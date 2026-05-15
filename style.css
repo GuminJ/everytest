@@ -263,3 +263,52 @@ body.settingPage-active header.top-header {
 
 /* 눌림 */
 .selected { transform: scale(0.95); }
+
+/* 스위치 컨테이너 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* 숨겨진 체크박스 */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 슬라이더 */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;       /* OFF 색상 */
+  transition: 0.3s;
+  border-radius: 12px;
+}
+
+/* 원 */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+/* 체크 ON 시 색상과 원 이동 */
+.switch input:checked + .slider {
+  background-color: #8b6cff;   /* ON 색상 */
+}
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+}
