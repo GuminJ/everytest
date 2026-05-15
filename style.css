@@ -1,21 +1,21 @@
 /* =========================
-   전체 기본
+   전역
 ========================= */
-body, html {
+html, body {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
   font-family: 'Pretendard', sans-serif;
   color: #222;
   overflow: hidden;
-  background: #f6f7fb; /* 기본 fallback */
+  background: #f6f7fb;
 }
 
 .app {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* =========================
@@ -25,17 +25,19 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 18px;
-  box-sizing: border-box;
+  padding: 12px 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 10;
 }
 
-.logo {
+.top-header .logo {
   margin: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.subtitle {
+.top-header .subtitle {
   margin: 2px 0 0 0;
   font-size: 12px;
   color: #666;
@@ -43,19 +45,17 @@ body, html {
 
 .profile-wrap {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  position: relative;
+  gap: 12px;
 }
 
 .profile-mini {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid #fff;
-  background: #ccc;
+  border: 2px solid #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,28 +67,22 @@ body, html {
   object-fit: cover;
 }
 
-.profile-mini input[type="file"] {
-  display: none;
-}
-
 .point-badge {
-  margin-top: 4px;
-  font-size: 12px;
+  background: #f6f7fb;
+  padding: 4px 8px;
+  border-radius: 8px;
   font-weight: 700;
+  font-size: 12px;
   color: #8b6cff;
 }
 
 /* =========================
-   메인 콘텐츠
+   메인 영역
 ========================= */
 .main-content {
-  width: 100%;
-  height: calc(100% - 64px); /* 헤더 높이 뺀 영역 */
+  flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
   scroll-behavior: smooth;
-  padding-bottom: 64px; /* 탭바 공간 확보 */
-  box-sizing: border-box;
 }
 
 /* =========================
@@ -96,73 +90,60 @@ body, html {
 ========================= */
 .page {
   display: none;
-  min-height: 100vh;
-  padding: 16px 18px 64px;
-  box-sizing: border-box;
+  padding: 16px;
+  min-height: calc(100% - 60px);
 }
 
-/* 활성 페이지만 표시 */
 .page.active {
   display: block;
 }
 
-/* 각 탭별 배경색 */
 #homePage {
-  background: #fff7fb; /* 홈 */
+  background: #fff7fb;
 }
 
 #explorePage {
-  background: #f0f8ff; /* 탐색 */
+  background: #f0f7ff;
 }
 
 #myPage {
-  background: #fffaf0; /* MY */
+  background: #fffaf0;
 }
 
 #settingPage {
-  background: #f6fff6; /* 설정 */
+  background: #f7fff5;
 }
 
 /* =========================
-   버튼 기본
-========================= */
-.tap {
-  cursor: pointer;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: 700;
-  transition: all 0.15s ease;
-}
-
-.tap.selected {
-  transform: scale(0.95);
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-}
-
-/* =========================
-   메인 배너
+   배너
 ========================= */
 .main-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 24px;
+  background: linear-gradient(135deg, #ffeef7, #e9fff9);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
-.banner-text {
-  flex: 1;
-}
-
-.banner-text .small-label {
-  font-size: 12px;
-  color: #888;
+.banner-text h2 {
+  margin: 8px 0;
+  font-size: 22px;
 }
 
 .start-btn {
   background: linear-gradient(135deg, #ff93b6, #ffc2d8);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 14px;
   color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.start-btn.selected {
+  transform: scale(0.96);
 }
 
 /* =========================
@@ -175,23 +156,27 @@ body, html {
 }
 
 .test-card {
-  flex: 0 0 200px;
-  border-radius: 14px;
+  min-width: 180px;
   background: #fff;
+  border-radius: 16px;
   padding: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.1s;
 }
 
-.test-card .emoji {
-  font-size: 32px;
-  text-align: center;
+.test-card:hover {
+  transform: translateY(-2px);
+}
+
+.emoji {
+  font-size: 28px;
+  margin-bottom: 6px;
 }
 
 /* =========================
-   오늘 기분 기록
+   기분 기록
 ========================= */
 .mood-box {
   margin-top: 24px;
@@ -199,38 +184,32 @@ body, html {
 
 .mood-list {
   display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
   justify-content: space-between;
-  margin-top: 8px;
+  gap: 8px;
 }
 
 .mood-btn {
   flex: 1;
-  font-size: 24px;
-  padding: 12px 0;
+  padding: 10px 0;
   border-radius: 12px;
+  border: 1px solid #ddd;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: all 0.15s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .mood-btn.selected {
-  transform: scale(0.95);
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  transform: scale(0.9);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* 주간 감정 기록 */
 .week-mood-box {
   margin-top: 12px;
 }
 
 .week-grid {
   display: flex;
-  gap: 4px;
   justify-content: space-between;
 }
 
@@ -238,20 +217,11 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 14px;
-}
-
-.week-day {
-  font-weight: 700;
-}
-
-.week-emoji {
-  font-size: 20px;
-  margin-top: 4px;
+  font-size: 12px;
 }
 
 /* =========================
-   카테고리 그리드
+   탐색 탭
 ========================= */
 .category-grid {
   display: flex;
@@ -260,34 +230,33 @@ body, html {
 }
 
 .category-card {
-  flex: 0 0 calc(33.33% - 8px);
+  flex: 1 1 30%;
+  background: #fff;
   border-radius: 12px;
   padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 16px;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.1s;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
 }
 
 .category-card span {
-  margin-top: 4px;
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
 }
 
-.category-card.popular { background: #ffe9e6; color: #e63946; }
-.category-card.love { background: #fff0f5; color: #d6336c; }
-.category-card.personality { background: #f0f8ff; color: #4d79ff; }
-.category-card.relation { background: #fff8e1; color: #f0a500; }
-.category-card.work { background: #f0fff0; color: #3bb273; }
-.category-card.emotion { background: #fff7f0; color: #ffb347; }
-.category-card.taste { background: #f9f0ff; color: #8b6cff; }
-
-.category-card.tap:active {
-  transform: scale(0.95);
-}
+/* 색상별 */
+.category-card.popular { background: #ffeef7; }
+.category-card.love { background: #fff0f5; }
+.category-card.personality { background: #f0f7ff; }
+.category-card.relation { background: #f0fff4; }
+.category-card.work { background: #fff7f0; }
+.category-card.emotion { background: #fdf7ff; }
+.category-card.taste { background: #f7fff5; }
 
 /* =========================
    MY 탭
@@ -296,108 +265,51 @@ body, html {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
-.my-monster-card .monster-image {
+.my-monster-card img {
   width: 80px;
   height: 80px;
+  border-radius: 16px;
   object-fit: cover;
-  border-radius: 50%;
-}
-
-/* =========================
-   설정 스위치
-========================= */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 22px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 22px;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #8b6cff;
-}
-
-input:checked + .slider:before {
-  transform: translateX(18px);
 }
 
 /* =========================
    하단 탭바
 ========================= */
 .bottom-tab {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 56px;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  padding: 6px 0;
   background: #fff;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #ddd;
 }
 
 .tab {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  font-size: 20px;
   color: #999;
-  font-size: 22px;
 }
 
-.tab small {
-  font-size: 12px;
-}
-
-.tab.active {
-  color: #8b6cff;
-}
+.tab.active { color: #8b6cff; }
 
 /* =========================
    포인트 팝업
 ========================= */
 .point-popup {
   position: fixed;
-  top: 60px;
-  right: 18px;
+  top: 70px;               /* 헤더 바로 아래 */
+  left: 50%;               /* 화면 중앙 */
+  transform: translateX(-50%);
   background: #8b6cff;
   color: #fff;
   padding: 6px 12px;
   border-radius: 12px;
   font-weight: 700;
+  font-size: 14px;
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
