@@ -382,6 +382,8 @@ body{
 
 .tab.active{
   color:#8b6cff;
+  text-shadow:0 0 12px rgba(139,108,255,0.35);
+}
 }
 
 .tab:active{
