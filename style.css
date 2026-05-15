@@ -7,16 +7,19 @@
   box-sizing:border-box;
 }
 
-html, body{
+html,body{
   width:100%;
-  min-height:100%;
+  height:100%;
+
   margin:0;
+  padding:0;
+
+  overflow:hidden;
 
   background:#f6f7fb;
+
   font-family:'Pretendard', sans-serif;
   color:#222;
-
-  overflow-x:hidden;
 }
 
 body{
@@ -37,10 +40,16 @@ button{
 ========================= */
 .app{
   width:100%;
-  max-width:480px;
-  min-height:100vh;
+  max-width:430px;
+
+  height:100dvh;
+
+  margin:0 auto;
+
+  background:white;
 
   position:relative;
+
   overflow:hidden;
 }
 
