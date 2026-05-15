@@ -6,6 +6,23 @@ body.settingPage-active header.top-header{background:#f6f7fb;}
 
 .app{max-width:480px;margin:0 auto;display:flex;flex-direction:column;min-height:100vh;position:relative;}
 .top-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee;transition:background 0.3s;}
+.tab {
+  background: none; /* 기본 배경 제거 */
+  color: #999;
+  border-radius: 12px;
+  padding: 6px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab.active {
+  color: #8b6cff;
+  /* 배경을 살짝 강조하거나 그림자 주고 싶다면 */
+  background: rgba(139, 108, 255, 0.08);
+  box-shadow: 0 2px 6px rgba(139,108,255,0.2);
+}
 .logo{font-size:20px;font-weight:800;margin:0;}
 .subtitle{margin:0;font-size:12px;color:#555;}
 .profile-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;}
