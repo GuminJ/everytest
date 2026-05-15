@@ -417,6 +417,9 @@ body{
   opacity 0.12s ease;
 
   -webkit-tap-highlight-color: transparent;
+
+  appearance:none;
+  -webkit-appearance:none;
 }
 
 .tab small{
