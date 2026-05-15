@@ -263,7 +263,7 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 /* PT 팝업 */
 .point-popup {
   position: absolute;
-  top: 300px;
+  top: 600px;
   left: 50%;
   transform: translateX(-50%);
   
