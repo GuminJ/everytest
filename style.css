@@ -371,6 +371,48 @@ button{
   background:#ede7ff;
   box-shadow:0 6px 14px rgba(139,108,255,0.18);
 }
+/* =========================
+   주간 감정 기록
+========================= */
+
+.week-mood-box{
+  margin-top:18px;
+  background:#fff;
+  border-radius:24px;
+  padding:18px;
+  display:none;
+}
+
+.week-title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.week-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:8px;
+}
+
+.day-card{
+  background:#f7f7fb;
+  border-radius:16px;
+  padding:10px 4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.day{
+  font-size:12px;
+  color:#888;
+}
+
+.mood{
+  font-size:22px;
+}
 
 /* =========================
    CATEGORY
