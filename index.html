@@ -467,6 +467,26 @@
 
     }
 
+    // =========================
+// 포인트 팝업
+// =========================
+
+function showPointPopup(){
+
+  const popup =
+    document.getElementById("pointPopup");
+
+  popup.classList.add("show");
+
+  setTimeout(() => {
+
+    popup.classList.remove("show");
+
+  }, 500);
+
+}
+    
+
     function updatePointUI(){
 
       pointText.textContent =
@@ -667,7 +687,7 @@ if(Object.keys(savedMoodData).length > 0){
   
 <!-- 포인트 팝업 -->
 <div class="point-popup" id="pointPopup">
-  +1PT 획득 ✨
+  +1PT
 </div>
   
 </body>
