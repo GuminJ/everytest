@@ -3,7 +3,21 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 .app { display:flex; flex-direction:column; height:100%; }
 
 /* 헤더 */
-.top-header { display:flex; justify-content:space-between; align-items:center; padding:16px; border-bottom:1px solid #e0e0e0; position:relative; background:#8b6cff; color:#fff; }
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+  /* 기존 배경색 제거 */
+  /* background: #8b6cff; */
+  
+  /* 그라데이션 적용 (보라 계열) */
+  background: linear-gradient(90deg, #8b6cff, #7b65ff);
+  color: #fff;
+}
+
 .top-header .logo {
   font-size: 30px;
   font-weight: 900;
@@ -11,11 +25,13 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 }
 
 .top-header .subtitle {
-  font-size: 15px;
-  color: rgba(255,255,255,0.8);
-  margin-top: 1px;
+  font-size: 14px;
+  color: #fff;
+  margin-top: 0;
   line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* 그림자 효과로 가시성 상승 */
 }
+
 .logo-icon {
   font-size: 20px;
   margin-left: 4px;
