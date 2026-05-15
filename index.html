@@ -67,7 +67,7 @@
           <img
             src="images/icon.png"
             alt="리틀몬스터"
-            class="monster-image"
+            class="main-monster-image"
           />
         </div>
 
@@ -114,12 +114,12 @@
           </div>
 
           <div class="mood-list">
-            <button class="tap">😊</button> <!--기본 긍정-->
-            <button class="tap">😴</button> <!--피곤-->
-            <button class="tap">🥹</button> <!--감성-->
-            <button class="tap">😎</button> <!--자신감-->
-            <button class="tap">🥺</button> <!--우울, 울적-->
-            <button class="tap">😡</button> <!--짜증, 스트레스-->
+            <button class="tap mood-btn">😊</button> <!--기본 긍정-->
+            <button class="tap mood-btn">😴</button> <!--피곤-->
+            <button class="tap mood-btn">🥹</button> <!--감성-->
+            <button class="tap mood-btn">😎</button> <!--자신감-->
+            <button class="tap mood-btn">🥺</button> <!--우울, 울적-->
+            <button class="tap mood-btn">😡</button> <!--짜증, 스트레스-->
           </div>
         </div>
 
@@ -169,7 +169,7 @@
 
           <img
             src="images/icon.png"
-            class="monster-image" 
+            class="my-monster-image" 
             alt="my"
           />
 
@@ -250,17 +250,17 @@
         <small>홈</small>
       </button>
 
-      <button class="tab active tap" data-page="explorePage">
+      <button class="tab tap" data-page="explorePage">
         <span>🔍</span>
         <small>탐색</small>
       </button>
 
-      <button class"tab active tap" data-page="myPage">
+      <button class="tab tap" data-page="myPage">
         <span>👾</span>
         <small>MY</small>
       </button>
 
-      <button class="tab active tap" data-page="settingPage">
+      <button class="tab tap" data-page="settingPage">
         <span>⚙️</span>
         <small>설정</small>
       </button>
@@ -294,11 +294,11 @@
 
     });
     
-document.querySelectorAll('.tap').forEach(btn => {
+document.querySelectorAll('.mood-btn').forEach(btn => {
 
   btn.addEventListener('click', () => {
 
-    document.querySelectorAll('.tap')
+    document.querySelectorAll('.mood-btn')
       .forEach(b => b.classList.remove('selected'));
 
     btn.classList.add('selected');
