@@ -227,6 +227,17 @@ function getStartOfWeek(date){const d=new Date(date);const day=d.getDay();d.setD
 function getDateKey(date){return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;}
 function getCurrentWeekKey(date){const start=getStartOfWeek(date);return getDateKey(start);}
 if(Object.keys(savedMoodData).length>0){weekMoodBox.style.display="block"; renderWeekMood();}
+
+/*상태를 로컬스토리지에 저장해서 새로고침 후에도 유지 가능*/ 
+const notifySwitch = document.getElementById("notifySwitch");
+const savedNotify = localStorage.getItem("notifySwitch");
+if (savedNotify !== null) {
+  notifySwitch.checked = savedNotify === "true";
+}
+notifySwitch.addEventListener("change", () => {
+  localStorage.setItem("notifySwitch", notifySwitch.checked);
+});
+  
 </script>
 </body>
 </html>
