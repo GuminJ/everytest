@@ -139,5 +139,369 @@
 
   <!-- JS -->
   <script src="app.js"></script>
+
+/*JS*/
+  
+// =========================
+// 탭 이동
+// =========================
+
+const tabs =
+  document.querySelectorAll(".tab");
+
+const pages =
+  document.querySelectorAll(".page");
+
+const mainContent =
+  document.querySelector(".main-content");
+
+tabs.forEach(tab => {
+
+  tab.addEventListener("click", () => {
+
+    tabs.forEach(t =>
+      t.classList.remove("active")
+    );
+
+    pages.forEach(p =>
+      p.classList.remove("active")
+    );
+
+    tab.classList.add("active");
+
+    const target =
+      tab.dataset.page;
+
+    document
+      .getElementById(target)
+      .classList.add("active");
+
+    // 탭 변경 시 스크롤 맨 위
+    mainContent.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  });
+
+});
+
+// =========================
+// 눌림 효과
+// =========================
+
+document
+  .querySelectorAll(".tap")
+  .forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      btn.classList.add("selected");
+
+      setTimeout(() => {
+
+        btn.classList.remove("selected");
+
+      }, 150);
+
+    });
+
+  });
+
+// =========================
+// 프로필 이미지 변경
+// =========================
+
+const profileInput =
+  document.getElementById("profileInput");
+
+const profileImage =
+  document.getElementById("profileImage");
+
+// 저장된 이미지 불러오기
+const savedProfile =
+  localStorage.getItem("profileImage");
+
+if(savedProfile){
+
+  profileImage.src = savedProfile;
+
+}
+
+profileInput.addEventListener("change", e => {
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = event => {
+
+    const imageData =
+      event.target.result;
+
+    profileImage.src =
+      imageData;
+
+    localStorage.setItem(
+      "profileImage",
+      imageData
+    );
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+// =========================
+// 포인트 시스템
+// =========================
+
+const pointText =
+  document.getElementById("pointText");
+
+const pointPopup =
+  document.getElementById("pointPopup");
+
+let point =
+  Number(localStorage.getItem("point")) || 0;
+
+updatePointUI();
+
+function addPoint(amount){
+
+  point += amount;
+
+  localStorage.setItem(
+    "point",
+    point
+  );
+
+  updatePointUI();
+
+  showPointPopup(`+${amount}PT`);
+
+}
+
+function updatePointUI(){
+
+  pointText.textContent =
+    `${point}PT`;
+
+}
+
+function showPointPopup(text){
+
+  pointPopup.textContent = text;
+
+  pointPopup.style.opacity = "1";
+
+  setTimeout(() => {
+
+    pointPopup.style.opacity = "0";
+
+  }, 1600);
+
+}
+
+// =========================
+// 감정 기록
+// =========================
+
+const moodButtons =
+  document.querySelectorAll(".mood-btn");
+
+const weekMoodBox =
+  document.getElementById("weekMoodBox");
+
+const weekGrid =
+  document.getElementById("weekGrid");
+
+const today =
+  new Date();
+
+const currentWeekKey =
+  getCurrentWeekKey(today);
+
+const savedWeekKey =
+  localStorage.getItem("weekKey");
+
+// 주간 자동 초기화
+if(savedWeekKey !== currentWeekKey){
+
+  localStorage.removeItem("weekMood");
+
+  localStorage.setItem(
+    "weekKey",
+    currentWeekKey
+  );
+
+}
+
+let savedMoodData =
+  JSON.parse(
+    localStorage.getItem("weekMood")
+  ) || {};
+
+moodButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const todayKey =
+      getDateKey(today);
+
+    // 오늘 이미 기록했는지 확인
+    const alreadyChecked =
+      savedMoodData[todayKey];
+
+    // 오늘 감정 저장
+    savedMoodData[todayKey] =
+      button.textContent;
+
+    localStorage.setItem(
+      "weekMood",
+      JSON.stringify(savedMoodData)
+    );
+
+    // 주간 기록 렌더링
+    renderWeekMood();
+
+    // 주간 기록 표시
+    weekMoodBox.style.display =
+      "block";
+
+    // 첫 기록일 때만 포인트 지급
+    if(!alreadyChecked){
+
+      addPoint(1);
+
+    }
+
+  });
+
+});
+
+// =========================
+// 주간 감정 렌더링
+// =========================
+
+function renderWeekMood(){
+
+  weekGrid.innerHTML = "";
+
+  const startOfWeek =
+    getStartOfWeek(today);
+
+  const dayNames = [
+    "일",
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "토"
+  ];
+
+  for(let i = 0; i < 7; i++){
+
+    const date =
+      new Date(startOfWeek);
+
+    date.setDate(
+      startOfWeek.getDate() + i
+    );
+
+    const key =
+      getDateKey(date);
+
+    const mood =
+      savedMoodData[key] || "➖";
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "week-item";
+
+    item.innerHTML = `
+      <div class="week-day">
+        ${dayNames[i]}
+      </div>
+
+      <div class="week-emoji">
+        ${mood}
+      </div>
+    `;
+
+    weekGrid.appendChild(item);
+
+  }
+
+}
+
+// =========================
+// 주 시작 계산
+// =========================
+
+function getStartOfWeek(date){
+
+  const d =
+    new Date(date);
+
+  const day =
+    d.getDay();
+
+  d.setDate(
+    d.getDate() - day
+  );
+
+  return d;
+
+}
+
+// =========================
+// 날짜 키 생성
+// =========================
+
+function getDateKey(date){
+
+  return `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${
+    date.getDate()
+  }`;
+
+}
+
+// =========================
+// 현재 주 키
+// =========================
+
+function getCurrentWeekKey(date){
+
+  const start =
+    getStartOfWeek(date);
+
+  return getDateKey(start);
+
+}
+
+// =========================
+// 기존 기록 표시
+// =========================
+
+if(
+  Object.keys(savedMoodData)
+  .length > 0
+){
+
+  weekMoodBox.style.display =
+    "block";
+
+  renderWeekMood();
+
+}
 </body>
 </html>
