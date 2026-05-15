@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -13,7 +14,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- 폰트 -->
+  <!-- Pretendard -->
   <link
     rel="stylesheet"
     as="style"
@@ -30,31 +31,39 @@
     <header class="top-header">
 
       <div>
-        <h1 class="logo">LittleMonster</h1>
+
+        <h1 class="logo">
+          LittleMonster
+        </h1>
 
         <p class="subtitle">
           심리테스트로 만드는<br />
           나의 정체성
         </p>
+
       </div>
 
-      <!-- 프로필 + 포인트 -->
-      <div class="profile-wrap">
+      <!-- 우측 프로필 -->
+      <div class="header-profile">
 
         <div class="profile-mini">
-        👾
+          👾
         </div>
-       <div class="point-badge">
-       <span class="point-star">
-       ✨
-       </span>
-       <span id="pointText">
-       0
-       </span>
 
-        <small>pt</small>
+        <!-- 포인트 -->
+        <div class="point-badge">
 
-       </div>
+          <span class="point-star">
+            ✨
+          </span>
+
+          <span id="pointText">
+            0
+          </span>
+
+          <small>PT</small>
+
+        </div>
 
       </div>
 
@@ -111,11 +120,15 @@
             <div class="emoji">🍚</div>
 
             <div class="card-info">
-              <h3>식사 유형으로 적성 찾기</h3>
+
+              <h3>
+                식사 유형으로 적성 찾기
+              </h3>
 
               <p>
                 외식 취향으로 나와 잘맞는 직무 파악하기
               </p>
+
             </div>
 
           </div>
@@ -125,11 +138,15 @@
             <div class="emoji">💘</div>
 
             <div class="card-info">
-              <h3>연애 집착남/녀 테스트</h3>
+
+              <h3>
+                연애 집착남/녀 테스트
+              </h3>
 
               <p>
                 나는 얼마나 사랑/애정에 갈망하고 있을까?
               </p>
+
             </div>
 
           </div>
@@ -139,18 +156,22 @@
             <div class="emoji">🌙</div>
 
             <div class="card-info">
-              <h3>감각 테스트</h3>
+
+              <h3>
+                감각 테스트
+              </h3>
 
               <p>
                 나의 감각은 얼마나 뛰어날까?
               </p>
+
             </div>
 
           </div>
 
         </div>
 
-        <!-- 오늘 기분 기록 -->
+        <!-- 감정 기록 -->
         <div class="mood-box">
 
           <div class="section-title">
@@ -159,18 +180,35 @@
 
           <div class="mood-list">
 
-            <button class="tap mood-btn">😊</button>
-            <button class="tap mood-btn">😴</button>
-            <button class="tap mood-btn">🥹</button>
-            <button class="tap mood-btn">😎</button>
-            <button class="tap mood-btn">🥺</button>
-            <button class="tap mood-btn">😡</button>
+            <button class="mood-btn tap">
+              😊
+            </button>
+
+            <button class="mood-btn tap">
+              😴
+            </button>
+
+            <button class="mood-btn tap">
+              🥹
+            </button>
+
+            <button class="mood-btn tap">
+              😎
+            </button>
+
+            <button class="mood-btn tap">
+              🥺
+            </button>
+
+            <button class="mood-btn tap">
+              😡
+            </button>
 
           </div>
 
         </div>
 
-        <!-- 주간 감정 기록 -->
+        <!-- 주간 기록 -->
         <div
           class="week-mood-box"
           id="weekMoodBox"
@@ -294,7 +332,9 @@
 
           <div>
 
-            <h3>새 테스트 알림</h3>
+            <h3>
+              새 테스트 알림
+            </h3>
 
             <p>
               새로운 심리테스트 업데이트 시 알림
@@ -304,7 +344,10 @@
 
           <label class="switch">
 
-            <input type="checkbox" checked />
+            <input
+              type="checkbox"
+              checked
+            />
 
             <span class="slider"></span>
 
@@ -316,7 +359,9 @@
 
           <div>
 
-            <h3>문의하기</h3>
+            <h3>
+              문의하기
+            </h3>
 
             <p>
               버그 제보 및 제안 보내기
@@ -374,7 +419,7 @@
     class="point-popup"
     id="pointPopup"
   >
-    +1 PT ✨
+    +1PT 획득 ✨
   </div>
 
   <!-- JS -->
@@ -404,7 +449,8 @@
 
         tab.classList.add("active");
 
-        const target = tab.dataset.page;
+        const target =
+          tab.dataset.page;
 
         document
           .getElementById(target)
@@ -437,261 +483,243 @@
       });
 
     // =========================
-    // 포인트 시스템
+    // 포인트
     // =========================
 
-    const pointPopup =
-      document.getElementById("pointPopup");
-
-    const pointText =
-      document.querySelector(".point-text");
-
-    let savedPoint =
+    let points =
       Number(
-        localStorage.getItem("monsterPoint")
+        localStorage.getItem("points")
       ) || 0;
 
-    updatePointUI();
+    const pointText =
+      document.getElementById("pointText");
+
+    pointText.textContent = points;
 
     function addPoint(amount){
 
-points += amount;
+      points += amount;
 
-  localStorage.setItem(
-    "points",
-    points
-  );
+      localStorage.setItem(
+        "points",
+        points
+      );
 
-  pointText.textContent =
-    `${points}PT`;
+      pointText.textContent =
+        points;
 
-  // 팝업 실행
-  showPointPopup();
+      showPointPopup();
 
     }
 
     // =========================
-// 포인트 팝업
-// =========================
+    // 포인트 팝업
+    // =========================
 
-function showPointPopup(){
+    function showPointPopup(){
 
-  const popup =
-    document.getElementById("pointPopup");
+      const popup =
+        document.getElementById("pointPopup");
 
-  popup.classList.add("show");
+      popup.classList.add("show");
 
-  setTimeout(() => {
+      setTimeout(() => {
 
-    popup.classList.remove("show");
+        popup.classList.remove("show");
 
-  }, 500);
-
-}
-    
-
-    function updatePointUI(){
-
-      pointText.textContent =
-        `${savedPoint} PT`;
+      }, 500);
 
     }
 
-// =========================
-// 감정 기록
-// =========================
+    // =========================
+    // 감정 기록
+    // =========================
 
-const moodButtons =
-  document.querySelectorAll(".mood-btn");
+    const moodButtons =
+      document.querySelectorAll(".mood-btn");
 
-const weekMoodBox =
-  document.getElementById("weekMoodBox");
+    const weekMoodBox =
+      document.getElementById("weekMoodBox");
 
-const weekGrid =
-  document.getElementById("weekGrid");
+    const weekGrid =
+      document.getElementById("weekGrid");
 
-const today = new Date();
+    const today = new Date();
 
-const currentWeekKey =
-  getCurrentWeekKey(today);
+    const currentWeekKey =
+      getCurrentWeekKey(today);
 
-const savedWeekKey =
-  localStorage.getItem("weekKey");
+    const savedWeekKey =
+      localStorage.getItem("weekKey");
 
-// 주간 자동 초기화
-if(savedWeekKey !== currentWeekKey){
+    // 주간 자동 초기화
+    if(savedWeekKey !== currentWeekKey){
 
-  localStorage.removeItem("weekMood");
+      localStorage.removeItem("weekMood");
 
-  localStorage.setItem(
-    "weekKey",
-    currentWeekKey
-  );
-
-}
-
-let savedMoodData =
-  JSON.parse(
-    localStorage.getItem("weekMood")
-  ) || {};
-
-// 감정 버튼 클릭
-moodButtons.forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const todayKey =
-      getDateKey(today);
-
-    // 오늘 이미 기록했는지
-    const alreadyChecked =
-      savedMoodData[todayKey];
-
-    // 감정 저장
-    savedMoodData[todayKey] =
-      button.textContent;
-
-    localStorage.setItem(
-      "weekMood",
-      JSON.stringify(savedMoodData)
-    );
-
-    // UI 업데이트
-    renderWeekMood();
-
-    weekMoodBox.style.display =
-      "block";
-
-    // 첫 기록일 때만 포인트 지급
-    if(!alreadyChecked){
-
-      addPoint(1);
+      localStorage.setItem(
+        "weekKey",
+        currentWeekKey
+      );
 
     }
 
-  });
+    let savedMoodData =
+      JSON.parse(
+        localStorage.getItem("weekMood")
+      ) || {};
 
-});
+    moodButtons.forEach(button => {
 
-// =========================
-// 주간 감정 렌더링
-// =========================
+      button.addEventListener("click", () => {
 
-function renderWeekMood(){
+        const todayKey =
+          getDateKey(today);
 
-  weekGrid.innerHTML = "";
+        const alreadyChecked =
+          savedMoodData[todayKey];
 
-  const startOfWeek =
-    getStartOfWeek(today);
+        savedMoodData[todayKey] =
+          button.textContent;
 
-  const dayNames = [
-    "일",
-    "월",
-    "화",
-    "수",
-    "목",
-    "금",
-    "토"
-  ];
+        localStorage.setItem(
+          "weekMood",
+          JSON.stringify(savedMoodData)
+        );
 
-  for(let i = 0; i < 7; i++){
+        renderWeekMood();
 
-    const date =
-      new Date(startOfWeek);
+        weekMoodBox.style.display =
+          "block";
 
-    date.setDate(
-      startOfWeek.getDate() + i
-    );
+        // 하루 1회만 포인트 지급
+        if(!alreadyChecked){
 
-    const key =
-      getDateKey(date);
+          addPoint(1);
 
-    const mood =
-      savedMoodData[key] || "➖";
+        }
 
-    const item =
-      document.createElement("div");
+      });
 
-    item.className = "week-item";
+    });
 
-    item.innerHTML = `
-      <div class="week-day">
-        ${dayNames[i]}
-      </div>
+    // =========================
+    // 주간 렌더링
+    // =========================
 
-      <div class="week-emoji">
-        ${mood}
-      </div>
-    `;
+    function renderWeekMood(){
 
-    weekGrid.appendChild(item);
+      weekGrid.innerHTML = "";
 
-  }
+      const startOfWeek =
+        getStartOfWeek(today);
 
-}
+      const dayNames = [
+        "일",
+        "월",
+        "화",
+        "수",
+        "목",
+        "금",
+        "토"
+      ];
 
-// =========================
-// 주 시작 계산
-// =========================
+      for(let i = 0; i < 7; i++){
 
-function getStartOfWeek(date){
+        const date =
+          new Date(startOfWeek);
 
-  const d = new Date(date);
+        date.setDate(
+          startOfWeek.getDate() + i
+        );
 
-  const day = d.getDay();
+        const key =
+          getDateKey(date);
 
-  d.setDate(d.getDate() - day);
+        const mood =
+          savedMoodData[key] || "➖";
 
-  return d;
+        const item =
+          document.createElement("div");
 
-}
+        item.className = "week-item";
 
-// =========================
-// 날짜 key
-// =========================
+        item.innerHTML = `
+          <div class="week-day">
+            ${dayNames[i]}
+          </div>
 
-function getDateKey(date){
+          <div class="week-emoji">
+            ${mood}
+          </div>
+        `;
 
-  return `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${
-    date.getDate()
-  }`;
+        weekGrid.appendChild(item);
 
-}
+      }
 
-// =========================
-// 주차 key
-// =========================
+    }
 
-function getCurrentWeekKey(date){
+    // =========================
+    // 주 시작
+    // =========================
 
-  const start =
-    getStartOfWeek(date);
+    function getStartOfWeek(date){
 
-  return getDateKey(start);
+      const d = new Date(date);
 
-}
+      const day = d.getDay();
 
-// =========================
-// 초기 렌더링
-// =========================
+      d.setDate(d.getDate() - day);
 
-if(Object.keys(savedMoodData).length > 0){
+      return d;
 
-  weekMoodBox.style.display =
-    "block";
+    }
 
-  renderWeekMood();
+    // =========================
+    // 날짜 key
+    // =========================
 
-}
+    function getDateKey(date){
+
+      return `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${
+        date.getDate()
+      }`;
+
+    }
+
+    // =========================
+    // 현재 주 key
+    // =========================
+
+    function getCurrentWeekKey(date){
+
+      const start =
+        getStartOfWeek(date);
+
+      return getDateKey(start);
+
+    }
+
+    // =========================
+    // 초기 렌더링
+    // =========================
+
+    if(
+      Object.keys(savedMoodData)
+      .length > 0
+    ){
+
+      weekMoodBox.style.display =
+        "block";
+
+      renderWeekMood();
+
+    }
 
   </script>
-  
-<!-- 포인트 팝업 -->
-<div class="point-popup" id="pointPopup">
-  +1PT
-</div>
-  
+
 </body>
 </html>
