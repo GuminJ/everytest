@@ -1,74 +1,359 @@
-<!-- 하단 탭바 -->
-<nav class="bottom-tab">
+<!DOCTYPE html>
+<html lang="ko">
 
-  <!-- 홈 -->
-  <button class="tab active tap" data-page="homePage">
-    <span>🏠</span>
-    <small>홈</small>
-  </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <!-- 탐색 -->
-  <button class="tab tap" data-page="explorePage">
-    <span>🔍</span>
-    <small>탐색</small>
-  </button>
+  <title>LittleMonster</title>
 
-  <!-- MY -->
-  <button class="tab tap" data-page="myPage">
-    <span>👾</span>
-    <small>MY</small>
-  </button>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- 설정 -->
-  <button class="tab tap" data-page="settingPage">
-    <span>⚙️</span>
-    <small>설정</small>
-  </button>
+  <!-- 폰트 -->
+  <link
+    rel="stylesheet"
+    as="style"
+    crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  />
+</head>
 
-</nav>
+<body>
 
-<!-- JS -->
-<script>
+  <div class="app">
 
-  // 탭
-  const tabs = document.querySelectorAll(".tab");
-  const pages = document.querySelectorAll(".page");
+    <!-- 헤더 -->
+    <header class="top-header">
 
-  tabs.forEach(tab => {
+      <div>
+        <h1 class="logo">LittleMonster</h1>
 
-    tab.addEventListener("click", () => {
+        <p class="subtitle">
+          심리테스트로 만드는<br />
+          나의 정체성
+        </p>
+      </div>
 
-      // 기존 active 제거
-      tabs.forEach(t => t.classList.remove("active"));
-      pages.forEach(p => p.classList.remove("active"));
+      <div class="profile-mini">
+        👾
+      </div>
 
-      // 현재 탭 active
-      tab.classList.add("active");
+    </header>
 
-      // 해당 페이지 열기
-      const target = tab.dataset.page;
+    <!-- 메인 -->
+    <main class="main-content">
 
-      document
-        .getElementById(target)
-        .classList.add("active");
+      <!-- 홈 -->
+      <section class="page active" id="homePage">
+
+        <!-- 메인 배너 -->
+        <div class="main-banner">
+
+          <div class="banner-text">
+
+            <span class="small-label">
+              오늘의 추천 테스트
+            </span>
+
+            <h2>
+              나는 어떤<br />
+              리틀몬스터일까?
+            </h2>
+
+            <p>
+              테스트를 통해<br />
+              나만의 정체성을 발견해보세요
+            </p>
+
+            <button class="start-btn tap">
+              테스트 시작하기
+            </button>
+
+          </div>
+
+          <img
+            src="images/icon.png"
+            alt="리틀몬스터"
+            class="monster-image"
+          />
+
+        </div>
+
+        <!-- 인기 테스트 -->
+        <div class="section-title">
+          🔥 인기 테스트
+        </div>
+
+        <div class="card-list">
+
+          <div class="test-card tap">
+
+            <div class="emoji">🍚</div>
+
+            <div class="card-info">
+              <h3>식사 유형으로 적성 찾기</h3>
+              <p>
+                외식 취향으로 나와 잘맞는 직무 파악하기
+              </p>
+            </div>
+
+          </div>
+
+          <div class="test-card tap">
+
+            <div class="emoji">💘</div>
+
+            <div class="card-info">
+              <h3>연애 집착남/녀 테스트</h3>
+              <p>
+                나는 얼마나 사랑/애정에 갈망하고 있을까?
+              </p>
+            </div>
+
+          </div>
+
+          <div class="test-card tap">
+
+            <div class="emoji">🌙</div>
+
+            <div class="card-info">
+              <h3>감각 테스트</h3>
+              <p>
+                나의 감각은 얼마나 뛰어날까?
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- 오늘 기분 기록 -->
+        <div class="mood-box">
+
+          <div class="section-title">
+            🌈 오늘 기분 기록
+          </div>
+
+          <div class="mood-list">
+
+            <button class="tap">😊</button>
+            <button class="tap">😴</button>
+            <button class="tap">🥹</button>
+            <button class="tap">😎</button>
+            <button class="tap">🥺</button>
+            <button class="tap">😡</button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- 탐색 -->
+      <section class="page" id="explorePage">
+
+        <div class="section-title">
+          🧠 카테고리 탐색
+        </div>
+
+        <div class="category-grid">
+
+          <div class="category-card tap">
+            💘
+            <span>연애</span>
+          </div>
+
+          <div class="category-card tap">
+            🧠
+            <span>성격</span>
+          </div>
+
+          <div class="category-card tap">
+            👥
+            <span>관계</span>
+          </div>
+
+          <div class="category-card tap">
+            💼
+            <span>직장</span>
+          </div>
+
+          <div class="category-card tap">
+            🌙
+            <span>감성</span>
+          </div>
+
+          <div class="category-card tap">
+            🎨
+            <span>취향</span>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- MY -->
+      <section class="page" id="myPage">
+
+        <div class="my-monster-card">
+
+          <img
+            src="images/icon.png"
+            class="monster-image"
+            alt="my monster"
+          />
+
+          <div>
+
+            <div class="monster-type">
+              몽글몽글 몬스터
+            </div>
+
+            <div class="monster-desc">
+              감성이 풍부하고 공감 능력이 높은 타입
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- 성향 분석 -->
+        <div class="analysis-box">
+
+          <div class="section-title">
+            📊 정체성 분석
+          </div>
+
+          <div class="radar-placeholder">
+            성향 그래프 영역
+          </div>
+
+        </div>
+
+        <!-- 오늘의 조언 -->
+        <div class="advice-box">
+
+          <div class="section-title">
+            💡 오늘의 조언
+          </div>
+
+          <p>
+            너무 많은 감정을 한 번에 안으려 하지 마세요.<br />
+            오늘은 스스로를 가볍게 돌보는 하루가 필요합니다.
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- 설정 -->
+      <section class="page" id="settingPage">
+
+        <div class="setting-card">
+
+          <div>
+            <h3>새 테스트 알림</h3>
+            <p>
+              새로운 심리테스트 업데이트 시 알림
+            </p>
+          </div>
+
+          <label class="switch">
+
+            <input type="checkbox" checked />
+
+            <span class="slider"></span>
+
+          </label>
+
+        </div>
+
+        <div class="setting-card">
+
+          <div>
+            <h3>문의하기</h3>
+            <p>
+              버그 제보 및 제안 보내기
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- 하단 탭 -->
+    <nav class="bottom-tab">
+
+      <button class="tab active tap" data-page="homePage">
+        <span>🏠</span>
+        <small>홈</small>
+      </button>
+
+      <button class="tab tap" data-page="explorePage">
+        <span>🔍</span>
+        <small>탐색</small>
+      </button>
+
+      <button class="tab tap" data-page="myPage">
+        <span>👾</span>
+        <small>MY</small>
+      </button>
+
+      <button class="tab tap" data-page="settingPage">
+        <span>⚙️</span>
+        <small>설정</small>
+      </button>
+
+    </nav>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+
+    // 탭 이동
+    const tabs = document.querySelectorAll(".tab");
+    const pages = document.querySelectorAll(".page");
+
+    tabs.forEach(tab => {
+
+      tab.addEventListener("click", () => {
+
+        tabs.forEach(t => t.classList.remove("active"));
+        pages.forEach(p => p.classList.remove("active"));
+
+        tab.classList.add("active");
+
+        const target = tab.dataset.page;
+
+        document
+          .getElementById(target)
+          .classList.add("active");
+
+      });
 
     });
 
-  });
+    // 눌림 효과
+    document.querySelectorAll(".tap").forEach(btn => {
 
-  // 눌림 효과
-  document.querySelectorAll('.tap').forEach(btn => {
+      btn.addEventListener("click", () => {
 
-    btn.addEventListener('click', () => {
+        btn.classList.add("selected");
 
-      btn.classList.add('selected');
+        setTimeout(() => {
+          btn.classList.remove("selected");
+        }, 150);
 
-      setTimeout(() => {
-        btn.classList.remove('selected');
-      }, 150);
+      });
 
     });
 
-  });
+  </script>
 
-</script>
+</body>
+</html>
