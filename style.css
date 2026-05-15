@@ -106,6 +106,18 @@ body{
   border-radius:18px;
   font-size:16px;
   font-weight:700;
+  box-shadow:0 6px 16px rgba(0,0,0,0.12);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.start-btn:active{
+  transform:scale(0.94);
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+  opacity:0.9;
 }
 
 .monster-image{
