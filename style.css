@@ -1,143 +1,724 @@
-<!DOCTYPE html>
-<html lang="ko">
+html,
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  overflow-x:hidden;
+  background:#f6f7fb;
+  font-family:'Pretendard', sans-serif;
+  color:#222;
+}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>LittleMonster</title>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+body{
+  display:flex;
+  justify-content:center;
+}
 
-  <!-- Pretendard 폰트 -->
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-</head>
+/* 앱 전체 */
+.app{
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  background:#f6f7fb;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
 
-<body>
-  <div class="app">
+/* =========================
+   헤더
+========================= */
 
-    <!-- 헤더 -->
-    <header class="top-header">
-      <div>
-        <h1 class="logo">LittleMonster</h1>
-        <p class="subtitle">
-          심리테스트로 만드는<br />
-          나의 정체성
-        </p>
-      </div>
+.top-header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:22px 20px 14px;
+  flex-shrink:0;
 
-      <div class="profile-wrap">
-        <label class="profile-mini">
-          <img id="profileImage" src="images/default-profile.png" alt="프로필" />
-          <input type="file" id="profileInput" accept="image/*" />
-        </label>
-        <div class="point-badge">
-          <span id="pointText">0PT</span>
-        </div>
-      </div>
-    </header>
+  background:linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f7f4ff 100%
+  );
 
-    <!-- 메인 -->
-    <main class="main-content">
+  border-bottom:1px solid #ece8ff;
 
-      <!-- 홈 -->
-      <section class="page active" id="homePage">
-        <!-- 메인 배너 -->
-        <div class="main-banner">
-          <div class="banner-text">
-            <span class="small-label">오늘의 추천 테스트</span>
-            <h2>나는 어떤<br />리틀몬스터일까?</h2>
-            <p>테스트를 통해<br />나만의 정체성을 발견해보세요</p>
-            <button class="start-btn tap">테스트 시작하기</button>
-          </div>
-          <img src="images/icon.png" alt="리틀몬스터" class="monster-image" />
-        </div>
+  z-index:10;
+}
 
-        <!-- 인기 테스트 -->
-        <div class="section-title">🔥 인기 테스트</div>
-        <div class="card-list">
-          <div class="test-card tap"><div class="emoji">🍚</div><div class="card-info"><h3>식사 유형으로 적성 찾기</h3><p>외식 취향으로 나와 잘맞는 직무 파악하기</p></div></div>
-          <div class="test-card tap"><div class="emoji">💘</div><div class="card-info"><h3>연애 집착남/녀 테스트</h3><p>나는 얼마나 사랑/애정에 갈망하고 있을까?</p></div></div>
-          <div class="test-card tap"><div class="emoji">🌙</div><div class="card-info"><h3>감각 테스트</h3><p>나의 감각은 얼마나 뛰어날까?</p></div></div>
-        </div>
+.logo{
+  margin:0;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.5px;
+}
 
-        <!-- 오늘 기분 기록 -->
-        <div class="mood-box">
-          <div class="section-title">🌈 오늘 기분 기록</div>
-          <div class="mood-list">
-            <button class="mood-btn tap">😊</button>
-            <button class="mood-btn tap">😴</button>
-            <button class="mood-btn tap">🥹</button>
-            <button class="mood-btn tap">😎</button>
-            <button class="mood-btn tap">🥺</button>
-            <button class="mood-btn tap">😡</button>
-          </div>
-          <div class="week-mood-box" id="weekMoodBox">
-            <div class="week-grid" id="weekGrid"></div>
-          </div>
-        </div>
-      </section>
+.subtitle{
+  margin-top:6px;
+  line-height:1.45;
+  font-size:13px;
+  color:#666;
+}
 
-      <!-- 탐색 -->
-      <section class="page" id="explorePage">
-        <div class="section-title">🧠 카테고리 탐색</div>
-        <div class="category-grid">
-          <div class="category-card tap">🔥<span>인기</span></div>
-          <div class="category-card tap">💘<span>연애</span></div>
-          <div class="category-card tap">🧠<span>성격</span></div>
-          <div class="category-card tap">👥<span>관계</span></div>
-          <div class="category-card tap">💼<span>직장</span></div>
-          <div class="category-card tap">🌙<span>감성</span></div>
-          <div class="category-card tap">🎨<span>취향</span></div>
-        </div>
-      </section>
+/* 프로필 영역 */
 
-      <!-- MY -->
-      <section class="page" id="myPage">
-        <div class="my-monster-card">
-          <img src="images/fire-monster.png" class="monster-image" alt="my monster" />
-          <div>
-            <div class="monster-type">매사에 열정적인 '화로'</div>
-            <div class="monster-desc">진취적이고, 열정적이며 활기찬 타입</div>
-          </div>
-        </div>
-        <div class="analysis-box">
-          <div class="section-title">📊 정체성 분석</div>
-          <div class="radar-placeholder">성향 그래프 영역</div>
-        </div>
-        <div class="advice-box">
-          <div class="section-title">💡 오늘의 조언</div>
-          <p>지나친 열정은 화를 부릅니다.<br />뒤를 돌아보고, 찬찬히 살펴보세요.</p>
-        </div>
-      </section>
+.profile-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
 
-      <!-- 설정 -->
-      <section class="page" id="settingPage">
-        <div class="setting-card">
-          <div><h3>새 테스트 알림</h3><p>새로운 심리테스트 업데이트 시 알림</p></div>
-          <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
-        </div>
-        <div class="setting-card">
-          <div><h3>문의하기</h3><p>버그 제보 및 제안 보내기</p></div>
-        </div>
-      </section>
+.profile-mini{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  flex-shrink:0;
 
-    </main>
+  background:#fff;
 
-    <!-- 하단 탭 -->
-    <nav class="bottom-tab">
-      <button class="tab active tap" data-page="homePage"><span>🏠</span><small>홈</small></button>
-      <button class="tab tap" data-page="explorePage"><span>🔍</span><small>탐색</small></button>
-      <button class="tab tap" data-page="myPage"><span>👾</span><small>MY</small></button>
-      <button class="tab tap" data-page="settingPage"><span>⚙️</span><small>설정</small></button>
-    </nav>
+  box-shadow:
+    0 8px 20px rgba(123,97,255,0.18);
 
-    <!-- 포인트 팝업 -->
-    <div class="point-popup" id="pointPopup">+1PT</div>
+  border:3px solid #fff;
+}
 
-  </div>
+.profile-mini img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
-  <!-- JS -->
-  <script src="app.js"></script>
-</body>
-</html>
+.profile-mini input{
+  display:none;
+}
+
+/* 포인트 */
+
+.point-badge{
+  padding:6px 12px;
+
+  border-radius:999px;
+
+  background:linear-gradient(
+    135deg,
+    #8b6cff,
+    #b39bff
+  );
+
+  color:#fff;
+
+  font-size:12px;
+  font-weight:700;
+
+  box-shadow:
+    0 6px 14px rgba(139,108,255,0.25);
+}
+
+/* =========================
+   메인 영역
+========================= */
+
+.main-content{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  padding:20px;
+  padding-bottom:110px;
+
+  scroll-behavior:smooth;
+}
+
+/* 페이지 */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* =========================
+   메인 배너
+========================= */
+
+.main-banner{
+  position:relative;
+
+  width:100%;
+
+  padding:24px;
+
+  border-radius:28px;
+
+  background:linear-gradient(
+    135deg,
+    #8b6cff,
+    #a58cff
+  );
+
+  color:#fff;
+
+  overflow:visible;
+
+  margin-bottom:26px;
+
+  box-shadow:
+    0 14px 30px rgba(139,108,255,0.24);
+}
+
+.small-label{
+  font-size:12px;
+  opacity:0.9;
+}
+
+.banner-text h2{
+  margin:12px 0 10px;
+
+  font-size:30px;
+  line-height:1.2;
+
+  letter-spacing:-1px;
+}
+
+.banner-text p{
+  margin:0;
+
+  font-size:14px;
+  line-height:1.5;
+
+  opacity:0.95;
+}
+
+/* 시작 버튼 */
+
+.start-btn{
+  margin-top:18px;
+
+  border:none;
+
+  background:#fff;
+  color:#8b6cff;
+
+  font-weight:700;
+  font-size:14px;
+
+  padding:14px 18px;
+
+  border-radius:16px;
+
+  cursor:pointer;
+
+  transition:all 0.12s ease;
+}
+
+.start-btn:active{
+  transform:scale(0.95);
+}
+
+/* 메인 몬스터 */
+
+.main-banner .monster-image{
+  position:absolute;
+
+  right:10px;
+  bottom:-14px;
+
+  width:128px;
+
+  object-fit:contain;
+
+  z-index:3;
+
+  pointer-events:none;
+
+  filter:
+    drop-shadow(
+      0 10px 16px rgba(0,0,0,0.18)
+    );
+}
+
+/* =========================
+   섹션
+========================= */
+
+.section-title{
+  margin-bottom:14px;
+
+  font-size:17px;
+  font-weight:700;
+}
+
+/* =========================
+   카드 리스트
+========================= */
+
+.card-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+
+  margin-bottom:24px;
+}
+
+.test-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  padding:18px;
+
+  background:#fff;
+
+  border-radius:22px;
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.05);
+
+  transition:all 0.12s ease;
+}
+
+.test-card:active{
+  transform:scale(0.97);
+}
+
+.emoji{
+  font-size:32px;
+}
+
+.card-info h3{
+  margin:0 0 6px;
+
+  font-size:15px;
+}
+
+.card-info p{
+  margin:0;
+
+  font-size:13px;
+  line-height:1.5;
+
+  color:#777;
+}
+
+/* =========================
+   기분 기록
+========================= */
+
+.mood-box{
+  margin-top:6px;
+}
+
+.mood-list{
+  display:flex;
+  gap:8px;
+}
+
+.mood-btn{
+  width:48px;
+  height:48px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:#fff;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  transition:all 0.12s ease;
+
+  box-shadow:
+    0 8px 16px rgba(0,0,0,0.05);
+}
+
+.mood-btn:active{
+  transform:scale(0.92);
+}
+
+.mood-btn.selected{
+  transform:scale(0.92);
+}
+
+/* 주간 기록 */
+
+.week-mood-box{
+  display:none;
+
+  margin-top:16px;
+}
+
+.week-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+}
+
+.week-item{
+  background:#fff;
+
+  border-radius:16px;
+
+  padding:10px 0;
+
+  text-align:center;
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.05);
+}
+
+.week-day{
+  font-size:11px;
+  color:#777;
+
+  margin-bottom:6px;
+}
+
+.week-emoji{
+  font-size:22px;
+}
+
+/* =========================
+   탐색
+========================= */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.category-card{
+  height:110px;
+
+  background:#fff;
+
+  border-radius:24px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  gap:8px;
+
+  font-size:28px;
+
+  font-weight:700;
+
+  transition:all 0.12s ease;
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.05);
+}
+
+.category-card span{
+  font-size:14px;
+  color:#444;
+}
+
+.category-card:active{
+  transform:scale(0.96);
+}
+
+/* 컬러 */
+
+.popular{
+  background:#fff1f1;
+}
+
+.love{
+  background:#fff0f6;
+}
+
+.personality{
+  background:#f3f0ff;
+}
+
+.relation{
+  background:#eef9ff;
+}
+
+.work{
+  background:#f3fff2;
+}
+
+.emotion{
+  background:#f9f5ff;
+}
+
+.taste{
+  background:#fff8ec;
+}
+
+/* =========================
+   MY
+========================= */
+
+.my-monster-card{
+  display:flex;
+  align-items:center;
+  gap:18px;
+
+  background:#fff;
+
+  padding:22px;
+
+  border-radius:28px;
+
+  margin-bottom:20px;
+
+  box-shadow:
+    0 12px 22px rgba(0,0,0,0.05);
+}
+
+.my-monster-card .monster-image{
+  width:88px;
+  height:88px;
+
+  object-fit:contain;
+}
+
+.monster-type{
+  font-size:18px;
+  font-weight:800;
+
+  margin-bottom:8px;
+}
+
+.monster-desc{
+  font-size:14px;
+  line-height:1.5;
+  color:#666;
+}
+
+/* 분석 / 조언 */
+
+.analysis-box,
+.advice-box{
+  background:#fff;
+
+  border-radius:24px;
+
+  padding:22px;
+
+  margin-bottom:18px;
+
+  box-shadow:
+    0 10px 18px rgba(0,0,0,0.05);
+}
+
+.radar-placeholder{
+  height:180px;
+
+  border-radius:18px;
+
+  background:#f7f7fb;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  color:#aaa;
+}
+
+/* =========================
+   설정
+========================= */
+
+.setting-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:#fff;
+
+  border-radius:22px;
+
+  padding:20px;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 10px 18px rgba(0,0,0,0.05);
+}
+
+.setting-card h3{
+  margin:0 0 6px;
+  font-size:15px;
+}
+
+.setting-card p{
+  margin:0;
+  font-size:13px;
+  color:#777;
+}
+
+/* 스위치 */
+
+.switch{
+  position:relative;
+
+  width:50px;
+  height:28px;
+}
+
+.switch input{
+  display:none;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+
+  background:#ddd;
+
+  border-radius:999px;
+
+  transition:0.2s;
+}
+
+.slider::before{
+  content:"";
+
+  position:absolute;
+
+  width:22px;
+  height:22px;
+
+  left:3px;
+  top:3px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  transition:0.2s;
+}
+
+.switch input:checked + .slider{
+  background:#8b6cff;
+}
+
+.switch input:checked + .slider::before{
+  transform:translateX(22px);
+}
+
+/* =========================
+   하단 탭
+========================= */
+
+.bottom-tab{
+  position:absolute;
+
+  bottom:0;
+  left:0;
+
+  width:100%;
+  height:78px;
+
+  background:#fff;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+
+  border-top:
+    1px solid #ececec;
+
+  z-index:30;
+}
+
+.tab{
+  border:none;
+  background:none;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:4px;
+
+  color:#999;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  transition:all 0.12s ease;
+}
+
+.tab small{
+  font-size:12px;
+}
+
+.tab.active{
+  color:#8b6cff;
+}
+
+.tab:active{
+  transform:scale(0.92);
+}
+
+/* =========================
+   PT 팝업
+========================= */
+
+.point-popup{
+  position:fixed;
+
+  top:92px;
+  right:22px;
+
+  background:#8b6cff;
+  color:#fff;
+
+  padding:12px 16px;
+
+  border-radius:16px;
+
+  font-size:14px;
+  font-weight:700;
+
+  opacity:0;
+
+  transform:
+    translateY(-8px);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  box-shadow:
+    0 12px 22px rgba(139,108,255,0.28);
+}
+
+/* =========================
+   눌림
+========================= */
+
+.selected{
+  transform:scale(0.94);
+}
