@@ -265,6 +265,19 @@ if(Object.keys(savedMoodData).length > 0){
   weekMoodBox.style.display = "block";
   renderWeekMood();
 }
+
+  // 토글 스위치 클릭
+const toggle = document.querySelector('.toggle-switch');
+let toggleState = localStorage.getItem('newTestAlert') === 'on';
+
+if(toggleState) toggle.classList.add('active');
+
+toggle.addEventListener('click', () => {
+  toggleState = !toggleState;
+  toggle.classList.toggle('active');
+  localStorage.setItem('newTestAlert', toggleState ? 'on' : 'off');
+});
+  
 </script>
 </body>
 </html>
