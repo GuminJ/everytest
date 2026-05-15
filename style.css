@@ -123,10 +123,23 @@ body{
 }
 
 .monster-image{
+  animation:float 3s ease-in-out infinite;
   position:absolute;
   right:-20px;
   bottom:-10px;
   width:170px;
+  @keyframes float{
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
 }
 
 /* 섹션 */
