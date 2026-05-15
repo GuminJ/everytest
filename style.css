@@ -14,6 +14,7 @@ html, body{
   font-family:'Pretendard', sans-serif;
   color:#222;
   overflow:hidden;
+  overflow-x:hidden;
 }
 
 button{
@@ -29,8 +30,8 @@ button{
 ========================= */
 .app{
   width:100%;
-  max-width:520px;
-  height:100vh;
+  max-width:480px;
+  min-height:100vh;
   margin:0 auto;
   background:#f6f7fb;
   position:relative;
