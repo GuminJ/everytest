@@ -448,22 +448,18 @@
 
     function addPoint(amount){
 
-      savedPoint += amount;
+points += amount;
 
-      localStorage.setItem(
-        "monsterPoint",
-        savedPoint
-      );
+  localStorage.setItem(
+    "points",
+    points
+  );
 
-      updatePointUI();
+  pointText.textContent =
+    `${points}PT`;
 
-      pointPopup.classList.add("show");
-
-      setTimeout(() => {
-
-        pointPopup.classList.remove("show");
-
-      }, 300);
+  // 팝업 실행
+  showPointPopup();
 
     }
 
