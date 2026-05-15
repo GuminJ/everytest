@@ -131,7 +131,7 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 }
 .main-banner .monster-image {
   width: 120px;
-  height: 1520px;
+  height: 150px;
   max-width: 40%;      /* 배너 가로의 50% 이하 */
   object-fit: contain;
 }
