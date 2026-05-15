@@ -328,10 +328,12 @@ body{
 .mood-list{
   display:flex;
   gap:8px;
+  width:100%;
 }
 
 .mood-btn{
-  width:48px;
+  flex:1;
+  min-width:0;
   height:48px;
 
   border:none;
