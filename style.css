@@ -840,3 +840,43 @@ img{
   }
 
 }
+
+/* =========================
+   카테고리 컬러
+========================= */
+
+.category-card.popular{
+  background:#fff1f0;
+  color:#ff5a36;
+}
+
+.category-card.love{
+  background:#ffeef5;
+  color:#ff4f87;
+}
+
+.category-card.personality{
+  background:#f3efff;
+  color:#7b61ff;
+}
+
+.category-card.relation{
+  background:#eefcf8;
+  color:#16b892;
+}
+
+.category-card.work{
+  background:#eef4ff;
+  color:#3b82f6;
+}
+
+.category-card.emotion{
+  background:#f5f3ff;
+  color:#6d5dfc;
+}
+
+.category-card.taste{
+  background:#fff8e8;
+  color:#f59e0b;
+}
+
