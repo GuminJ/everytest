@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>LittleMonster</title>
 
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Pretendard 폰트 -->
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 </head>
 
 <body>
@@ -35,8 +35,6 @@
 
       <!-- 홈 -->
       <section class="page active" id="homePage">
-
-        <!-- 메인 배너 -->
         <div class="main-banner">
           <div class="banner-text">
             <span class="small-label">오늘의 추천 테스트</span>
@@ -47,7 +45,6 @@
           <img src="images/icon.png" alt="리틀몬스터" class="monster-image" />
         </div>
 
-        <!-- 인기 테스트 -->
         <div class="section-title">🔥 인기 테스트</div>
         <div class="card-list">
           <div class="test-card tap">
@@ -73,7 +70,6 @@
           </div>
         </div>
 
-        <!-- 오늘 기분 기록 -->
         <div class="mood-box">
           <div class="section-title">🌈 오늘 기분 기록</div>
           <div class="mood-list">
@@ -89,7 +85,6 @@
             <div class="week-grid" id="weekGrid"></div>
           </div>
         </div>
-
       </section>
 
       <!-- 탐색 -->
@@ -157,11 +152,125 @@
       <button class="tab tap" data-page="settingPage"><span>⚙️</span><small>설정</small></button>
     </nav>
 
-    <!-- 포인트 팝업 -->
+    <!-- PT 팝업 -->
     <div class="point-popup" id="pointPopup">+1PT</div>
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const pages = document.querySelectorAll(".page");
+    const mainContent = document.querySelector(".main-content");
+    const topHeader = document.getElementById("topHeader");
+
+    const tabColors = {
+      homePage: '#8b6cff',
+      explorePage: '#ff6b6b',
+      myPage: '#22aa22',
+      settingPage: '#888888'
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        pages.forEach(p => p.classList.remove("active"));
+        tab.classList.add("active");
+        const target = tab.dataset.page;
+        document.getElementById(target).classList.add("active");
+
+        topHeader.style.background = tabColors[target] || '#8b6cff';
+        mainContent.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    // 탭 눌림 효과
+    document.querySelectorAll(".tap").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.add("selected");
+        setTimeout(() => btn.classList.remove("selected"), 150);
+      });
+    });
+
+    // 프로필 이미지 업로드
+    const profileInput = document.getElementById("profileInput");
+    const profileImage = document.getElementById("profileImage");
+    const savedProfile = localStorage.getItem("profileImage");
+    if (savedProfile) profileImage.src = savedProfile;
+    profileInput.addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = event => {
+        profileImage.src = event.target.result;
+        localStorage.setItem("profileImage", event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // 포인트 시스템
+    const pointText = document.getElementById("pointText");
+    const pointPopup = document.getElementById("pointPopup");
+    let point = Number(localStorage.getItem("point")) || 0;
+    updatePointUI();
+    function addPoint(amount) {
+      point += amount;
+      localStorage.setItem("point", point);
+      updatePointUI();
+      showPointPopup(`+${amount}PT`);
+    }
+    function updatePointUI() { pointText.textContent = `${point}PT`; }
+    function showPointPopup(text) {
+      pointPopup.textContent = text;
+      pointPopup.style.opacity = "1";
+      setTimeout(() => pointPopup.style.opacity = "0", 1500);
+    }
+
+    // 오늘 기분 기록
+    const moodButtons = document.querySelectorAll(".mood-btn");
+    const weekMoodBox = document.getElementById("weekMoodBox");
+    const weekGrid = document.getElementById("weekGrid");
+    const today = new Date();
+    const currentWeekKey = getCurrentWeekKey(today);
+    const savedWeekKey = localStorage.getItem("weekKey");
+    if(savedWeekKey !== currentWeekKey) {
+      localStorage.removeItem("weekMood");
+      localStorage.setItem("weekKey", currentWeekKey);
+    }
+    let savedMoodData = JSON.parse(localStorage.getItem("weekMood")) || {};
+
+    moodButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const todayKey = getDateKey(today);
+        const alreadyChecked = savedMoodData[todayKey];
+        savedMoodData[todayKey] = button.textContent;
+        localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
+        renderWeekMood();
+        weekMoodBox.style.display = "block";
+        if(!alreadyChecked) addPoint(1);
+      });
+    });
+
+    function renderWeekMood() {
+      weekGrid.innerHTML = "";
+      const startOfWeek = getStartOfWeek(today);
+      const dayNames = ["일","월","화","수","목","금","토"];
+      for(let i=0;i<7;i++){
+        const date = new Date(startOfWeek);
+        date.setDate(startOfWeek.getDate()+i);
+        const key = getDateKey(date);
+        const mood = savedMoodData[key] || "➖";
+        const item = document.createElement("div");
+        item.className = "week-item";
+        item.innerHTML = `<div class="week-day">${dayNames[i]}</div><div class="week-emoji">${mood}</div>`;
+        weekGrid.appendChild(item);
+      }
+    }
+
+    function getStartOfWeek(date){ const d = new Date(date); d.setDate(d.getDate()-d.getDay()); return d; }
+    function getDateKey(date){ return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`; }
+    function getCurrentWeekKey(date){ return getDateKey(getStartOfWeek(date)); }
+
+    if(Object.keys(savedMoodData).length>0){ weekMoodBox.style.display="block"; renderWeekMood(); }
+  </script>
 </body>
 </html>
