@@ -110,9 +110,9 @@ body{
 
 .monster-image{
   position:absolute;
-  right:20px;
-  bottom:10px;
-  width:120px;
+  right:-10px;
+  bottom:-5px;
+  width:170px;
 }
 
 /* 섹션 */
