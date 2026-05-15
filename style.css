@@ -1,5 +1,5 @@
 /* =========================
-   전역
+   기본 스타일
 ========================= */
 html, body {
   width: 100%;
@@ -7,15 +7,14 @@ html, body {
   margin: 0;
   font-family: 'Pretendard', sans-serif;
   color: #222;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #f6f7fb;
 }
 
 .app {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-bottom: 64px; /* 하단 탭 공간 확보 */
 }
 
 /* =========================
@@ -25,40 +24,35 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 10;
+  padding: 14px 18px;
+  position: relative;
 }
 
-.top-header .logo {
+.logo {
+  font-size: 24px;
   margin: 0;
-  font-size: 20px;
-  font-weight: 800;
 }
 
-.top-header .subtitle {
-  margin: 2px 0 0 0;
-  font-size: 12px;
+.subtitle {
+  margin: 4px 0 0 0;
+  font-size: 14px;
   color: #666;
 }
 
 .profile-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
 }
 
 .profile-mini {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .profile-mini img {
@@ -67,143 +61,184 @@ html, body {
   object-fit: cover;
 }
 
+.profile-mini input[type="file"] {
+  display: none;
+}
+
+/* =========================
+   포인트
+========================= */
 .point-badge {
-  background: #f6f7fb;
-  padding: 4px 8px;
-  border-radius: 8px;
+  margin-top: 6px;
   font-weight: 700;
   font-size: 12px;
-  color: #8b6cff;
+  background: #8b6cff;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+/* 포인트 팝업 */
+.point-popup {
+  position: fixed;
+  top: 80px; /* 헤더 바로 아래 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff93b6;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  pointer-events: none;
+  z-index: 999;
 }
 
 /* =========================
-   메인 영역
+   메인 콘텐츠
 ========================= */
 .main-content {
-  flex: 1;
+  min-height: calc(100vh - 64px);
   overflow-y: auto;
   scroll-behavior: smooth;
+  position: relative;
 }
 
-/* =========================
-   페이지별 배경색
-========================= */
+/* 페이지 배경색 (탭별) */
 .page {
   display: none;
-  padding: 16px;
-  min-height: calc(100% - 60px);
+  padding: 16px 18px;
+  box-sizing: border-box;
 }
 
 .page.active {
   display: block;
 }
 
-#homePage {
-  background: #fff7fb;
-}
-
-#explorePage {
-  background: #f0f7ff;
-}
-
-#myPage {
-  background: #fffaf0;
-}
-
-#settingPage {
-  background: #f7fff5;
-}
+/* 배경색 */
+#homePage { background: #fff7fb; }
+#explorePage { background: #f0f9ff; }
+#myPage { background: #fffaf0; }
+#settingPage { background: #f7fff6; }
 
 /* =========================
    배너
 ========================= */
 .main-banner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, #ffeef7, #e9fff9);
-  border-radius: 18px;
+  gap: 12px;
+  background: linear-gradient(135deg,#fff0f5,#e9fff9);
+  border-radius: 16px;
   padding: 16px;
-  margin-bottom: 16px;
+  align-items: center;
 }
 
-.banner-text h2 {
-  margin: 8px 0;
-  font-size: 22px;
+.main-banner .banner-text {
+  flex: 1;
 }
 
-.start-btn {
-  background: linear-gradient(135deg, #ff93b6, #ffc2d8);
+.main-banner .monster-image {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* =========================
+   버튼
+========================= */
+button {
+  appearance: none;
   border: none;
-  padding: 10px 16px;
   border-radius: 14px;
-  color: #fff;
+  padding: 10px 14px;
   font-weight: 700;
   cursor: pointer;
 }
 
-.start-btn.selected {
-  transform: scale(0.96);
+.tap {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.tap.selected {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.start-btn {
+  background: linear-gradient(135deg,#ff93b6,#ffc2d8);
+  color: #fff;
 }
 
 /* =========================
-   카드 리스트
+   카드
 ========================= */
-.card-list {
+.card-list, .category-grid {
   display: flex;
   gap: 12px;
-  overflow-x: auto;
+  flex-wrap: wrap;
 }
 
-.test-card {
-  min-width: 180px;
+.test-card, .category-card {
   background: #fff;
   border-radius: 16px;
   padding: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  flex: 1 1 30%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.1s;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.test-card:hover {
+.test-card:hover, .category-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.emoji {
-  font-size: 28px;
-  margin-bottom: 6px;
+.category-card span {
+  font-weight: 700;
 }
+
+/* 카테고리별 색상 */
+.category-card.popular { background: #ffecec; }
+.category-card.love { background: #fff0f5; }
+.category-card.personality { background: #f0f9ff; }
+.category-card.relation { background: #fffbe6; }
+.category-card.work { background: #f0fff4; }
+.category-card.emotion { background: #fffaf0; }
+.category-card.taste { background: #fff0ff; }
 
 /* =========================
    기분 기록
 ========================= */
-.mood-box {
-  margin-top: 24px;
-}
-
 .mood-list {
   display: flex;
-  justify-content: space-between;
   gap: 8px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-top: 12px;
 }
 
 .mood-btn {
   flex: 1;
-  padding: 10px 0;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  background: #fff;
+  padding: 8px 0;
   font-size: 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .mood-btn.selected {
-  transform: scale(0.9);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* 주간 감정 */
 .week-mood-box {
   margin-top: 12px;
 }
@@ -211,55 +246,26 @@ html, body {
 .week-grid {
   display: flex;
   justify-content: space-between;
+  gap: 6px;
 }
 
 .week-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.week-day {
   font-size: 12px;
+  color: #666;
+}
+
+.week-emoji {
+  font-size: 18px;
 }
 
 /* =========================
-   탐색 탭
-========================= */
-.category-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.category-card {
-  flex: 1 1 30%;
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.1s;
-}
-
-.category-card:hover {
-  transform: translateY(-2px);
-}
-
-.category-card span {
-  display: block;
-  margin-top: 6px;
-  font-size: 14px;
-}
-
-/* 색상별 */
-.category-card.popular { background: #ffeef7; }
-.category-card.love { background: #fff0f5; }
-.category-card.personality { background: #f0f7ff; }
-.category-card.relation { background: #f0fff4; }
-.category-card.work { background: #fff7f0; }
-.category-card.emotion { background: #fdf7ff; }
-.category-card.taste { background: #f7fff5; }
-
-/* =========================
-   MY 탭
+   MY 카드
 ========================= */
 .my-monster-card {
   display: flex;
@@ -268,21 +274,25 @@ html, body {
   margin-bottom: 16px;
 }
 
-.my-monster-card img {
-  width: 80px;
-  height: 80px;
+.my-monster-card .monster-image {
+  width: 72px;
+  height: 72px;
   border-radius: 16px;
   object-fit: cover;
 }
 
 /* =========================
-   하단 탭바
+   탭
 ========================= */
 .bottom-tab {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-  padding: 6px 0;
   background: #fff;
+  padding: 6px 0;
   border-top: 1px solid #ddd;
 }
 
@@ -290,28 +300,15 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 20px;
+  gap: 4px;
   color: #999;
+  font-size: 22px;
 }
 
-.tab.active { color: #8b6cff; }
+.tab.active {
+  color: #8b6cff;
+}
 
-/* =========================
-   포인트 팝업
-========================= */
-.point-popup {
-  position: fixed;
-  top: 70px;               /* 헤더 바로 아래 */
-  left: 50%;               /* 화면 중앙 */
-  transform: translateX(-50%);
-  background: #8b6cff;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1000;
+.tab small {
+  font-size: 12px;
 }
