@@ -1,357 +1,245 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-  <title>LittleMonster</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Pretendard 폰트 -->
-  <link rel="stylesheet" as="style" crossorigin
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>LittleMonster</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 </head>
-
 <body>
-  <div class="app">
+<div class="app">
+  <!-- 헤더 -->
+  <header class="top-header" id="topHeader">
+    <div>
+      <h1 class="logo">LittleMonster</h1>
+      <p class="subtitle">심리테스트로 만드는<br>나의 정체성</p>
+    </div>
+    <div class="profile-wrap">
+      <label class="profile-mini">
+        <img id="profileImage" src="images/default-profile.png" alt="프로필"/>
+        <input type="file" id="profileInput" accept="image/*"/>
+      </label>
+      <div class="point-badge"><span id="pointText">0PT</span></div>
+    </div>
+  </header>
 
-    <!-- ========================
-         헤더
-         ======================== -->
-    <header class="top-header" id="topHeader">
-      <div>
-        <h1 class="logo">LittleMonster</h1>
-        <p class="subtitle">심리테스트로 만드는<br />나의 정체성</p>
+  <!-- 메인 -->
+  <main class="main-content">
+
+    <!-- 홈 탭 -->
+    <section class="page active" id="homePage">
+      <!-- 추천 테스트 배너 -->
+      <div class="main-banner">
+        <div class="banner-text">
+          <span class="small-label">오늘의 추천 테스트</span>
+          <h2>나는 어떤<br>리틀몬스터일까?</h2>
+          <p>테스트를 통해<br>나만의 정체성을 발견해보세요</p>
+          <button class="start-btn tap">테스트 시작하기</button>
+        </div>
+        <img src="images/icon.png" alt="리틀몬스터" class="monster-image"/>
       </div>
 
-      <!-- 프로필 + 포인트 -->
-      <div class="profile-wrap">
-        <!-- 프로필 이미지 -->
-        <label class="profile-mini">
-          <img id="profileImage" src="images/default-profile.png" alt="프로필" />
-          <input type="file" id="profileInput" accept="image/*" />
-        </label>
+      <!-- 인기/신규 테스트 -->
+      <div class="section-title">🔥 인기 테스트</div>
+      <div class="card-list">
+        <div class="test-card tap"><div class="emoji">🍚</div><div class="card-info"><h3>식사 유형으로 적성 찾기</h3><p>외식 취향으로 나와 잘맞는 직무 파악하기</p></div></div>
+        <div class="test-card tap"><div class="emoji">💘</div><div class="card-info"><h3>연애 집착남/녀 테스트</h3><p>나는 얼마나 사랑/애정에 갈망하고 있을까?</p></div></div>
+        <div class="test-card tap"><div class="emoji">🌙</div><div class="card-info"><h3>감각 테스트</h3><p>나의 감각은 얼마나 뛰어날까?</p></div></div>
+      </div>
 
-        <!-- 포인트 배지 -->
-        <div class="point-badge">
-          <span id="pointText">0PT</span>
+      <!-- 오늘의 기분 기록 -->
+      <div class="mood-box">
+        <div class="section-title">🌈 오늘 기분 기록</div>
+        <div class="mood-list">
+          <button class="mood-btn tap">😊</button>
+          <button class="mood-btn tap">😴</button>
+          <button class="mood-btn tap">🥹</button>
+          <button class="mood-btn tap">😎</button>
+          <button class="mood-btn tap">🥺</button>
+          <button class="mood-btn tap">😡</button>
+        </div>
+        <div class="week-mood-box" id="weekMoodBox"><div class="week-grid" id="weekGrid"></div></div>
+      </div>
+    </section>
+
+    <!-- 탐색 탭 -->
+    <section class="page" id="explorePage">
+      <div class="section-title">🧠 카테고리 탐색</div>
+      <div class="category-grid">
+        <div class="category-card tap popular">🔥<span>인기</span></div>
+        <div class="category-card tap love">💘<span>연애</span></div>
+        <div class="category-card tap personality">🧠<span>성격</span></div>
+        <div class="category-card tap relation">👥<span>관계</span></div>
+        <div class="category-card tap work">💼<span>직장</span></div>
+        <div class="category-card tap emotion">🌙<span>감성</span></div>
+        <div class="category-card tap taste">🎨<span>취향</span></div>
+      </div>
+    </section>
+
+    <!-- MY 탭 -->
+    <section class="page" id="myPage">
+      <div class="my-monster-card">
+        <img src="images/fire-monster.png" class="monster-image" alt="my monster"/>
+        <div>
+          <div class="monster-type">매사에 열정적인 '화로'</div>
+          <div class="monster-desc">진취적이고, 열정적이며 활기찬 타입</div>
         </div>
       </div>
-    </header>
+      <div class="analysis-box">
+        <div class="section-title">📊 정체성 분석</div>
+        <div class="radar-placeholder">성향 그래프 영역</div>
+      </div>
+      <div class="advice-box">
+        <div class="section-title">💡 오늘의 조언</div>
+        <p>지나친 열정은 화를 부릅니다.<br>뒤를 돌아보고, 찬찬히 살펴보세요.</p>
+      </div>
+    </section>
 
-    <!-- ========================
-         메인 콘텐츠
-         ======================== -->
-    <main class="main-content">
+    <!-- 세팅 탭 -->
+    <section class="page" id="settingPage">
+      <div class="setting-card">
+        <div><h3>새 테스트 알림</h3><p>새로운 심리테스트 업데이트 시 알림</p></div>
+        <label class="switch"><input type="checkbox" checked/><span class="slider"></span></label>
+      </div>
+      <div class="setting-card">
+        <div><h3>문의하기</h3><p>버그 제보 및 제안 보내기</p></div>
+      </div>
+      <div class="setting-card">
+        <div><h3>개인정보 처리방침</h3><p>내용 표시</p></div>
+      </div>
+      <div class="setting-card">
+        <div><h3>앱 버전</h3><p>1.0.0</p></div>
+      </div>
+    </section>
 
-      <!-- ------------------------
-           홈 페이지
-           ------------------------ -->
-      <section class="page active" id="homePage">
+  </main>
 
-        <!-- 메인 배너 -->
-        <div class="main-banner">
-          <div class="banner-text">
-            <span class="small-label">오늘의 추천 테스트</span>
-            <h2>나는 어떤<br />리틀몬스터일까?</h2>
-            <p>테스트를 통해<br />나만의 정체성을 발견해보세요</p>
-            <button class="start-btn tap">테스트 시작하기</button>
-          </div>
-          <img src="images/icon.png" alt="리틀몬스터" class="monster-image" />
-        </div>
+  <!-- 하단 탭 -->
+  <nav class="bottom-tab">
+    <button class="tab active tap" data-page="homePage"><span>🏠</span><small>홈</small></button>
+    <button class="tab tap" data-page="explorePage"><span>🔍</span><small>탐색</small></button>
+    <button class="tab tap" data-page="myPage"><span>👾</span><small>MY</small></button>
+    <button class="tab tap" data-page="settingPage"><span>⚙️</span><small>설정</small></button>
+  </nav>
 
-        <!-- 인기 테스트 -->
-        <div class="section-title">🔥 인기 테스트</div>
-        <div class="card-list">
-          <div class="test-card tap">
-            <div class="emoji">🍚</div>
-            <div class="card-info">
-              <h3>식사 유형으로 적성 찾기</h3>
-              <p>외식 취향으로 나와 잘맞는 직무 파악하기</p>
-            </div>
-          </div>
+  <!-- PT 팝업 -->
+  <div class="point-popup" id="pointPopup">+1PT</div>
+</div>
 
-          <div class="test-card tap">
-            <div class="emoji">💘</div>
-            <div class="card-info">
-              <h3>연애 집착남/녀 테스트</h3>
-              <p>나는 얼마나 사랑/애정에 갈망하고 있을까?</p>
-            </div>
-          </div>
+<script>
+// -------------------- 탭 이동 --------------------
+const tabs = document.querySelectorAll(".tab");
+const pages = document.querySelectorAll(".page");
+const mainContent = document.querySelector(".main-content");
 
-          <div class="test-card tap">
-            <div class="emoji">🌙</div>
-            <div class="card-info">
-              <h3>감각 테스트</h3>
-              <p>나의 감각은 얼마나 뛰어날까?</p>
-            </div>
-          </div>
-        </div>
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    pages.forEach(p => p.classList.remove("active"));
+    tab.classList.add("active");
+    const target = tab.dataset.page;
+    document.getElementById(target).classList.add("active");
+    mainContent.scrollTo({top:0, behavior:"smooth"});
+  });
+});
 
-        <!-- 오늘의 기분 기록 -->
-        <div class="mood-box">
-          <div class="section-title">🌈 오늘 기분 기록</div>
-          <div class="mood-list">
-            <button class="mood-btn tap">😊</button>
-            <button class="mood-btn tap">😴</button>
-            <button class="mood-btn tap">🥹</button>
-            <button class="mood-btn tap">😎</button>
-            <button class="mood-btn tap">🥺</button>
-            <button class="mood-btn tap">😡</button>
-          </div>
+// -------------------- 눌림 효과 --------------------
+document.querySelectorAll(".tap").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.classList.add("selected");
+    setTimeout(() => btn.classList.remove("selected"), 150);
+  });
+});
 
-          <!-- 주간 감정 -->
-          <div class="week-mood-box" id="weekMoodBox">
-            <div class="week-grid" id="weekGrid"></div>
-          </div>
-        </div>
+// -------------------- 프로필 이미지 --------------------
+const profileInput = document.getElementById("profileInput");
+const profileImage = document.getElementById("profileImage");
+const savedProfile = localStorage.getItem("profileImage");
+if(savedProfile) profileImage.src = savedProfile;
+profileInput.addEventListener("change", e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = event => {
+    profileImage.src = event.target.result;
+    localStorage.setItem("profileImage", event.target.result);
+  };
+  reader.readAsDataURL(file);
+});
 
-      </section>
+// -------------------- 포인트 시스템 --------------------
+const pointText = document.getElementById("pointText");
+const pointPopup = document.getElementById("pointPopup");
+let point = Number(localStorage.getItem("point")) || 0;
+updatePointUI();
 
-      <!-- ------------------------
-           탐색 페이지
-           ------------------------ -->
-      <section class="page" id="explorePage">
-        <div class="section-title">🧠 카테고리 탐색</div>
-        <div class="category-grid">
-          <div class="category-card tap popular">🔥<span>인기</span></div>
-          <div class="category-card tap love">💘<span>연애</span></div>
-          <div class="category-card tap personality">🧠<span>성격</span></div>
-          <div class="category-card tap relation">👥<span>관계</span></div>
-          <div class="category-card tap work">💼<span>직장</span></div>
-          <div class="category-card tap emotion">🌙<span>감성</span></div>
-          <div class="category-card tap taste">🎨<span>취향</span></div>
-        </div>
-      </section>
+function addPoint(amount){
+  point += amount;
+  localStorage.setItem("point", point);
+  updatePointUI();
+  showPointPopup(`+${amount}PT`);
+}
 
-      <!-- ------------------------
-           MY 페이지
-           ------------------------ -->
-      <section class="page" id="myPage">
-        <div class="my-monster-card">
-          <img src="images/fire-monster.png" class="monster-image" alt="my monster" />
-          <div>
-            <div class="monster-type">매사에 열정적인 '화로'</div>
-            <div class="monster-desc">진취적이고, 열정적이며 활기찬 타입</div>
-          </div>
-        </div>
+function updatePointUI(){ pointText.textContent = `${point}PT`; }
+function showPointPopup(text){
+  pointPopup.textContent = text;
+  pointPopup.style.opacity = "1";
+  setTimeout(() => pointPopup.style.opacity = "0", 1600);
+}
 
-        <!-- 성향 분석 -->
-        <div class="analysis-box">
-          <div class="section-title">📊 정체성 분석</div>
-          <div class="radar-placeholder">성향 그래프 영역</div>
-        </div>
+// -------------------- 감정 기록 --------------------
+const moodButtons = document.querySelectorAll(".mood-btn");
+const weekMoodBox = document.getElementById("weekMoodBox");
+const weekGrid = document.getElementById("weekGrid");
+const today = new Date();
+const currentWeekKey = getCurrentWeekKey(today);
+const savedWeekKey = localStorage.getItem("weekKey");
 
-        <!-- 오늘의 조언 -->
-        <div class="advice-box">
-          <div class="section-title">💡 오늘의 조언</div>
-          <p>지나친 열정은 화를 부릅니다.<br />뒤를 돌아보고, 찬찬히 살펴보세요.</p>
-        </div>
-      </section>
+// 주간 초기화
+if(savedWeekKey !== currentWeekKey){
+  localStorage.removeItem("weekMood");
+  localStorage.setItem("weekKey", currentWeekKey);
+}
 
-      <!-- ------------------------
-           설정 페이지
-           ------------------------ -->
-      <section class="page" id="settingPage">
-        <div class="setting-card">
-          <div>
-            <h3>새 테스트 알림</h3>
-            <p>새로운 심리테스트 업데이트 시 알림</p>
-          </div>
-          <label class="switch">
-            <input type="checkbox" checked />
-            <span class="slider"></span>
-          </label>
-        </div>
+let savedMoodData = JSON.parse(localStorage.getItem("weekMood")) || {};
+moodButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const todayKey = getDateKey(today);
+    const alreadyChecked = savedMoodData[todayKey];
+    savedMoodData[todayKey] = button.textContent;
+    localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
+    renderWeekMood();
+    weekMoodBox.style.display = "block";
+    if(!alreadyChecked) addPoint(1); // 하루 1회만
+  });
+});
 
-        <div class="setting-card">
-          <div>
-            <h3>문의하기</h3>
-            <p>버그 제보 및 제안 보내기</p>
-          </div>
-        </div>
-      </section>
+// 주간 렌더링
+function renderWeekMood(){
+  weekGrid.innerHTML = "";
+  const startOfWeek = getStartOfWeek(today);
+  const dayNames = ["일","월","화","수","목","금","토"];
+  for(let i=0;i<7;i++){
+    const date = new Date(startOfWeek);
+    date.setDate(startOfWeek.getDate() + i);
+    const key = getDateKey(date);
+    const mood = savedMoodData[key] || "➖";
+    const item = document.createElement("div");
+    item.className = "week-item";
+    item.innerHTML = `<div class="week-day">${dayNames[i]}</div><div class="week-emoji">${mood}</div>`;
+    weekGrid.appendChild(item);
+  }
+}
 
-    </main>
+function getStartOfWeek(date){ const d = new Date(date); const day = d.getDay(); d.setDate(d.getDate() - day); return d; }
+function getDateKey(date){ return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`; }
+function getCurrentWeekKey(date){ return getDateKey(getStartOfWeek(date)); }
 
-    <!-- ========================
-         하단 탭
-         ======================== -->
-    <nav class="bottom-tab">
-      <button class="tab active tap" data-page="homePage"><span>🏠</span><small>홈</small></button>
-      <button class="tab tap" data-page="explorePage"><span>🔍</span><small>탐색</small></button>
-      <button class="tab tap" data-page="myPage"><span>👾</span><small>MY</small></button>
-      <button class="tab tap" data-page="settingPage"><span>⚙️</span><small>설정</small></button>
-    </nav>
-
-    <!-- 포인트 팝업 -->
-    <div class="point-popup" id="pointPopup">+1PT</div>
-
-  </div>
-
-  <!-- =========================
-       JS 통합
-       ========================= -->
-  <script>
-    /* ==================================================
-        탭 이동
-    ================================================== */
-    const tabs = document.querySelectorAll(".tab");
-    const pages = document.querySelectorAll(".page");
-    const mainContent = document.querySelector(".main-content");
-
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        // 모든 탭/페이지 active 제거
-        tabs.forEach(t => t.classList.remove("active"));
-        pages.forEach(p => p.classList.remove("active"));
-
-        // 클릭한 탭 active
-        tab.classList.add("active");
-        const target = tab.dataset.page;
-        document.getElementById(target).classList.add("active");
-
-        // 스크롤 맨 위로 초기화
-        mainContent.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
-
-    /* ==================================================
-        눌림 효과
-    ================================================== */
-    document.querySelectorAll(".tap").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.classList.add("selected");
-        setTimeout(() => btn.classList.remove("selected"), 150);
-      });
-    });
-
-    /* ==================================================
-        프로필 이미지
-    ================================================== */
-    const profileInput = document.getElementById("profileInput");
-    const profileImage = document.getElementById("profileImage");
-    const savedProfile = localStorage.getItem("profileImage");
-
-    if (savedProfile) profileImage.src = savedProfile;
-
-    profileInput.addEventListener("change", e => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = event => {
-        const imageData = event.target.result;
-        profileImage.src = imageData;
-        localStorage.setItem("profileImage", imageData);
-      };
-      reader.readAsDataURL(file);
-    });
-
-    /* ==================================================
-        포인트 시스템
-    ================================================== */
-    const pointText = document.getElementById("pointText");
-    const pointPopup = document.getElementById("pointPopup");
-    let point = Number(localStorage.getItem("point")) || 0;
-
-    function addPoint(amount) {
-      point += amount;
-      localStorage.setItem("point", point);
-      updatePointUI();
-      showPointPopup(`+${amount}PT`);
-    }
-
-    function updatePointUI() {
-      pointText.textContent = `${point}PT`;
-    }
-
-    function showPointPopup(text) {
-      pointPopup.textContent = text;
-      pointPopup.style.opacity = "1";
-      setTimeout(() => pointPopup.style.opacity = "0", 1600);
-    }
-
-    updatePointUI();
-
-    /* ==================================================
-        감정 기록
-    ================================================== */
-    const moodButtons = document.querySelectorAll(".mood-btn");
-    const weekMoodBox = document.getElementById("weekMoodBox");
-    const weekGrid = document.getElementById("weekGrid");
-    const today = new Date();
-    const currentWeekKey = getCurrentWeekKey(today);
-    const savedWeekKey = localStorage.getItem("weekKey");
-
-    // 주간 초기화
-    if (savedWeekKey !== currentWeekKey) {
-      localStorage.removeItem("weekMood");
-      localStorage.setItem("weekKey", currentWeekKey);
-    }
-
-    let savedMoodData = JSON.parse(localStorage.getItem("weekMood")) || {};
-
-    moodButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        const todayKey = getDateKey(today);
-
-        // 하루 1회만 PT 지급
-        const alreadyChecked = savedMoodData[todayKey];
-        if (!alreadyChecked) addPoint(1);
-
-        savedMoodData[todayKey] = button.textContent;
-        localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
-
-        renderWeekMood();
-        weekMoodBox.style.display = "block";
-      });
-    });
-
-    // 주간 감정 렌더링
-    function renderWeekMood() {
-      weekGrid.innerHTML = "";
-      const startOfWeek = getStartOfWeek(today);
-      const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-
-      for (let i = 0; i < 7; i++) {
-        const date = new Date(startOfWeek);
-        date.setDate(startOfWeek.getDate() + i);
-        const key = getDateKey(date);
-        const mood = savedMoodData[key] || "➖";
-
-        const item = document.createElement("div");
-        item.className = "week-item";
-        item.innerHTML = `<div class="week-day">${dayNames[i]}</div>
-                          <div class="week-emoji">${mood}</div>`;
-        weekGrid.appendChild(item);
-      }
-    }
-
-    function getStartOfWeek(date) {
-      const d = new Date(date);
-      const day = d.getDay();
-      d.setDate(d.getDate() - day);
-      return d;
-    }
-
-    function getDateKey(date) {
-      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    }
-
-    function getCurrentWeekKey(date) {
-      const start = getStartOfWeek(date);
-      return getDateKey(start);
-    }
-
-    // 초기 표시
-    if (Object.keys(savedMoodData).length > 0) {
-      weekMoodBox.style.display = "block";
-      renderWeekMood();
-    }
-
-  </script>
+if(Object.keys(savedMoodData).length > 0){
+  weekMoodBox.style.display = "block";
+  renderWeekMood();
+}
+</script>
 </body>
 </html>
