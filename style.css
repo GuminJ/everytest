@@ -788,3 +788,7 @@ body.settingPage{
     #ffffff 100%
   );
 }
+
+img{
+  display:block;
+}
