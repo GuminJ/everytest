@@ -4,51 +4,34 @@
   border-radius: 16px;
 ">
   
-<h1> 💙 EVERYTEST 💙</h1>
+<h1> 💙 LITTLE MONSTER 💙</h1>
 
-<p> <b>무료 간단 심리테스트 ZIPPPP </b> </p>
+<p> <b> 무료 심리테스트 LITTLE MONSTER </b> </p>
 
 <div align="center">
 
 <p>
-  <a href="https://guminj.github.io/everytest.github.io/test4.html"
+  <a href="https://guminj.github.io/everytest.github.io/index.html"
      style="display:inline-block;background:#ff93b6;color:#fff;
             padding:14px 28px;border-radius:12px;font-weight:800;font-size:16px;
             text-decoration:none;box-shadow:0 6px 14px rgba(255,147,182,.28);
             transition:all .2s ease">
-    🍚 밥 습관으로 보는 나와 잘맞는 회사
+    
+    🍚 무료 심리테스트 LITTLE MONSTER
+    
   </a>
 </p>
 👉 [ 추가 테스트 준비중 ]
-<p></p>
 
 </div>
 
 <b>📌 테스트 소개</b>
-무료 간단 심리테스트, 
-결과 보고 깔깔대기 💌
+무료 간단 심리테스트/MZ·ALPH 세대 취저
 <p></p>
 
-<b>⚠️ 주의사항</b>
-!!이 테스트는 의학적·임상적 진단 도구가 아닙니다.!!
-재미로 만든 것입니다!!
+<b>⚠️ 안내사항</b>
+이 테스트는 의학적·임상적 진단 도구가 아닙니다.
 <p></p>
-
-<b>💌 만든 이유</b>
-바쁘고 각박한 세상 속에서, 서로를 조금 더 이해하고 존중하는 마음이 관계를 더 깊고 따뜻하게 만든다고 믿습니다.
-이 테스트가 당신에게 몰랐던 나를 발견하는 작은 순간이 되길 바라며,
-그 깨달음이 일상 속에서 더 나은 대화를 만들고, 관계를 한 걸음 진전시키는 계기가 되었으면 합니다.
-<p></p>
-<p></p>
-<h3>🗨 개발자의 말</h3>
-<blockquote style="background:#f6f8fa; padding:12px 16px; border-radius:6px; border-left:4px solid #d0d7de; color:#57606a;">
-안녕하세요! 😊  
-저는 심리학과를 졸업하고, 인지심리학 대학원 과정을 수료한 평범한(!) 사람입니다.<p>  
-“친구들이랑 하하호호” 하면서 가볍게 즐길 수 있는 심리 테스트로 만들었어요.</p>
-  
-<p>Goom(콘텐츠 후원 계좌: 카카오뱅크 3333-22-6440348, 정**)</p>
-  
-</blockquote>
 <p></p>
 </div>
 
