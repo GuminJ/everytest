@@ -1,266 +1,404 @@
+/* =========================
+   RESET
+========================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-body{
+html, body{
+  width:100%;
+  height:100%;
+  background:#f6f7fb;
   font-family:'Pretendard', sans-serif;
-  background:#f6f3ff;
-  color:#1a1a1a;
+  color:#222;
+  overflow:hidden;
 }
 
+button{
+  font-family:inherit;
+  outline:none;
+  border:none;
+  background:none;
+  cursor:pointer;
+}
+
+/* =========================
+   APP
+========================= */
 .app{
-  max-width:500px;
+  width:100%;
+  max-width:520px;
+  height:100vh;
   margin:0 auto;
-  min-height:100vh;
-  background:#f6f3ff;
+  background:#f6f7fb;
   position:relative;
-  padding-bottom:100px;
+  overflow:hidden;
 }
 
-/* 상단 */
-
+/* =========================
+   HEADER
+========================= */
 .top-header{
-  padding:24px 20px 10px;
+  padding:
+    calc(env(safe-area-inset-top) + 18px)
+    22px
+    20px;
+
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
 }
 
 .logo{
-  font-size:40px;
+  font-size:28px;
   font-weight:800;
-  line-height:1.1;
+  color:#7b61ff;
 }
 
 .subtitle{
-  margin-top:12px;
-  font-size:17px;
-  color:#666;
+  margin-top:8px;
+  font-size:15px;
   line-height:1.5;
+  color:#666;
 }
 
 .profile-mini{
-  width:54px;
-  height:54px;
-  background:white;
-  border-radius:20px;
+  width:52px;
+  height:52px;
+  border-radius:18px;
+
+  background:linear-gradient(
+    135deg,
+    #8b6cff,
+    #ff7ad9
+  );
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+
+  font-size:24px;
+  color:#fff;
+
+  box-shadow:0 10px 24px rgba(139,108,255,0.25);
 }
 
-/* 메인 */
-
+/* =========================
+   MAIN
+========================= */
 .main-content{
-  padding:0 20px;
+  height:calc(100vh - 145px);
+  overflow-y:auto;
+
+  padding:
+    0 20px
+    120px;
 }
 
+/* 스크롤바 */
+.main-content::-webkit-scrollbar{
+  width:6px;
+}
+
+.main-content::-webkit-scrollbar-thumb{
+  background:#ddd;
+  border-radius:999px;
+}
+
+/* =========================
+   PAGE
+========================= */
 .page{
   display:none;
+  animation:fade .25s ease;
 }
 
 .page.active{
   display:block;
 }
 
-/* 메인 배너 */
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
 
+/* =========================
+   SECTION TITLE
+========================= */
+.section-title{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:16px;
+  color:#222;
+}
+
+/* =========================
+   MAIN BANNER
+========================= */
 .main-banner{
-  background:linear-gradient(135deg,#8b6cff,#b69cff);
-  border-radius:32px;
-  padding:28px;
-  color:white;
-  margin-top:10px;
   position:relative;
+
   overflow:visible;
-  min-height:240px;
+
+  background:linear-gradient(
+    135deg,
+    #8b6cff,
+    #ff7ad9
+  );
+
+  border-radius:32px;
+
+  padding:28px;
+
+  color:#fff;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:28px;
+
+  box-shadow:0 18px 40px rgba(139,108,255,0.22);
+}
+
+.banner-text{
+  z-index:2;
 }
 
 .small-label{
-  font-size:13px;
-  opacity:0.8;
+  display:inline-block;
+
+  padding:6px 12px;
+
+  background:rgba(255,255,255,0.18);
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:600;
+
+  margin-bottom:14px;
 }
 
-.banner-text h2{
-  margin-top:12px;
-  font-size:34px;
-  line-height:1.25;
+.main-banner h2{
+  font-size:30px;
+  line-height:1.2;
+  font-weight:800;
+
+  margin-bottom:12px;
 }
 
-.banner-text p{
-  margin-top:12px;
-  line-height:1.5;
+.main-banner p{
+  font-size:14px;
+  line-height:1.6;
+
   opacity:0.9;
+
+  margin-bottom:18px;
 }
 
+/* =========================
+   START BUTTON
+========================= */
 .start-btn{
-  margin-top:20px;
-  border:none;
-  background:white;
-  color:#7a5cff;
-  padding:14px 20px;
-  border-radius:18px;
-  font-size:16px;
+  height:50px;
+  padding:0 22px;
+
+  border-radius:16px;
+
+  background:#fff;
+  color:#7b61ff;
+
+  font-size:15px;
   font-weight:700;
-  box-shadow:0 6px 16px rgba(0,0,0,0.12);
+
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
 
   transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease,
-    opacity 0.12s ease;
+    transform .08s ease,
+    box-shadow .12s ease,
+    opacity .12s ease;
+}
 
-  -webkit-tap-highlight-color: transparent;
+.start-btn:hover{
+  transform:translateY(-2px);
 }
 
 .start-btn:active{
-  transform:scale(0.94);
-  box-shadow:0 2px 8px rgba(0,0,0,0.12);
-  opacity:0.9;
+  transform:scale(0.95);
+  box-shadow:0 3px 8px rgba(0,0,0,0.15);
 }
 
+/* =========================
+   MONSTER IMAGE
+========================= */
 .monster-image{
-  animation:float 3s ease-in-out infinite;
+  width:150px;
+
   position:absolute;
-  right:-20px;
-  bottom:-10px;
-  width:170px;
-  @keyframes float{
-  0%{
-    transform:translateY(0px);
-  }
+  right:-12px;
+  bottom:-6px;
 
-  50%{
-    transform:translateY(-8px);
-  }
+  z-index:1;
 
-  100%{
-    transform:translateY(0px);
-  }
+  pointer-events:none;
+
+  filter:
+    drop-shadow(
+      0 12px 18px rgba(0,0,0,0.16)
+    );
 }
 
-/* 섹션 */
-
-.section-title{
-  margin-top:36px;
-  margin-bottom:18px;
-  font-size:26px;
-  font-weight:800;
-}
-
-/* 카드 */
-
+/* =========================
+   TEST CARD
+========================= */
 .card-list{
   display:flex;
   flex-direction:column;
-  gap:16px;
+  gap:14px;
+
+  margin-bottom:28px;
 }
 
 .test-card{
-  background:white;
+  background:#fff;
+
   border-radius:24px;
-  padding:20px;
+
+  padding:18px;
+
   display:flex;
-  gap:18px;
   align-items:center;
-  box-shadow:0 8px 24px rgba(0,0,0,0.06);
+  gap:16px;
+
+  box-shadow:0 8px 22px rgba(0,0,0,0.05);
+
+  transition:
+    transform .12s ease,
+    box-shadow .12s ease;
+}
+
+.test-card:active{
+  transform:scale(0.98);
+}
+
+.test-card:hover{
+  transform:translateY(-2px);
 }
 
 .emoji{
-  width:64px;
-  height:64px;
-  border-radius:20px;
-  background:#f3edff;
+  width:56px;
+  height:56px;
+
+  border-radius:18px;
+
+  background:#f3f0ff;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
+
+  font-size:26px;
+
+  flex-shrink:0;
 }
 
 .card-info h3{
-  font-size:20px;
+  font-size:16px;
+  font-weight:700;
+
   margin-bottom:6px;
 }
 
 .card-info p{
-  color:#666;
+  font-size:13px;
   line-height:1.5;
+
+  color:#777;
 }
 
-/* 감정 기록 */
-
+/* =========================
+   MOOD BOX
+========================= */
 .mood-box{
-  margin-top:30px;
+  background:#fff;
+
+  border-radius:28px;
+
+  padding:22px;
+
+  box-shadow:0 8px 22px rgba(0,0,0,0.05);
 }
 
 .mood-list{
   display:flex;
+  justify-content:space-between;
   gap:8px;
-  overflow-x:auto;
-  padding-bottom:4px;
 }
 
 .mood-list button{
-  min-width:48px;
+  width:48px;
   height:48px;
-  border:none;
-  border-radius:14px;
-  background:#fff;
+
+  border-radius:16px;
+
+  background:#f6f7fb;
+
   font-size:24px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  flex-shrink:0;
 
   transition:
-    transform 0.08s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
+    transform .08s ease,
+    background .12s ease,
+    box-shadow .12s ease;
 }
 
 .mood-list button:active{
-  transform:scale(0.92);
+  transform:scale(0.9);
 }
 
 .mood-list button.selected{
-  background:#8b6cff;
-  color:white;
+  background:#ede7ff;
+  box-shadow:0 6px 14px rgba(139,108,255,0.18);
 }
 
-/* 카테고리 */
-
+/* =========================
+   CATEGORY
+========================= */
 .category-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-top:20px;
+  grid-template-columns:repeat(2, 1fr);
+  gap:14px;
 }
 
 .category-card{
-  background:#fff;
-  border-radius:20px;
+  height:110px;
 
-  padding:18px 14px;
+  background:#fff;
+
+  border-radius:26px;
 
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
-  gap:8px;
+  align-items:center;
+  gap:10px;
 
-  font-size:28px;
-  font-weight:600;
+  font-size:34px;
+  font-weight:700;
 
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  box-shadow:0 8px 22px rgba(0,0,0,0.05);
 
   transition:
-    transform 0.08s ease,
-    box-shadow 0.15s ease,
-    background 0.15s ease;
-
-  user-select:none;
-  cursor:pointer;
+    transform .08s ease,
+    box-shadow .12s ease;
 }
 
 .category-card span{
@@ -268,90 +406,135 @@ body{
   color:#444;
 }
 
-/* 눌리는 느낌 */
 .category-card:active{
-  transform:scale(0.94);
-  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+  transform:scale(0.95);
 }
 
-/* hover */
 .category-card:hover{
   transform:translateY(-2px);
 }
 
-/* MY */
-
+/* =========================
+   MY PAGE
+========================= */
 .my-monster-card{
-  margin-top:20px;
-  background:white;
-  border-radius:30px;
-  padding:24px;
-  display:flex;
-  align-items:center;
-  gap:20px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.06);
+  position:relative;
+
+  background:linear-gradient(
+    135deg,
+    #8b6cff,
+    #a98dff
+  );
+
+  border-radius:32px;
+
+  padding:28px;
+
+  min-height:190px;
+
+  overflow:hidden;
+
+  color:#fff;
+
+  margin-bottom:24px;
 }
 
-.my-monster{
-  width:90px;
-  height:90px;
+.my-monster-card .monster-image{
+  width:140px;
+
+  right:-10px;
+  bottom:-10px;
 }
 
 .monster-type{
-  font-size:24px;
+  font-size:26px;
   font-weight:800;
+
+  margin-bottom:10px;
 }
 
 .monster-desc{
-  margin-top:8px;
-  color:#666;
-  line-height:1.5;
+  width:60%;
+
+  font-size:14px;
+  line-height:1.6;
+
+  opacity:0.92;
 }
 
+/* =========================
+   ANALYSIS
+========================= */
 .analysis-box,
-.advice-box{
-  margin-top:24px;
-  background:white;
+.advice-box,
+.setting-card{
+  background:#fff;
+
   border-radius:28px;
+
   padding:24px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.06);
+
+  box-shadow:0 8px 22px rgba(0,0,0,0.05);
+
+  margin-bottom:18px;
 }
 
 .radar-placeholder{
-  margin-top:20px;
-  height:240px;
+  height:220px;
+
   border-radius:20px;
-  background:#f4f0ff;
+
+  background:
+    repeating-radial-gradient(
+      circle,
+      #f0ebff,
+      #f0ebff 12px,
+      #ffffff 12px,
+      #ffffff 24px
+    );
+
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#8a74ff;
+
+  color:#7b61ff;
   font-weight:700;
 }
 
-/* 설정 */
+/* =========================
+   ADVICE
+========================= */
+.advice-box p{
+  font-size:14px;
+  line-height:1.8;
+  color:#555;
+}
 
+/* =========================
+   SETTINGS
+========================= */
 .setting-card{
-  margin-top:20px;
-  background:white;
-  border-radius:24px;
-  padding:22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:0 8px 24px rgba(0,0,0,0.06);
+}
+
+.setting-card h3{
+  font-size:16px;
+  margin-bottom:6px;
 }
 
 .setting-card p{
+  font-size:13px;
   color:#777;
-  margin-top:6px;
 }
 
-/* 스위치 */
-
+/* =========================
+   SWITCH
+========================= */
 .switch{
   position:relative;
-  width:52px;
+  width:54px;
   height:30px;
 }
 
@@ -362,20 +545,29 @@ body{
 .slider{
   position:absolute;
   inset:0;
+
   background:#ddd;
+
   border-radius:999px;
+
+  transition:.2s;
 }
 
 .slider::before{
-  content:'';
+  content:"";
+
   position:absolute;
-  width:24px;
-  height:24px;
-  left:3px;
-  top:3px;
-  background:white;
+  left:4px;
+  top:4px;
+
+  width:22px;
+  height:22px;
+
   border-radius:50%;
-  transition:0.3s;
+
+  background:#fff;
+
+  transition:.2s;
 }
 
 .switch input:checked + .slider{
@@ -383,57 +575,102 @@ body{
 }
 
 .switch input:checked + .slider::before{
-  transform:translateX(22px);
+  transform:translateX(24px);
 }
 
-/* 하단 탭 */
-
+/* =========================
+   BOTTOM TAB
+========================= */
 .bottom-tab{
-  position:fixed;
+  position:absolute;
+  left:0;
+  right:0;
   bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:500px;
-  background:white;
-  border-top:1px solid #eee;
+
+  height:88px;
+
+  padding-bottom:env(safe-area-inset-bottom);
+
+  background:rgba(255,255,255,0.96);
+
+  backdrop-filter:blur(16px);
+
+  border-top:1px solid #ececec;
+
   display:flex;
   justify-content:space-around;
-  padding:12px 0 26px;
+  align-items:center;
 }
 
 .tab{
   border:none;
   background:none;
+
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:4px;
+
   color:#999;
+
   font-size:22px;
-  
+
   transition:
-  transform 0.12s ease,
-  opacity 0.12s ease;
-
-  -webkit-tap-highlight-color: transparent;
-
-  appearance:none;
-  -webkit-appearance:none;
+    transform .08s ease,
+    color .12s ease;
 }
 
 .tab small{
   font-size:12px;
+  font-weight:600;
 }
 
 .tab.active{
   color:#8b6cff;
-  text-shadow:0 0 12px rgba(139,108,255,0.35);
-}
 }
 
 .tab:active{
-  transform:scale(0.90);
-  opacity:0.7;
+  transform:scale(0.9);
 }
 
+/* =========================
+   TAP EFFECT
+========================= */
+.tap{
+  transition:
+    transform .08s ease,
+    opacity .12s ease;
+}
+
+.tap:active{
+  transform:scale(0.94);
+  opacity:0.8;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:420px){
+
+  .main-banner{
+    padding:24px;
+  }
+
+  .main-banner h2{
+    font-size:26px;
+  }
+
+  .monster-image{
+    width:125px;
+  }
+
+  .my-monster-card .monster-image{
+    width:120px;
+  }
+
+  .mood-list button{
+    width:44px;
+    height:44px;
+    font-size:22px;
+  }
+}
