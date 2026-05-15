@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LittleMonster</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LittleMonster</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 </head>
-<body class="home-active">
-
+<body>
 <div class="app">
 
   <!-- 헤더 -->
-  <header class="top-header">
+  <header class="top-header" id="topHeader">
     <div>
       <h1 class="logo">LittleMonster</h1>
       <p class="subtitle">심리테스트로 만드는<br>나의 정체성</p>
     </div>
-
     <div class="profile-wrap">
       <label class="profile-mini">
         <img id="profileImage" src="images/default-profile.png" alt="프로필">
         <input type="file" id="profileInput" accept="image/*">
+        <span class="edit-indicator">✎</span>
       </label>
-      <div class="point-badge"><span id="pointText">0PT</span></div>
+      <div class="point-badge"><span id="pointText">0 PT</span></div>
     </div>
   </header>
 
@@ -36,7 +35,7 @@
         <div class="banner-text">
           <span class="small-label">오늘의 추천 테스트</span>
           <h2>나는 어떤<br>리틀몬스터일까?</h2>
-          <p>테스트를 통해<br>나만의 정체성을 발견해보세요</p><br>
+          <p>테스트를 통해<br>나만의 정체성을 발견해보세요</p>
           <button class="start-btn tap">테스트 시작하기</button>
         </div>
         <img src="images/icon.png" alt="리틀몬스터" class="monster-image">
@@ -59,7 +58,9 @@
           <button class="mood-btn tap">🥺</button>
           <button class="mood-btn tap">😡</button>
         </div>
-        <div class="week-mood-box" id="weekMoodBox"><div class="week-grid" id="weekGrid"></div></div>
+        <div class="week-mood-box" id="weekMoodBox">
+          <div class="week-grid" id="weekGrid"></div>
+        </div>
       </div>
     </section>
 
@@ -98,13 +99,22 @@
 
     <!-- 설정 -->
     <section class="page" id="settingPage">
-      <div class="setting-card"><div><h3>새 테스트 알림</h3><p>새로운 심리테스트 업데이트 시 알림</p></div>
-    <!-- 토글 스위치 -->
-    <label class="switch">
-    <input type="checkbox" id="notifySwitch" checked>
-    <span class="slider"></span>
-    </label></div>
-      <div class="setting-card"><div><h3>문의하기</h3><p>버그 제보 및 제안 보내기</p></div></div>
+      <div class="setting-card">
+        <div>
+          <h3>새 테스트 알림</h3>
+          <p>새로운 심리테스트 업데이트 시 알림</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-card">
+        <div>
+          <h3>문의하기</h3>
+          <p>버그 제보 및 제안 보내기</p>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -118,48 +128,47 @@
   </nav>
 
   <!-- PT 팝업 -->
-  <div class="point-popup" id="pointPopup">+1PT</div>
+  <div class="point-popup" id="pointPopup">+1 PT</div>
 
 </div>
 
-<!-- JS -->
 <script>
 // 탭 이동
 const tabs = document.querySelectorAll(".tab");
 const pages = document.querySelectorAll(".page");
 const mainContent = document.querySelector(".main-content");
-tabs.forEach(tab=>{
-  tab.addEventListener("click", ()=>{
-    tabs.forEach(t=>t.classList.remove("active"));
-    pages.forEach(p=>p.classList.remove("active"));
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    pages.forEach(p => p.classList.remove("active"));
     tab.classList.add("active");
-    const target=tab.dataset.page;
-    document.getElementById(target).classList.add("active");
+    document.getElementById(tab.dataset.page).classList.add("active");
     mainContent.scrollTo({top:0, behavior:"smooth"});
-    document.body.className=target+"-active";
   });
 });
 
 // 눌림 효과
 document.querySelectorAll(".tap").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
+  btn.addEventListener("click",()=>{
     btn.classList.add("selected");
-    setTimeout(()=>{btn.classList.remove("selected");},150);
+    setTimeout(()=>{btn.classList.remove("selected")},150);
   });
 });
 
-// 프로필
-const profileInput=document.getElementById("profileInput");
-const profileImage=document.getElementById("profileImage");
-const savedProfile=localStorage.getItem("profileImage");
-if(savedProfile){profileImage.src=savedProfile;}
+// 프로필 이미지
+const profileInput = document.getElementById("profileInput");
+const profileImage = document.getElementById("profileImage");
+const savedProfile = localStorage.getItem("profileImage");
+if(savedProfile) profileImage.src = savedProfile;
+
 profileInput.addEventListener("change", e=>{
   const file=e.target.files[0];
-  if(!file)return;
+  if(!file) return;
   const reader=new FileReader();
   reader.onload=event=>{
     profileImage.src=event.target.result;
-    localStorage.setItem("profileImage",event.target.result);
+    localStorage.setItem("profileImage", event.target.result);
   };
   reader.readAsDataURL(file);
 });
@@ -171,43 +180,42 @@ let point=Number(localStorage.getItem("point"))||0;
 updatePointUI();
 function addPoint(amount){
   point+=amount;
-  localStorage.setItem("point",point);
+  localStorage.setItem("point", point);
   updatePointUI();
-  showPointPopup(`+${amount}PT`);
+  showPointPopup(`+${amount} PT`);
 }
-function updatePointUI(){pointText.textContent=`${point}PT`;}
+function updatePointUI(){pointText.textContent=`${point} PT`;}
 function showPointPopup(text){
   pointPopup.textContent=text;
   pointPopup.style.opacity="1";
-  pointPopup.style.display="block";
-  setTimeout(()=>{
-    pointPopup.style.opacity="0";
-    setTimeout(()=>{pointPopup.style.display="none";},400);
-  },1600);
+  pointPopup.style.top="60px"; // header 아래 중앙
+  setTimeout(()=>{pointPopup.style.opacity="0"},1600);
 }
 
-// 감정 기록
+// 기분 기록
 const moodButtons=document.querySelectorAll(".mood-btn");
 const weekMoodBox=document.getElementById("weekMoodBox");
 const weekGrid=document.getElementById("weekGrid");
 const today=new Date();
 const currentWeekKey=getCurrentWeekKey(today);
 const savedWeekKey=localStorage.getItem("weekKey");
-if(savedWeekKey!==currentWeekKey){localStorage.removeItem("weekMood"); localStorage.setItem("weekKey",currentWeekKey);}
+if(savedWeekKey!==currentWeekKey){
+  localStorage.removeItem("weekMood");
+  localStorage.setItem("weekKey",currentWeekKey);
+}
 let savedMoodData=JSON.parse(localStorage.getItem("weekMood"))||{};
 moodButtons.forEach(button=>{
   button.addEventListener("click",()=>{
     const todayKey=getDateKey(today);
     const alreadyChecked=savedMoodData[todayKey];
     savedMoodData[todayKey]=button.textContent;
-    localStorage.setItem("weekMood",JSON.stringify(savedMoodData));
+    localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
     renderWeekMood();
     weekMoodBox.style.display="block";
-    if(!alreadyChecked){addPoint(1);}
+    if(!alreadyChecked) addPoint(1);
   });
 });
 
-// 주간 렌더링
 function renderWeekMood(){
   weekGrid.innerHTML="";
   const startOfWeek=getStartOfWeek(today);
@@ -223,21 +231,11 @@ function renderWeekMood(){
     weekGrid.appendChild(item);
   }
 }
-function getStartOfWeek(date){const d=new Date(date);const day=d.getDay();d.setDate(d.getDate()-day);return d;}
-function getDateKey(date){return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;}
-function getCurrentWeekKey(date){const start=getStartOfWeek(date);return getDateKey(start);}
-if(Object.keys(savedMoodData).length>0){weekMoodBox.style.display="block"; renderWeekMood();}
 
-/*상태를 로컬스토리지에 저장해서 새로고침 후에도 유지 가능*/ 
-const notifySwitch = document.getElementById("notifySwitch");
-const savedNotify = localStorage.getItem("notifySwitch");
-if (savedNotify !== null) {
-  notifySwitch.checked = savedNotify === "true";
-}
-notifySwitch.addEventListener("change", () => {
-  localStorage.setItem("notifySwitch", notifySwitch.checked);
-});
-  
+function getStartOfWeek(date){const d=new Date(date);d.setDate(d.getDate()-d.getDay());return d;}
+function getDateKey(date){return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;}
+function getCurrentWeekKey(date){return getDateKey(getStartOfWeek(date));}
+if(Object.keys(savedMoodData).length>0){weekMoodBox.style.display="block";renderWeekMood();}
 </script>
 </body>
 </html>
