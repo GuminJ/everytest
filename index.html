@@ -474,159 +474,194 @@
 
     }
 
-    // =========================
-    // 감정 기록
-    // =========================
+// =========================
+// 감정 기록
+// =========================
 
-    const moodButtons =
-      document.querySelectorAll(".mood-btn");
+const moodButtons =
+  document.querySelectorAll(".mood-btn");
 
-    const weekMoodBox =
-      document.getElementById("weekMoodBox");
+const weekMoodBox =
+  document.getElementById("weekMoodBox");
 
-    const weekGrid =
-      document.getElementById("weekGrid");
+const weekGrid =
+  document.getElementById("weekGrid");
 
-    const today = new Date();
+const today = new Date();
 
-    const currentWeekKey =
-      getCurrentWeekKey(today);
+const currentWeekKey =
+  getCurrentWeekKey(today);
 
-    const savedWeekKey =
-      localStorage.getItem("weekKey");
+const savedWeekKey =
+  localStorage.getItem("weekKey");
 
-    if(savedWeekKey !== currentWeekKey){
+// 주간 자동 초기화
+if(savedWeekKey !== currentWeekKey){
 
-      localStorage.removeItem("weekMood");
+  localStorage.removeItem("weekMood");
 
-      localStorage.setItem(
-        "weekKey",
-        currentWeekKey
-      );
+  localStorage.setItem(
+    "weekKey",
+    currentWeekKey
+  );
 
-    }
+}
 
-    let savedMoodData =
-      JSON.parse(
-        localStorage.getItem("weekMood")
-      ) || {};
+let savedMoodData =
+  JSON.parse(
+    localStorage.getItem("weekMood")
+  ) || {};
 
-    moodButtons.forEach(button => {
+// 감정 버튼 클릭
+moodButtons.forEach(button => {
 
-      button.addEventListener("click", () => {
+  button.addEventListener("click", () => {
 
-        const todayKey =
-          getDateKey(today);
+    const todayKey =
+      getDateKey(today);
 
-        savedMoodData[todayKey] =
-          button.textContent;
+    // 오늘 이미 기록했는지
+    const alreadyChecked =
+      savedMoodData[todayKey];
 
-        localStorage.setItem(
-          "weekMood",
-          JSON.stringify(savedMoodData)
-        );
+    // 감정 저장
+    savedMoodData[todayKey] =
+      button.textContent;
 
-        renderWeekMood();
+    localStorage.setItem(
+      "weekMood",
+      JSON.stringify(savedMoodData)
+    );
 
-        weekMoodBox.style.display = "block";
+    // UI 업데이트
+    renderWeekMood();
 
-        addPoint(1);
+    weekMoodBox.style.display =
+      "block";
 
-      });
+    // 첫 기록일 때만 포인트 지급
+    if(!alreadyChecked){
 
-    });
-
-    function renderWeekMood(){
-
-      weekGrid.innerHTML = "";
-
-      const startOfWeek =
-        getStartOfWeek(today);
-
-      const dayNames = [
-        "일",
-        "월",
-        "화",
-        "수",
-        "목",
-        "금",
-        "토"
-      ];
-
-      for(let i = 0; i < 7; i++){
-
-        const date =
-          new Date(startOfWeek);
-
-        date.setDate(
-          startOfWeek.getDate() + i
-        );
-
-        const key =
-          getDateKey(date);
-
-        const mood =
-          savedMoodData[key] || "➖";
-
-        const item =
-          document.createElement("div");
-
-        item.className = "week-item";
-
-        item.innerHTML = `
-          <div class="week-day">
-            ${dayNames[i]}
-          </div>
-
-          <div class="week-emoji">
-            ${mood}
-          </div>
-        `;
-
-        weekGrid.appendChild(item);
-
-      }
+      addPoint(1);
 
     }
 
-    function getStartOfWeek(date){
+  });
 
-      const d = new Date(date);
+});
 
-      const day = d.getDay();
+// =========================
+// 주간 감정 렌더링
+// =========================
 
-      d.setDate(d.getDate() - day);
+function renderWeekMood(){
 
-      return d;
+  weekGrid.innerHTML = "";
 
-    }
+  const startOfWeek =
+    getStartOfWeek(today);
 
-    function getDateKey(date){
+  const dayNames = [
+    "일",
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "토"
+  ];
 
-      return `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${
-        date.getDate()
-      }`;
+  for(let i = 0; i < 7; i++){
 
-    }
+    const date =
+      new Date(startOfWeek);
 
-    function getCurrentWeekKey(date){
+    date.setDate(
+      startOfWeek.getDate() + i
+    );
 
-      const start =
-        getStartOfWeek(date);
+    const key =
+      getDateKey(date);
 
-      return getDateKey(start);
+    const mood =
+      savedMoodData[key] || "➖";
 
-    }
+    const item =
+      document.createElement("div");
 
-    if(Object.keys(savedMoodData).length > 0){
+    item.className = "week-item";
 
-      weekMoodBox.style.display = "block";
+    item.innerHTML = `
+      <div class="week-day">
+        ${dayNames[i]}
+      </div>
 
-      renderWeekMood();
+      <div class="week-emoji">
+        ${mood}
+      </div>
+    `;
 
-    }
+    weekGrid.appendChild(item);
+
+  }
+
+}
+
+// =========================
+// 주 시작 계산
+// =========================
+
+function getStartOfWeek(date){
+
+  const d = new Date(date);
+
+  const day = d.getDay();
+
+  d.setDate(d.getDate() - day);
+
+  return d;
+
+}
+
+// =========================
+// 날짜 key
+// =========================
+
+function getDateKey(date){
+
+  return `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${
+    date.getDate()
+  }`;
+
+}
+
+// =========================
+// 주차 key
+// =========================
+
+function getCurrentWeekKey(date){
+
+  const start =
+    getStartOfWeek(date);
+
+  return getDateKey(start);
+
+}
+
+// =========================
+// 초기 렌더링
+// =========================
+
+if(Object.keys(savedMoodData).length > 0){
+
+  weekMoodBox.style.display =
+    "block";
+
+  renderWeekMood();
+
+}
 
   </script>
 
