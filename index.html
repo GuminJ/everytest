@@ -361,69 +361,121 @@
 
   <!-- JS -->
   <script>
+  // =========================
+  // 탭 이동
+  // =========================
 
-    // 탭 이동
-    const tabs = document.querySelectorAll(".tab");
-    const pages = document.querySelectorAll(".page");
+  const tabs = document.querySelectorAll(".tab");
+  const pages = document.querySelectorAll(".page");
 
-    tabs.forEach(tab => {
+  tabs.forEach(tab => {
 
-      tab.addEventListener("click", () => {
+    tab.addEventListener("click", () => {
 
-        tabs.forEach(t => t.classList.remove("active"));
-        pages.forEach(p => p.classList.remove("active"));
+      tabs.forEach(t => t.classList.remove("active"));
+      pages.forEach(p => p.classList.remove("active"));
 
-        tab.classList.add("active");
+      tab.classList.add("active");
 
-        const target = tab.dataset.page;
+      const target = tab.dataset.page;
 
-        document
-          .getElementById(target)
-          .classList.add("active");
-
-      });
+      document
+        .getElementById(target)
+        .classList.add("active");
 
     });
 
-// 눌림 효과
-document.querySelectorAll(".tap").forEach(btn => {
+  });
 
-  btn.addEventListener("click", () => {
+  // =========================
+  // 눌림 효과
+  // =========================
 
-    btn.classList.add("selected");
+  document.querySelectorAll(".tap").forEach(btn => {
 
-    setTimeout(() => {
-      btn.classList.remove("selected");
-    }, 150);
+    btn.addEventListener("click", () => {
+
+      btn.classList.add("selected");
+
+      setTimeout(() => {
+        btn.classList.remove("selected");
+      }, 150);
+
+    });
 
   });
 
-});
+  // =========================
+  // 감정 기록 시스템
+  // =========================
 
-// =======================
-// 감정 기록
-// =======================
+  const moodButtons =
+    document.querySelectorAll(".mood-list button");
 
-const moodButtons = document.querySelectorAll(".mood-list button");
-const weekMoodBox = document.getElementById("weekMoodBox");
+  const weekMoodBox =
+    document.getElementById("weekMoodBox");
 
-moodButtons.forEach(button => {
+  // 저장된 감정 불러오기
+  let savedMoodData =
+    JSON.parse(localStorage.getItem("weekMoods")) || {};
 
-  button.addEventListener("click", () => {
+  // 화면에 반영
+  renderMoodData();
 
-    // 주간 박스 표시
-    weekMoodBox.style.display = "block";
+  moodButtons.forEach(button => {
 
-    // 오늘 요일 가져오기
-    const today = new Date().getDay();
+    button.addEventListener("click", () => {
 
-    // 오늘 감정 넣기
-    document.getElementById(`day${today}`).textContent =
-      button.textContent;
+      // 주간 기록 표시
+      weekMoodBox.style.display = "block";
+
+      // 오늘 요일
+      const today = new Date().getDay();
+
+      // 오늘 감정 저장
+      savedMoodData[today] =
+        button.textContent;
+
+      // localStorage 저장
+      localStorage.setItem(
+        "weekMoods",
+        JSON.stringify(savedMoodData)
+      );
+
+      // 화면 갱신
+      renderMoodData();
+
+    });
 
   });
 
-});
+  // =========================
+  // 화면 렌더링
+  // =========================
+
+  function renderMoodData(){
+
+    // 기록 있으면 표시
+    if(Object.keys(savedMoodData).length > 0){
+      weekMoodBox.style.display = "block";
+    }
+
+    // 요일별 렌더
+    for(let i = 0; i < 7; i++){
+
+      const target =
+        document.getElementById(`day${i}`);
+
+      if(savedMoodData[i]){
+        target.textContent = savedMoodData[i];
+      } else {
+        target.textContent = "-";
+      }
+
+    }
+
+  }
+
     
   </script>
 
