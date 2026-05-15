@@ -14,7 +14,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Pretendard -->
+  <!-- 폰트 -->
   <link
     rel="stylesheet"
     as="style"
@@ -43,27 +43,37 @@
 
       </div>
 
-      <!-- 우측 프로필 -->
-      <div class="header-profile">
-
-        <div class="profile-mini">
-          👾
-        </div>
+      <!-- 우측 -->
+      <div class="header-right">
 
         <!-- 포인트 -->
         <div class="point-badge">
-
-          <span class="point-star">
-            ✨
-          </span>
-
-          <span id="pointText">
-            0
-          </span>
-
-          <small>PT</small>
-
+          ✨
+          <span id="pointText">0</span>
+          PT
         </div>
+
+        <!-- 프로필 -->
+        <label class="profile-mini">
+
+          <input
+            type="file"
+            id="profileUpload"
+            accept="image/*"
+            hidden
+          />
+
+          <img
+            id="profileImage"
+            src=""
+            alt="profile"
+          />
+
+          <span id="defaultMonster">
+            👾
+          </span>
+
+        </label>
 
       </div>
 
@@ -73,7 +83,10 @@
     <main class="main-content">
 
       <!-- 홈 -->
-      <section class="page active" id="homePage">
+      <section
+        class="page active"
+        id="homePage"
+      >
 
         <!-- 메인 배너 -->
         <div class="main-banner">
@@ -117,7 +130,9 @@
 
           <div class="test-card tap">
 
-            <div class="emoji">🍚</div>
+            <div class="emoji">
+              🍚
+            </div>
 
             <div class="card-info">
 
@@ -126,7 +141,8 @@
               </h3>
 
               <p>
-                외식 취향으로 나와 잘맞는 직무 파악하기
+                외식 취향으로
+                나와 잘맞는 직무 파악하기
               </p>
 
             </div>
@@ -135,7 +151,9 @@
 
           <div class="test-card tap">
 
-            <div class="emoji">💘</div>
+            <div class="emoji">
+              💘
+            </div>
 
             <div class="card-info">
 
@@ -144,7 +162,8 @@
               </h3>
 
               <p>
-                나는 얼마나 사랑/애정에 갈망하고 있을까?
+                나는 얼마나 사랑/애정에
+                갈망하고 있을까?
               </p>
 
             </div>
@@ -153,7 +172,9 @@
 
           <div class="test-card tap">
 
-            <div class="emoji">🌙</div>
+            <div class="emoji">
+              🌙
+            </div>
 
             <div class="card-info">
 
@@ -162,7 +183,8 @@
               </h3>
 
               <p>
-                나의 감각은 얼마나 뛰어날까?
+                나의 감각은
+                얼마나 뛰어날까?
               </p>
 
             </div>
@@ -171,7 +193,7 @@
 
         </div>
 
-        <!-- 감정 기록 -->
+        <!-- 오늘 기분 기록 -->
         <div class="mood-box">
 
           <div class="section-title">
@@ -229,17 +251,21 @@
       </section>
 
       <!-- 탐색 -->
-      <section class="page" id="explorePage">
+      <section
+        class="page"
+        id="explorePage"
+      >
 
         <div class="section-title">
           🧠 카테고리 탐색
         </div>
 
         <div class="category-grid">
+
           <div class="category-card popular tap">
             🔥
-           <span>인기</span>
-         </div>
+            <span>인기</span>
+          </div>
 
           <div class="category-card love tap">
             💘
@@ -276,7 +302,10 @@
       </section>
 
       <!-- MY -->
-      <section class="page" id="myPage">
+      <section
+        class="page"
+        id="myPage"
+      >
 
         <div class="my-monster-card">
 
@@ -293,7 +322,8 @@
             </div>
 
             <div class="monster-desc">
-              진취적이고, 열정적이며 활기찬 타입
+              진취적이고,
+              열정적이며 활기찬 타입
             </div>
 
           </div>
@@ -322,7 +352,8 @@
 
           <p>
             지나친 열정은 화를 부릅니다.<br />
-            뒤를 돌아보고, 찬찬히 살펴보세요.
+            뒤를 돌아보고,
+            찬찬히 살펴보세요.
           </p>
 
         </div>
@@ -330,7 +361,10 @@
       </section>
 
       <!-- 설정 -->
-      <section class="page" id="settingPage">
+      <section
+        class="page"
+        id="settingPage"
+      >
 
         <div class="setting-card">
 
@@ -341,7 +375,8 @@
             </h3>
 
             <p>
-              새로운 심리테스트 업데이트 시 알림
+              새로운 심리테스트
+              업데이트 시 알림
             </p>
 
           </div>
@@ -423,7 +458,7 @@
     class="point-popup"
     id="pointPopup"
   >
-    +1PT 획득 ✨
+    +1PT ✨
   </div>
 
   <!-- JS -->
@@ -438,6 +473,11 @@
 
     const pages =
       document.querySelectorAll(".page");
+
+    const mainContent =
+      document.querySelector(
+        ".main-content"
+      );
 
     tabs.forEach(tab => {
 
@@ -460,6 +500,12 @@
           .getElementById(target)
           .classList.add("active");
 
+        // 탭 이동 시 스크롤 맨 위
+        mainContent.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
       });
 
     });
@@ -478,7 +524,9 @@
 
           setTimeout(() => {
 
-            btn.classList.remove("selected");
+            btn.classList.remove(
+              "selected"
+            );
 
           }, 150);
 
@@ -487,43 +535,36 @@
       });
 
     // =========================
-    // 포인트
+    // 포인트 시스템
     // =========================
 
-    let points =
+    const pointText =
+      document.getElementById(
+        "pointText"
+      );
+
+    const popup =
+      document.getElementById(
+        "pointPopup"
+      );
+
+    let point =
       Number(
-        localStorage.getItem("points")
+        localStorage.getItem("point")
       ) || 0;
 
-    const pointText =
-      document.getElementById("pointText");
-
-    pointText.textContent = points;
+    pointText.textContent = point;
 
     function addPoint(amount){
 
-      points += amount;
+      point += amount;
 
       localStorage.setItem(
-        "points",
-        points
+        "point",
+        point
       );
 
-      pointText.textContent =
-        points;
-
-      showPointPopup();
-
-    }
-
-    // =========================
-    // 포인트 팝업
-    // =========================
-
-    function showPointPopup(){
-
-      const popup =
-        document.getElementById("pointPopup");
+      pointText.textContent = point;
 
       popup.classList.add("show");
 
@@ -531,7 +572,7 @@
 
         popup.classList.remove("show");
 
-      }, 3000); /*pt 획득 팝업창이 얼마나 빨리 사라지게 할 것인지*/
+      }, 1500);
 
     }
 
@@ -548,7 +589,8 @@
     const weekGrid =
       document.getElementById("weekGrid");
 
-    const today = new Date();
+    const today =
+      new Date();
 
     const currentWeekKey =
       getCurrentWeekKey(today);
@@ -556,10 +598,11 @@
     const savedWeekKey =
       localStorage.getItem("weekKey");
 
-    // 주간 자동 초기화
     if(savedWeekKey !== currentWeekKey){
 
-      localStorage.removeItem("weekMood");
+      localStorage.removeItem(
+        "weekMood"
+      );
 
       localStorage.setItem(
         "weekKey",
@@ -607,10 +650,6 @@
 
     });
 
-    // =========================
-    // 주간 렌더링
-    // =========================
-
     function renderWeekMood(){
 
       weekGrid.innerHTML = "";
@@ -646,7 +685,8 @@
         const item =
           document.createElement("div");
 
-        item.className = "week-item";
+        item.className =
+          "week-item";
 
         item.innerHTML = `
           <div class="week-day">
@@ -664,25 +704,21 @@
 
     }
 
-    // =========================
-    // 주 시작
-    // =========================
-
     function getStartOfWeek(date){
 
-      const d = new Date(date);
+      const d =
+        new Date(date);
 
-      const day = d.getDay();
+      const day =
+        d.getDay();
 
-      d.setDate(d.getDate() - day);
+      d.setDate(
+        d.getDate() - day
+      );
 
       return d;
 
     }
-
-    // =========================
-    // 날짜 key
-    // =========================
 
     function getDateKey(date){
 
@@ -694,10 +730,6 @@
 
     }
 
-    // =========================
-    // 현재 주 key
-    // =========================
-
     function getCurrentWeekKey(date){
 
       const start =
@@ -706,10 +738,6 @@
       return getDateKey(start);
 
     }
-
-    // =========================
-    // 초기 렌더링
-    // =========================
 
     if(
       Object.keys(savedMoodData)
@@ -722,6 +750,77 @@
       renderWeekMood();
 
     }
+
+    // =========================
+    // 프로필 업로드
+    // =========================
+
+    const profileUpload =
+      document.getElementById(
+        "profileUpload"
+      );
+
+    const profileImage =
+      document.getElementById(
+        "profileImage"
+      );
+
+    const profileMini =
+      document.querySelector(
+        ".profile-mini"
+      );
+
+    const savedProfile =
+      localStorage.getItem(
+        "profileImage"
+      );
+
+    if(savedProfile){
+
+      profileImage.src =
+        savedProfile;
+
+      profileMini.classList.add(
+        "has-image"
+      );
+
+    }
+
+    profileUpload.addEventListener(
+      "change",
+      (event) => {
+
+        const file =
+          event.target.files[0];
+
+        if(!file) return;
+
+        const reader =
+          new FileReader();
+
+        reader.onload = (e) => {
+
+          const imageData =
+            e.target.result;
+
+          profileImage.src =
+            imageData;
+
+          localStorage.setItem(
+            "profileImage",
+            imageData
+          );
+
+          profileMini.classList.add(
+            "has-image"
+          );
+
+        };
+
+        reader.readAsDataURL(file);
+
+      }
+    );
 
   </script>
 
