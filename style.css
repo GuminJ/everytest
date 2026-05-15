@@ -170,17 +170,18 @@ body{
 }
 
 .mood-list{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
   gap:12px;
 }
 
 .mood-list button{
-  width:58px;
-  height:58px;
+  width:100%;
+  aspect-ratio:1/1;
   border:none;
-  border-radius:18px;
+  border-radius:20px;
   background:white;
-  font-size:26px;
+  font-size:28px;
   box-shadow:0 5px 16px rgba(0,0,0,0.06);
 }
 
