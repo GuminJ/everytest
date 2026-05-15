@@ -76,7 +76,7 @@ body{
   color:white;
   margin-top:10px;
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   min-height:240px;
 }
 
