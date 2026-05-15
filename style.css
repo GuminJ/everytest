@@ -18,8 +18,8 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
   color: #fff;
   
   /*아래 모서리 라운드*/
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .top-header .logo {
