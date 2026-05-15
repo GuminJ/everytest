@@ -237,10 +237,10 @@ body{
 .main-banner .monster-image{
   position:absolute;
 
-  right:12px;
+  right:10px;
   bottom:-14px;
 
-  width:128px;
+  width:150px;
 
   object-fit:contain;
 
