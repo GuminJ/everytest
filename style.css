@@ -368,6 +368,12 @@ body{
   gap:4px;
   color:#999;
   font-size:22px;
+  
+  transition:
+  transform 0.12s ease,
+  opacity 0.12s ease;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tab small{
@@ -377,3 +383,9 @@ body{
 .tab.active{
   color:#8b6cff;
 }
+
+.tab:active{
+  transform:scale(0.90);
+  opacity:0.7;
+}
+
