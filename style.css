@@ -7,17 +7,12 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  position: relative;
-  /* 기존 배경색 제거 */
-  /* background: #8b6cff; */
-  
-  /* 그라데이션 적용 */
+  padding: 8px 16px; /* 상하 8px 좌우 16px */
   background: linear-gradient(90deg, #a593ff, #ff9aff, #c8b5ff);
+  color: #fff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #fff;
+  position: relative;
   
   /*아래 모서리 라운드*/
   border-bottom-left-radius: 20px;
