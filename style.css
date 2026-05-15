@@ -19,6 +19,11 @@ html, body{
   overflow-x:hidden;
 }
 
+body{
+  display:flex;
+  justify-content:center;
+}
+
 button{
   font-family:inherit;
   outline:none;
@@ -34,8 +39,7 @@ button{
   width:100%;
   max-width:480px;
   min-height:100vh;
-  margin:0 auto;
-  background:#f6f7fb;
+
   position:relative;
   overflow:hidden;
 }
