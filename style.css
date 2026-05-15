@@ -1,342 +1,60 @@
-/* =========================
-   기본 스타일
-========================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Pretendard', sans-serif;
-  color: #222;
-  background: #f6f7fb;
-  overflow-x: hidden;
-}
+body, html{width:100%;height:100%;margin:0;padding:0;font-family:'Pretendard',sans-serif;overflow-x:hidden;transition:background 0.3s;}
+body.home-active header.top-header{background:linear-gradient(135deg,#ffeef7,#ffd9ec);}
+body.explorePage-active header.top-header{background:linear-gradient(135deg,#e0f7ff,#ccefff);}
+body.myPage-active header.top-header{background:linear-gradient(135deg,#fff4e0,#ffe7cc);}
+body.settingPage-active header.top-header{background:#f6f7fb;}
 
-.app {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* =========================
-   헤더
-========================= */
-.top-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  background: #8b6cff;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.top-header .logo {
-  margin: 0;
-  font-size: 20px;
-}
-
-.top-header .subtitle {
-  margin: 0;
-  font-size: 12px;
-  color: #fff;
-}
-
-.profile-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-}
-
-.profile-mini {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-mini img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.profile-mini input[type="file"] {
-  display: none;
-}
-
-.point-badge {
-  margin: 8px auto;          /* 위쪽 간격 + 중앙 정렬 */
-  display: inline-block;     
-  padding: 6px 12px;         
-  background: #8b6cff;       
-  color: #fff;               
-  border-radius: 12px;       
-  font-size: 14px;           
-  text-align: center;        
-}
-
-/* =========================
-   메인 콘텐츠
-========================= */
-.main-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  scroll-behavior: smooth;
-}
-
-/* =========================
-   배너
-========================= */
-.main-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.banner-text {
-  max-width: 60%;
-}
-
-.banner-text h2 {
-  margin: 4px 0;
-  font-size: 22px;
-}
-
-.start-btn {
-  background: #8b6cff;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.start-btn.selected {
-  transform: scale(0.97);
-}
-
-/* =========================
-   카드 리스트
-========================= */
-.card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.test-card {
-  display: flex;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: #fff;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.test-card .emoji {
-  font-size: 28px;
-}
-
-.card-info h3 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.card-info p {
-  margin: 2px 0 0 0;
-  font-size: 12px;
-  color: #555;
-}
-
-.test-card.selected {
-  transform: scale(0.97);
-}
-
-/* =========================
-   오늘의 기분 기록
-========================= */
-.mood-box {
-  margin-bottom: 20px;
-}
-
-.mood-list {
-  display: flex;
-  gap: 6px;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-}
-
-.mood-btn {
-  flex: 1;
-  padding: 8px 0;
-  border: none;
-  background: #fff;
-  border-radius: 12px;
-  font-size: 22px;
-  cursor: pointer;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.mood-btn.selected {
-  transform: scale(0.95);
-}
-
-/* 주간 기록 */
-.week-mood-box {
-  margin-top: 12px;
-  display: none;
-}
-
-.week-grid {
-  display: flex;
-  justify-content: space-between;
-}
-
-.week-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 12%;
-  background: #fff;
-  border-radius: 8px;
-  padding: 6px 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  font-size: 14px;
-}
-
-.week-day {
-  font-size: 10px;
-  color: #888;
-}
-
-.week-emoji {
-  font-size: 18px;
-  margin-top: 2px;
-}
-
-/* =========================
-   탐색 카테고리
-========================= */
-.category-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.category-card {
-  flex: 1 1 calc(33% - 8px);
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.category-card span {
-  display: block;
-  margin-top: 4px;
-  font-size: 12px;
-}
-
-/* =========================
-   MY 페이지
-========================= */
-.my-monster-card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 16px;
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.my-monster-card .monster-image {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-.analysis-box, .advice-box {
-  margin-bottom: 16px;
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* =========================
-   하단 탭
-========================= */
-.bottom-tab {
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  position: sticky;
-  bottom: 0;
-  z-index: 1000;
-}
-
-.tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  font-size: 18px;
-  color: #999;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.tab.active {
-  color: #8b6cff;
-}
-
-.tab small {
-  font-size: 10px;
-}
-
-/* =========================
-   포인트 팝업
-========================= */
-.point-popup {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #8b6cff;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 2000;
-}
+.app{max-width:480px;margin:0 auto;display:flex;flex-direction:column;min-height:100vh;position:relative;}
+.top-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee;transition:background 0.3s;}
+.logo{font-size:20px;font-weight:800;margin:0;}
+.subtitle{margin:0;font-size:12px;color:#555;}
+.profile-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;}
+.profile-mini{width:40px;height:40px;overflow:hidden;border-radius:50%;cursor:pointer;position:relative;}
+.profile-mini img{width:100%;height:100%;object-fit:cover;}
+.profile-mini input{display:none;}
+.point-badge{display:inline-block;padding:4px 10px;background:#8b6cff;color:#fff;border-radius:12px;font-size:14px;text-align:center;transition:all 0.3s;}
+.main-content{flex:1;overflow-y:auto;scroll-behavior:smooth;padding:16px;}
+.page{display:none;}
+.page.active{display:block;}
+.main-banner{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:18px;box-shadow:0 4px 12px rgba(0,0,0,0.05);padding:16px;margin-bottom:16px;}
+.banner-text h2{margin:8px 0;}
+.banner-text p{margin:4px 0;font-size:12px;color:#555;}
+.start-btn{padding:10px 16px;border:none;border-radius:14px;background:linear-gradient(135deg,#8b6cff,#b18aff);color:#fff;font-weight:700;cursor:pointer;transition:transform 0.1s;}
+.start-btn.selected{transform:scale(0.95);}
+.monster-image{width:80px;height:80px;}
+.section-title{font-weight:700;margin:16px 0 8px;}
+.card-list{display:flex;flex-direction:column;gap:12px;}
+.test-card{display:flex;align-items:center;gap:12px;background:#fff;padding:12px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);cursor:pointer;transition:transform 0.1s;}
+.test-card:hover{transform:translateY(-2px);}
+.test-card .emoji{font-size:28px;}
+.test-card .card-info h3{margin:0;font-size:14px;}
+.test-card .card-info p{margin:2px 0;font-size:12px;color:#555;}
+.mood-box{margin-top:16px;}
+.mood-list{display:flex;gap:6px;justify-content:space-between;}
+.mood-btn{flex:1;text-align:center;padding:8px 0;border-radius:12px;background:#fff;border:1px solid #eee;font-size:18px;cursor:pointer;transition:transform 0.1s;}
+.mood-btn:hover{transform:scale(1.05);}
+.week-mood-box{margin-top:8px;overflow-x:auto;}
+.week-grid{display:flex;justify-content:space-between;}
+.week-item{text-align:center;width:36px;}
+.week-day{font-size:10px;color:#777;}
+.week-emoji{font-size:18px;}
+.category-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.category-card{flex:1 0 30%;padding:12px;background:#fff;border-radius:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);cursor:pointer;transition:transform 0.1s;}
+.category-card:hover{transform:translateY(-2px);}
+.category-card span{display:block;margin-top:4px;font-size:12px;}
+.category-card.popular{background:#ffeef7;}
+.category-card.love{background:#ffeef7;}
+.category-card.personality{background:#e0f7ff;}
+.category-card.relation{background:#f0f4ff;}
+.category-card.work{background:#f0f0f0;}
+.category-card.emotion{background:#fff4e0;}
+.category-card.taste{background:#fffaf0;}
+.my-monster-card{display:flex;gap:12px;background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:16px;}
+.my-monster-card img{width:60px;height:60px;border-radius:12px;}
+.point-popup{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:#8b6cff;color:#fff;padding:6px 12px;border-radius:12px;font-weight:700;opacity:0;transition:opacity 0.4s;}
+.bottom-tab{display:flex;justify-content:space-around;align-items:center;height:56px;border-top:1px solid #eee;position:sticky;bottom:0;background:#fff;}
+.bottom-tab .tab{display:flex;flex-direction:column;align-items:center;font-size:12px;color:#999;cursor:pointer;transition:all 0.2s;}
+.bottom-tab .tab span{font-size:18px;}
+.bottom-tab .tab.active{color:#8b6cff;}
+.bottom-tab .tab.active span{border-bottom:3px solid #8b6cff;}
+.selected{transform:scale(0.95);}
