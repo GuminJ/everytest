@@ -158,7 +158,7 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
   white-space: normal;        /* 자동 줄바꿈 허용 */
   word-break: keep-all;       /* 단어 끊기 방지 */
   overflow-wrap: break-word;  /* 너무 긴 단어는 줄바꿈 */
-  margin: 8px 0 8px 0;
+  margin: 8px 0 12px 0;
 }
 /*여기까지*/
 .main-banner .banner-text { max-width:45%; }
