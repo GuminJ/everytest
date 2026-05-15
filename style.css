@@ -131,9 +131,15 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 }
 .main-banner .monster-image {
   width: 120px;
-  height: 150px;
+  height: 180px;
   max-width: 40%;      /* 배너 가로의 50% 이하 */
   object-fit: contain;
+  position: absolute;        /* 배너 기준 위치 절대화 */
+  bottom: -20px;             /* 배너 아래로 20px 튀어나오게 */
+  right: 16px;               /* 오른쪽 끝에서 약간 띄움 */
+
+  z-index: 1;                /* 텍스트보다 위에 표시 */
+  transition: transform 0.3s; /* 필요 시 애니메이션 */
 }
 .main-banner { display:flex; background:#7b65ff; border-radius:16px; 
               padding:16px; align-items:center; justify-content:space-between; color:#fff; position:relative; }
