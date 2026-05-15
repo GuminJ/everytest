@@ -359,7 +359,9 @@
 
   </div>
 
+  
   <!-- JS -->
+  
   <script>
   // =========================
   // 탭 이동
@@ -415,22 +417,85 @@
   const weekMoodBox =
     document.getElementById("weekMoodBox");
 
-  // 저장된 감정 불러오기
-  let savedMoodData =
-    JSON.parse(localStorage.getItem("weekMoods")) || {};
+  // =========================
+  // 현재 주차 계산
+  // =========================
 
-  // 화면에 반영
+  function getCurrentWeek(){
+
+    const now = new Date();
+
+    const firstDay =
+      new Date(now.getFullYear(), 0, 1);
+
+    const passedDays =
+      Math.floor(
+        (now - firstDay) / 86400000
+      );
+
+    return Math.ceil(
+      (passedDays + firstDay.getDay() + 1) / 7
+    );
+
+  }
+
+  // =========================
+  // 저장 데이터 불러오기
+  // =========================
+
+  let savedMoodData =
+    JSON.parse(
+      localStorage.getItem("weekMoods")
+    ) || {};
+
+  // 저장된 주차
+  let savedWeek =
+    localStorage.getItem("moodWeek");
+
+  // 현재 주차
+  const currentWeek =
+    getCurrentWeek();
+
+  // =========================
+  // 주간 자동 초기화
+  // =========================
+
+  if(savedWeek != currentWeek){
+
+    savedMoodData = {};
+
+    localStorage.setItem(
+      "weekMoods",
+      JSON.stringify(savedMoodData)
+    );
+
+    localStorage.setItem(
+      "moodWeek",
+      currentWeek
+    );
+
+  }
+
+  // =========================
+  // 초기 렌더링
+  // =========================
+
   renderMoodData();
+
+  // =========================
+  // 감정 버튼 클릭
+  // =========================
 
   moodButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-      // 주간 기록 표시
+      // 주간 박스 표시
       weekMoodBox.style.display = "block";
 
       // 오늘 요일
-      const today = new Date().getDay();
+      const today =
+        new Date().getDay();
 
       // 오늘 감정 저장
       savedMoodData[today] =
@@ -442,6 +507,12 @@
         JSON.stringify(savedMoodData)
       );
 
+      // 현재 주차 저장
+      localStorage.setItem(
+        "moodWeek",
+        currentWeek
+      );
+
       // 화면 갱신
       renderMoodData();
 
@@ -450,33 +521,73 @@
   });
 
   // =========================
-  // 화면 렌더링
+  // 감정 데이터 렌더링
   // =========================
 
   function renderMoodData(){
 
-    // 기록 있으면 표시
-    if(Object.keys(savedMoodData).length > 0){
+    // 기록 있으면 박스 표시
+    if(
+      Object.keys(savedMoodData).length > 0
+    ){
+
       weekMoodBox.style.display = "block";
+
     }
 
-    // 요일별 렌더
+    // 요일별 렌더링
     for(let i = 0; i < 7; i++){
 
       const target =
         document.getElementById(`day${i}`);
 
       if(savedMoodData[i]){
-        target.textContent = savedMoodData[i];
+
+        target.textContent =
+          savedMoodData[i];
+
       } else {
+
         target.textContent = "-";
+
       }
+
+    }
+
+    // 오늘 날짜 강조
+    highlightToday();
+
+  }
+
+  // =========================
+  // 오늘 날짜 강조
+  // =========================
+
+  function highlightToday(){
+
+    const today =
+      new Date().getDay();
+
+    document
+      .querySelectorAll(".day-card")
+      .forEach(card => {
+
+        card.classList.remove("today");
+
+      });
+
+    const todayCard =
+      document
+        .querySelectorAll(".day-card")[today];
+
+    if(todayCard){
+
+      todayCard.classList.add("today");
 
     }
 
   }
 
-    
   </script>
 
 </body>
