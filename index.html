@@ -236,7 +236,7 @@ moodButtons.forEach(button => {
     localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
     renderWeekMood();
     weekMoodBox.style.display = "block";
-    if(!alreadyChecked) addPoint(1); // 하루 1회만
+    if(!alreadyChecked) addPoint(10); // 하루 1회만
   });
 });
 
