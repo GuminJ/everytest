@@ -348,3 +348,27 @@ input:checked + .slider { background:#ff93b6; }
   transition:opacity .5s;
   pointer-events:none;
 }
+
+/* 탭별 배경색 */
+#homePage {
+  background: #f6f7fb; /* 홈: 연한 파스텔 블루 */
+}
+
+#explorePage {
+  background: #fff4f0; /* 탐색: 연한 핑크톤 */
+}
+
+#myPage {
+  background: #f0fff4; /* MY: 연한 민트톤 */
+}
+
+#settingPage {
+  background: #fffaf0; /* 설정: 연한 크림톤 */
+}
+
+/* 페이지 전체에 꽉 차도록 */
+.page {
+  min-height: 100%;
+  padding: 16px 18px 64px;
+  box-sizing: border-box;
+}
