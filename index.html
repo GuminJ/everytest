@@ -158,8 +158,9 @@ tabs.forEach(tab=>{
 document.querySelectorAll(".tap").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     btn.classList.add("selected");
-    setTimeout(()=>{btn.classList.remove("selected");},150);
-  });
+    setTimeout(() => {
+  btn.classList.remove("selected"); 
+    }, 150);
 });
 
 // =========================
