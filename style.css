@@ -792,3 +792,54 @@ body.settingPage{
 img{
   display:block;
 }
+
+/* =========================
+   포인트 팝업
+========================= */
+
+.point-popup{
+
+  position:fixed;
+
+  top:50%;
+  left:50%;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.8);
+
+  background:#111;
+  color:white;
+
+  padding:
+    14px
+    22px;
+
+  border-radius:18px;
+
+  font-size:18px;
+  font-weight:700;
+
+  z-index:9999;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+
+}
+
+/* 활성화 */
+
+.point-popup.show{
+
+  opacity:1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+
+}
