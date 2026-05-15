@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
   <title>LittleMonster</title>
 
@@ -20,7 +22,7 @@
   />
 </head>
 
-<body class="homePage">
+<body>
 
   <div class="app">
 
@@ -36,8 +38,17 @@
         </p>
       </div>
 
-      <div class="profile-mini">
-        👾
+      <!-- 프로필 + 포인트 -->
+      <div class="profile-wrap">
+
+        <div class="profile-mini">
+          👾
+        </div>
+
+        <div class="point-text">
+          0 PT
+        </div>
+
       </div>
 
     </header>
@@ -94,6 +105,7 @@
 
             <div class="card-info">
               <h3>식사 유형으로 적성 찾기</h3>
+
               <p>
                 외식 취향으로 나와 잘맞는 직무 파악하기
               </p>
@@ -107,6 +119,7 @@
 
             <div class="card-info">
               <h3>연애 집착남/녀 테스트</h3>
+
               <p>
                 나는 얼마나 사랑/애정에 갈망하고 있을까?
               </p>
@@ -120,6 +133,7 @@
 
             <div class="card-info">
               <h3>감각 테스트</h3>
+
               <p>
                 나의 감각은 얼마나 뛰어날까?
               </p>
@@ -138,63 +152,34 @@
 
           <div class="mood-list">
 
-            <button class="tap">😊</button>
-            <button class="tap">😴</button>
-            <button class="tap">🥹</button>
-            <button class="tap">😎</button>
-            <button class="tap">🥺</button>
-            <button class="tap">😡</button>
+            <button class="tap mood-btn">😊</button>
+            <button class="tap mood-btn">😴</button>
+            <button class="tap mood-btn">🥹</button>
+            <button class="tap mood-btn">😎</button>
+            <button class="tap mood-btn">🥺</button>
+            <button class="tap mood-btn">😡</button>
 
           </div>
 
-          <!-- 주간 감정 기록 -->
-          <div class="week-mood-box" id="weekMoodBox">
-
-          <div class="week-title">
-            이번 주 감정 기록
-          </div>
-
-          <div class="week-grid">
-
-          <div class="day-card">
-            <span class="day">일</span>
-            <span class="mood" id="day0">-</span>
-          </div>
-      
-          <div class="day-card">
-            <span class="day">월</span>
-            <span class="mood" id="day1">-</span>
-          </div>
-      
-          <div class="day-card">
-            <span class="day">화</span>
-            <span class="mood" id="day2">-</span>
-          </div>
-      
-          <div class="day-card">
-            <span class="day">수</span>
-          <span class="mood" id="day3">-</span>
         </div>
-    
-        <div class="day-card">
-          <span class="day">목</span>
-          <span class="mood" id="day4">-</span>
+
+        <!-- 주간 감정 기록 -->
+        <div
+          class="week-mood-box"
+          id="weekMoodBox"
+          style="display:none;"
+        >
+
+          <div class="section-title">
+            🗓 이번주 감정 기록
+          </div>
+
+          <div
+            class="week-grid"
+            id="weekGrid"
+          ></div>
+
         </div>
-    
-        <div class="day-card">
-          <span class="day">금</span>
-          <span class="mood" id="day5">-</span>
-        </div>
-    
-        <div class="day-card">
-          <span class="day">토</span>
-          <span class="mood" id="day6">-</span>
-        </div>
-    
-      </div>
-    
-      </div>
-      </div>
 
       </section>
 
@@ -259,8 +244,7 @@
             </div>
 
             <div class="monster-desc">
-              진취적이고, 열정적이며 <br />
-              활기찬 타입
+              진취적이고, 열정적이며 활기찬 타입
             </div>
 
           </div>
@@ -302,10 +286,13 @@
         <div class="setting-card">
 
           <div>
+
             <h3>새 테스트 알림</h3>
+
             <p>
               새로운 심리테스트 업데이트 시 알림
             </p>
+
           </div>
 
           <label class="switch">
@@ -321,10 +308,13 @@
         <div class="setting-card">
 
           <div>
+
             <h3>문의하기</h3>
+
             <p>
               버그 제보 및 제안 보내기
             </p>
+
           </div>
 
         </div>
@@ -336,22 +326,34 @@
     <!-- 하단 탭 -->
     <nav class="bottom-tab">
 
-      <button class="tab active tap" data-page="homePage">
+      <button
+        class="tab active tap"
+        data-page="homePage"
+      >
         <span>🏠</span>
         <small>홈</small>
       </button>
 
-      <button class="tab tap" data-page="explorePage">
+      <button
+        class="tab tap"
+        data-page="explorePage"
+      >
         <span>🔍</span>
         <small>탐색</small>
       </button>
 
-      <button class="tab tap" data-page="myPage">
+      <button
+        class="tab tap"
+        data-page="myPage"
+      >
         <span>👾</span>
         <small>MY</small>
       </button>
 
-      <button class="tab tap" data-page="settingPage">
+      <button
+        class="tab tap"
+        data-page="settingPage"
+      >
         <span>⚙️</span>
         <small>설정</small>
       </button>
@@ -360,237 +362,271 @@
 
   </div>
 
-  
+  <!-- 포인트 팝업 -->
+  <div
+    class="point-popup"
+    id="pointPopup"
+  >
+    +1 PT ✨
+  </div>
+
   <!-- JS -->
-  
   <script>
-  // =========================
-  // 탭 이동
-  // =========================
 
-  const tabs = document.querySelectorAll(".tab");
-  const pages = document.querySelectorAll(".page");
+    // =========================
+    // 탭 이동
+    // =========================
 
-  tabs.forEach(tab => {
+    const tabs =
+      document.querySelectorAll(".tab");
 
-    tab.addEventListener("click", () => {
+    const pages =
+      document.querySelectorAll(".page");
 
-      tabs.forEach(t => t.classList.remove("active"));
-      pages.forEach(p => p.classList.remove("active"));
+    tabs.forEach(tab => {
 
-      tab.classList.add("active");
+      tab.addEventListener("click", () => {
 
-      const target = tab.dataset.page;
+        tabs.forEach(t =>
+          t.classList.remove("active")
+        );
 
-      document
-        .getElementById(target)
-        .classList.add("active");
-      
-      // 탭 화면별 배경 변경
-      document.body.className = target;
+        pages.forEach(p =>
+          p.classList.remove("active")
+        );
+
+        tab.classList.add("active");
+
+        const target = tab.dataset.page;
+
+        document
+          .getElementById(target)
+          .classList.add("active");
+
+      });
 
     });
 
-  });
+    // =========================
+    // 눌림 효과
+    // =========================
 
-  // =========================
-  // 눌림 효과
-  // =========================
+    document
+      .querySelectorAll(".tap")
+      .forEach(btn => {
 
-  document.querySelectorAll(".tap").forEach(btn => {
+        btn.addEventListener("click", () => {
 
-    btn.addEventListener("click", () => {
+          btn.classList.add("selected");
 
-      btn.classList.add("selected");
+          setTimeout(() => {
+
+            btn.classList.remove("selected");
+
+          }, 150);
+
+        });
+
+      });
+
+    // =========================
+    // 포인트 시스템
+    // =========================
+
+    const pointPopup =
+      document.getElementById("pointPopup");
+
+    const pointText =
+      document.querySelector(".point-text");
+
+    let savedPoint =
+      Number(
+        localStorage.getItem("monsterPoint")
+      ) || 0;
+
+    updatePointUI();
+
+    function addPoint(amount){
+
+      savedPoint += amount;
+
+      localStorage.setItem(
+        "monsterPoint",
+        savedPoint
+      );
+
+      updatePointUI();
+
+      pointPopup.classList.add("show");
 
       setTimeout(() => {
-        btn.classList.remove("selected");
-      }, 150);
 
-    });
+        pointPopup.classList.remove("show");
 
-  });
-
-  // =========================
-  // 감정 기록 시스템
-  // =========================
-
-  const moodButtons =
-    document.querySelectorAll(".mood-list button");
-
-  const weekMoodBox =
-    document.getElementById("weekMoodBox");
-
-  // =========================
-  // 현재 주차 계산
-  // =========================
-
-  function getCurrentWeek(){
-
-    const now = new Date();
-
-    const firstDay =
-      new Date(now.getFullYear(), 0, 1);
-
-    const passedDays =
-      Math.floor(
-        (now - firstDay) / 86400000
-      );
-
-    return Math.ceil(
-      (passedDays + firstDay.getDay() + 1) / 7
-    );
-
-  }
-
-  // =========================
-  // 저장 데이터 불러오기
-  // =========================
-
-  let savedMoodData =
-    JSON.parse(
-      localStorage.getItem("weekMoods")
-    ) || {};
-
-  // 저장된 주차
-  let savedWeek =
-    localStorage.getItem("moodWeek");
-
-  // 현재 주차
-  const currentWeek =
-    getCurrentWeek();
-
-  // =========================
-  // 주간 자동 초기화
-  // =========================
-
-  if(savedWeek != currentWeek){
-
-    savedMoodData = {};
-
-    localStorage.setItem(
-      "weekMoods",
-      JSON.stringify(savedMoodData)
-    );
-
-    localStorage.setItem(
-      "moodWeek",
-      currentWeek
-    );
-
-  }
-
-  // =========================
-  // 초기 렌더링
-  // =========================
-
-  renderMoodData();
-
-  // =========================
-  // 감정 버튼 클릭
-  // =========================
-
-  moodButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      // 주간 박스 표시
-      weekMoodBox.style.display = "block";
-
-      // 오늘 요일
-      const today =
-        new Date().getDay();
-
-      // 오늘 감정 저장
-      savedMoodData[today] =
-        button.textContent;
-
-      // localStorage 저장
-      localStorage.setItem(
-        "weekMoods",
-        JSON.stringify(savedMoodData)
-      );
-
-      // 현재 주차 저장
-      localStorage.setItem(
-        "moodWeek",
-        currentWeek
-      );
-
-      // 화면 갱신
-      renderMoodData();
-
-    });
-
-  });
-
-  // =========================
-  // 감정 데이터 렌더링
-  // =========================
-
-  function renderMoodData(){
-
-    // 기록 있으면 박스 표시
-    if(
-      Object.keys(savedMoodData).length > 0
-    ){
-
-      weekMoodBox.style.display = "block";
+      }, 300);
 
     }
 
-    // 요일별 렌더링
-    for(let i = 0; i < 7; i++){
+    function updatePointUI(){
 
-      const target =
-        document.getElementById(`day${i}`);
+      pointText.textContent =
+        `${savedPoint} PT`;
 
-      if(savedMoodData[i]){
+    }
 
-        target.textContent =
-          savedMoodData[i];
+    // =========================
+    // 감정 기록
+    // =========================
 
-      } else {
+    const moodButtons =
+      document.querySelectorAll(".mood-btn");
 
-        target.textContent = "-";
+    const weekMoodBox =
+      document.getElementById("weekMoodBox");
+
+    const weekGrid =
+      document.getElementById("weekGrid");
+
+    const today = new Date();
+
+    const currentWeekKey =
+      getCurrentWeekKey(today);
+
+    const savedWeekKey =
+      localStorage.getItem("weekKey");
+
+    if(savedWeekKey !== currentWeekKey){
+
+      localStorage.removeItem("weekMood");
+
+      localStorage.setItem(
+        "weekKey",
+        currentWeekKey
+      );
+
+    }
+
+    let savedMoodData =
+      JSON.parse(
+        localStorage.getItem("weekMood")
+      ) || {};
+
+    moodButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const todayKey =
+          getDateKey(today);
+
+        savedMoodData[todayKey] =
+          button.textContent;
+
+        localStorage.setItem(
+          "weekMood",
+          JSON.stringify(savedMoodData)
+        );
+
+        renderWeekMood();
+
+        weekMoodBox.style.display = "block";
+
+        addPoint(1);
+
+      });
+
+    });
+
+    function renderWeekMood(){
+
+      weekGrid.innerHTML = "";
+
+      const startOfWeek =
+        getStartOfWeek(today);
+
+      const dayNames = [
+        "일",
+        "월",
+        "화",
+        "수",
+        "목",
+        "금",
+        "토"
+      ];
+
+      for(let i = 0; i < 7; i++){
+
+        const date =
+          new Date(startOfWeek);
+
+        date.setDate(
+          startOfWeek.getDate() + i
+        );
+
+        const key =
+          getDateKey(date);
+
+        const mood =
+          savedMoodData[key] || "➖";
+
+        const item =
+          document.createElement("div");
+
+        item.className = "week-item";
+
+        item.innerHTML = `
+          <div class="week-day">
+            ${dayNames[i]}
+          </div>
+
+          <div class="week-emoji">
+            ${mood}
+          </div>
+        `;
+
+        weekGrid.appendChild(item);
 
       }
 
     }
 
-    // 오늘 날짜 강조
-    highlightToday();
+    function getStartOfWeek(date){
 
-  }
+      const d = new Date(date);
 
-  // =========================
-  // 오늘 날짜 강조
-  // =========================
+      const day = d.getDay();
 
-  function highlightToday(){
+      d.setDate(d.getDate() - day);
 
-    const today =
-      new Date().getDay();
-
-    document
-      .querySelectorAll(".day-card")
-      .forEach(card => {
-
-        card.classList.remove("today");
-
-      });
-
-    const todayCard =
-      document
-        .querySelectorAll(".day-card")[today];
-
-    if(todayCard){
-
-      todayCard.classList.add("today");
+      return d;
 
     }
 
-  }
+    function getDateKey(date){
+
+      return `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${
+        date.getDate()
+      }`;
+
+    }
+
+    function getCurrentWeekKey(date){
+
+      const start =
+        getStartOfWeek(date);
+
+      return getDateKey(start);
+
+    }
+
+    if(Object.keys(savedMoodData).length > 0){
+
+      weekMoodBox.style.display = "block";
+
+      renderWeekMood();
+
+    }
 
   </script>
 
