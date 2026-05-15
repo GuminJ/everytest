@@ -385,21 +385,46 @@
 
     });
 
-    // 눌림 효과
-    document.querySelectorAll(".tap").forEach(btn => {
+// 눌림 효과
+document.querySelectorAll(".tap").forEach(btn => {
 
-      btn.addEventListener("click", () => {
+  btn.addEventListener("click", () => {
 
-        btn.classList.add("selected");
+    btn.classList.add("selected");
 
-        setTimeout(() => {
-          btn.classList.remove("selected");
-        }, 150);
+    setTimeout(() => {
+      btn.classList.remove("selected");
+    }, 150);
 
-      });
+  });
 
-    });
+});
 
+// =======================
+// 감정 기록
+// =======================
+
+const moodButtons = document.querySelectorAll(".mood-list button");
+const weekMoodBox = document.getElementById("weekMoodBox");
+
+moodButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    // 주간 박스 표시
+    weekMoodBox.style.display = "block";
+
+    // 오늘 요일 가져오기
+    const today = new Date().getDay();
+
+    // 오늘 감정 넣기
+    document.getElementById(`day${today}`).textContent =
+      button.textContent;
+
+  });
+
+});
+    
   </script>
 
 </body>
