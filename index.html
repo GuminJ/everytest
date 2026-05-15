@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js"
+integrity="sha384-OL+ylM/iuPLtW5U3XcvLSGhE8JzReKDank5InqlHGWPhb4140/yrBw0bg0y7+C9J"
+crossorigin="anonymous"></script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -140,9 +143,12 @@
         </div>
         <div id="oneLiner" class="one-liner"></div>
         <div class="support">콘텐츠 생산 후원 계좌: 3333-22-6440348 (카카오뱅크) 정**</div>
-        <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap">
-          <button class="btn" id="copyResult">결과 링크 복사</button>
-        </div>
+      <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap">
+      <button class="btn" id="copyResult">결과 링크 복사</button>
+      <button class="btn secondary" id="kakaoShare">
+       카카오톡 공유하기
+      </button>
+      </div>
         <footer>참고용 자기이해 도구입니다. 의사결정은 상황과 맥락에 따라 검토하세요.</footer>
       </div>
     </section>
@@ -418,7 +424,55 @@
       const p = new URLSearchParams(location.search);
       const company = p.get('company'); const mbti = p.get('mbti');
       if(company && COMPANY_TYPES[company]){ intro.style.display='none'; showCompany(company, mbti||''); }
+      
+    // ===== 카카오 SDK 초기화 =====
+// 반드시 본인 JavaScript 키로 교체
+Kakao.init('여기에_본인_자바스크립트키');
+
+// ===== 카카오 공유 =====
+document.getElementById('kakaoShare').onclick = () => {
+
+  const currentUrl = location.href;
+
+  // 현재 결과 가져오기
+  const currentType =
+    document.getElementById('typeTitle').textContent;
+
+  const currentDesc =
+    document.getElementById('oneLiner').textContent;
+
+  Kakao.Share.sendDefault({
+    objectType: 'feed',
+
+    content: {
+      title: currentType,
+
+      description: currentDesc,
+
+      imageUrl:
+        'https://guminj.github.io/everytest/images/thumbnail.png',
+
+      link: {
+        mobileWebUrl: currentUrl,
+        webUrl: currentUrl,
+      },
+    },
+
+    buttons: [
+      {
+        title: '🍚 테스트 하러가기',
+        link: {
+          mobileWebUrl: currentUrl,
+          webUrl: currentUrl,
+        },
+      },
+    ],
+  });
+};
     })();
   </script>
 </body>
 </html>
+
+
+
