@@ -1,253 +1,228 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-   <link rel="stylesheet" href="style.css">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-
-<title>Little Monster</title>
-
-</head>
-
-<body>
-
 <div class="app">
 
-  <!-- HEADER -->
+  <!-- 상단 헤더 -->
+  <header class="app-header">
 
-  <div class="header">
-    <div class="logo">
+    <div class="logo-wrap">
 
-      <div class="logo-face">
+      <div class="logo float">
         👾
       </div>
 
       <div class="logo-text">
-        <h1>Little Monster</h1>
-        <p>
-          심리테스트로 만드는 나의 정체성
-        </p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- HOME -->
-
-  <div class="screen" id="homeScreen">
-
-    <div class="section-title">
-      추천 테스트 ✨
-    </div>
-
-    <div class="card test-card">
-
-      <div class="test-thumb">
-        🍚
-      </div>
-
-      <div class="test-info">
-        <h3>밥 습관 회사 유형 테스트</h3>
-
-        <p>
-          밥 먹는 습관만으로
-          당신의 회사 성향을 분석해드려요.
-        </p>
-
-        <button class="start-btn">
-          테스트 시작
-        </button>
+        <h1>LittleMonster</h1>
+        <p>심리테스트로 만드는 나의 정체성</p>
       </div>
 
     </div>
 
-    <div class="section-title">
-      오늘의 기분 🌤
-    </div>
+    <button class="header-btn">
+      🔔
+    </button>
 
-    <div class="card">
+  </header>
 
-      <p style="color:var(--muted)">
-        오늘 기분을 기록해보세요
-      </p>
+  <!-- 메인 콘텐츠 -->
+  <main class="app-content">
 
-      <div class="mood-row">
-        <div class="mood">😆</div>
-        <div class="mood">🙂</div>
-        <div class="mood">🥲</div>
-        <div class="mood">😡</div>
-      </div>
+    <!-- 홈 화면 -->
+    <section id="home-screen" class="screen active">
 
-    </div>
+      <!-- 히어로 카드 -->
+      <div class="card hero-card">
 
-  </div>
-
-  <!-- EXPLORE -->
-
-  <div class="screen hidden" id="exploreScreen">
-
-    <div class="section-title">
-      카테고리 탐색 🔎
-    </div>
-
-    <div class="card">
-      💼 회사 성향 테스트
-    </div>
-
-    <div class="card">
-      ❤️ 연애 성향 테스트
-    </div>
-
-    <div class="card">
-      👥 인간관계 테스트
-    </div>
-
-    <div class="card">
-      🧠 심리 분석 테스트
-    </div>
-
-  </div>
-
-  <!-- MY -->
-
-  <div class="screen hidden" id="myScreen">
-
-    <div class="section-title">
-      나의 리틀몬스터 👾
-    </div>
-
-    <div class="card identity-box">
-
-      <div class="monster">
-        👾
-      </div>
-
-      <div class="identity-name">
-        감성 탐험가 몬스터
-      </div>
-
-      <div class="identity-desc">
-        감수성과 호기심이 높은 성향.<br>
-        새로운 감정을 탐험하는 타입.
-      </div>
-
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-top">
-            <span>감수성</span>
-            <span>88%</span>
-          </div>
-
-          <div class="bar">
-            <div class="fill" style="width:88%"></div>
-          </div>
+        <div class="hero-title">
+          오늘의 감정은<br>
+          어떤가요?
         </div>
 
-        <div class="stat">
-          <div class="stat-top">
-            <span>사교성</span>
-            <span>65%</span>
-          </div>
+        <div class="hero-desc">
+          감정을 기록하고,<br>
+          나만의 리틀몬스터를 성장시켜보세요 👾
+        </div>
 
-          <div class="bar">
-            <div class="fill" style="width:65%"></div>
-          </div>
+        <div class="mood-row">
+
+          <button class="mood-btn">😊</button>
+          <button class="mood-btn">😴</button>
+          <button class="mood-btn">😭</button>
+          <button class="mood-btn">😡</button>
+
         </div>
 
       </div>
 
-    </div>
+      <!-- 추천 테스트 -->
+      <div class="section-title">
+        <h2>추천 테스트</h2>
+        <span>전체보기</span>
+      </div>
 
-    <div class="card">
-      <h3 style="margin-bottom:10px">
-        오늘의 조언 💡
-      </h3>
+      <div class="test-list">
 
-      <p style="line-height:1.7;color:var(--muted)">
-        오늘은 너무 많은 사람의 감정을
-        신경쓰지 않아도 괜찮아요.
-      </p>
-    </div>
+        <div class="test-card">
 
-  </div>
+          <div class="test-thumb">
+            🍚
+          </div>
 
-  <!-- SETTINGS -->
+          <div class="test-body">
+            <h3>밥 습관 회사 타입 테스트</h3>
 
-  <div class="screen hidden" id="settingsScreen">
+            <p>
+              당신의 식사 습관으로 알아보는
+              직장 성향 분석
+            </p>
+          </div>
 
-    <div class="section-title">
-      설정 ⚙️
-    </div>
+        </div>
 
-    <div class="card">
-      🔔 새 테스트 알림
-    </div>
+        <div class="test-card">
 
-    <div class="card">
-      📩 문의하기
-    </div>
+          <div class="test-thumb">
+            💘
+          </div>
 
-    <div class="card">
-      📄 개인정보 처리방침
-    </div>
+          <div class="test-body">
+            <h3>연애 집착도 테스트</h3>
 
-  </div>
+            <p>
+              나는 연애할 때 얼마나
+              집착하는 타입일까?
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 탐색 -->
+    <section id="explore-screen" class="screen">
+
+      <div class="section-title">
+        <h2>카테고리 탐색</h2>
+      </div>
+
+      <div class="category-grid">
+
+        <div class="category-card">
+          <div class="category-icon">💘</div>
+          <div class="category-name">연애</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🧠</div>
+          <div class="category-name">성격</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">🌙</div>
+          <div class="category-name">감정</div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon">👾</div>
+          <div class="category-name">정체성</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MY -->
+    <section id="my-screen" class="screen">
+
+      <div class="card identity-card">
+
+        <div class="monster-avatar float">
+          👾
+        </div>
+
+        <div class="identity-title">
+          몽실한 감정 수집가
+        </div>
+
+        <div class="identity-desc">
+          감수성이 풍부하고,<br>
+          사람의 감정을 잘 읽는 리틀몬스터예요.
+        </div>
+
+        <div class="graph-box">
+          성향 그래프 영역
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 설정 -->
+    <section id="settings-screen" class="screen">
+
+      <div class="setting-list">
+
+        <div class="setting-item">
+
+          <div class="setting-left">
+            <div class="setting-title">
+              새 테스트 알림
+            </div>
+
+            <div class="setting-desc">
+              새로운 심리테스트 업데이트 알림
+            </div>
+          </div>
+
+          <div class="switch active"></div>
+
+        </div>
+
+        <div class="setting-item">
+
+          <div class="setting-left">
+            <div class="setting-title">
+              문의하기
+            </div>
+
+            <div class="setting-desc">
+              오류 및 문의사항 보내기
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 하단 탭 -->
+  <nav class="bottom-tabbar">
+
+    <button class="tab-btn active">
+      <div class="tab-icon">🏠</div>
+      홈
+    </button>
+
+    <button class="tab-btn">
+      <div class="tab-icon">🔍</div>
+      탐색
+    </button>
+
+    <button class="tab-btn">
+      <div class="tab-icon">👾</div>
+      MY
+    </button>
+
+    <button class="tab-btn">
+      <div class="tab-icon">⚙️</div>
+      설정
+    </button>
+
+  </nav>
 
 </div>
 
-<!-- TABBAR -->
-
-<div class="tabbar">
-
-  <div class="tab active" onclick="showTab('home')">
-    <div class="tab-icon">🏠</div>
-    홈
-  </div>
-
-  <div class="tab" onclick="showTab('explore')">
-    <div class="tab-icon">🔎</div>
-    탐색
-  </div>
-
-  <div class="tab" onclick="showTab('my')">
-    <div class="tab-icon">👾</div>
-    MY
-  </div>
-
-  <div class="tab" onclick="showTab('settings')">
-    <div class="tab-icon">⚙️</div>
-    설정
-  </div>
-
-</div>
-
-<script>
-
-const screens = {
-  home: document.getElementById('homeScreen'),
-  explore: document.getElementById('exploreScreen'),
-  my: document.getElementById('myScreen'),
-  settings: document.getElementById('settingsScreen')
-};
-
-function showTab(tab){
-
-  Object.values(screens).forEach(screen=>{
-    screen.classList.add('hidden');
-  });
-
-  screens[tab].classList.remove('hidden');
-
-  document.querySelectorAll('.tab')
-    .forEach(tab=>{
-      tab.classList.remove('active');
-    });
-
-  event.currentTarget.classList.add('active');
-}
-
-</script>
-
-</body>
-</html>
+<script src="app.js"></script>
