@@ -62,15 +62,46 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
   justify-content: center;
 }
 .profile-wrap { display:flex; flex-direction:column; align-items:center; position:relative; }
-.profile-mini { width:48px; height:48px; border-radius:50%; overflow:hidden; cursor:pointer; position:relative; border:2px solid #fff; }
+.profile-mini {
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #ff9a9e, #7B6CFF) 1;
+}
 .profile-mini img { width:100%; height:100%; object-fit:cover; display:block; }
 .profile-mini input { display:none; }
-.point-badge { margin-top:8px; padding:2px 6px; background:#fff; color:#8b6cff; font-weight:bold; border-radius:12px; font-size:12px; }
+.point-badge {
+  margin-top: 8px;
+  padding: 2px 6px;
+  background: none; /* 기존 흰색 배경 제거 */
+  font-weight: bold;
+  border-radius: 12px;
+  font-size: 12px;
+
+  /* 타이틀 그라데이션과 동일 */
+  background: linear-gradient(45deg, #ff9a9e, #7B6CFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 텍스트 그림자 optional */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
 
 /* 메인 */
-.main-content { flex:1; overflow-y:auto; padding-top:12px; display:flex; flex-direction:column; gap:16px; }
-.page { display:none; flex-direction:column; gap:16px; }
-.page.active { display:flex; }
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px; /* top/bottom 12px, left/right 16px */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.page {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  /* padding 추가 가능 */
+  /* padding-left/right: 8px; */
+}
+.page.active { display: flex; }
 
 /* 배너 */
 .main-banner { display:flex; background:#7b65ff; border-radius:16px; 
