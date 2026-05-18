@@ -623,11 +623,16 @@ let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
   "공감온도": 0,
   "몽상감도": 0
 };
+
+renderMyTab(identityScore);
+renderRadarGraph(identityScore);
   
 function addScore(type, amount){
   if(identityScore[type] !== undefined){
     identityScore[type] += amount;
     localStorage.setItem("userIdentity", JSON.stringify(identityScore));
+    renderMyTab(identityScore);      // MY 탭 UI 업데이트
+    renderRadarGraph(identityScore); // 방사형 그래프 업데이트
   }
 }
   
