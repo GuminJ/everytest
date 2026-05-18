@@ -305,14 +305,76 @@
       </div>
 
       <!-- 개인정보 -->
-      <div class="setting-card">
-
+      <div class="setting-card" id="privacyCard">
         <div>
           <h3>개인정보 처리방침</h3>
-          <p>내용 표시</p>
+          <p>내용을 보려면 클릭하세요.</p>
         </div>
-
       </div>
+
+      <!-- 개인정보 모달 -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>개인정보 처리방침</h2>
+      <button class="close-btn" id="privacyCloseBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p><strong>제1조(개인정보의 수집 및 이용 목적)</strong></p>
+      <p>본 앱은 사용자의 심리 테스트 결과 및 프로필 정보를 <strong>사용자 단말기의 로컬 저장소(LocalStorage)에만 저장</strong>하며, 다음 목적을 위해 이용됩니다.</p>
+      <ul>
+        <li>테스트 진행 기록 저장</li>
+        <li>테스트 결과 기반 정체성 분석 표시</li>
+        <li>프로필 이미지 저장</li>
+      </ul>
+      <p>서버 또는 외부 클라우드로 전송되지 않으며, 앱 외부에서 사용자의 개인정보가 활용되지 않습니다.</p>
+
+      <p><strong>제2조(수집하는 개인정보 항목)</strong></p>
+      <ul>
+        <li>프로필 이미지</li>
+        <li>테스트 진행 기록 및 결과 점수</li>
+        <li>사용자가 선택한 기분 기록 및 포인트</li>
+      </ul>
+
+      <p><strong>제3조(개인정보 보관 기간)</strong></p>
+      <p>로컬에 저장된 개인정보는 <strong>사용자가 앱을 삭제하거나 브라우저 데이터를 삭제할 때까지</strong> 보관됩니다. 앱 삭제 시 모든 로컬 기록이 <strong>영구적으로 삭제</strong>되며, 복구가 불가능합니다.</p>
+
+      <p><strong>제4조(개인정보의 제3자 제공)</strong></p>
+      <p>본 앱은 수집한 개인정보를 <strong>외부 서버, 광고주, 제휴사 등 제3자에게 제공하지 않습니다.</strong></p>
+
+      <p><strong>제5조(사용자 권리 및 관리)</strong></p>
+      <ul>
+        <li>사용자는 언제든 앱 내 기능을 통해 기록을 초기화하거나 삭제할 수 있습니다.</li>
+        <li>앱 삭제 시 로컬에 저장된 모든 데이터가 사라집니다.</li>
+        <li>추후 내보내기/복원 기능을 통해 사용자가 직접 백업할 수 있습니다.</li>
+      </ul>
+
+      <p><strong>제6조(고지 의무)</strong></p>
+      <p>본 개인정보 처리방침은 앱 내 설정 메뉴에 항상 표시되며, 내용이 변경될 경우 앱 실행 시 안내 메시지를 통해 공지됩니다.</p>
+    </div>
+  </div>
+</div>
+      <script>
+  const privacyCard = document.getElementById('privacyCard');
+  const privacyModal = document.getElementById('privacyModal');
+  const privacyCloseBtn = document.getElementById('privacyCloseBtn');
+
+  privacyCard.addEventListener('click', () => {
+    privacyModal.style.display = 'block';
+  });
+
+  privacyCloseBtn.addEventListener('click', () => {
+    privacyModal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === privacyModal) {
+      privacyModal.style.display = 'none';
+    }
+  });
+</script>
+      
+      
 
       <!-- 버전 -->
       <div class="setting-card">
