@@ -261,6 +261,22 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 .advice-box { background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; }
 .advice-box .section-title { font-weight:700; margin-bottom:6px; }
 .radar-placeholder { background:#f0f0f0; border-radius:16px; padding:16px; }
+.radar-canvas {
+  width: 100%;          /* 가로는 100% */
+  max-width: 400px;     /* 최대 폭 */
+  height: 300px;        /* 높이를 고정해서 세로 여백 줄임 */
+  display: block;       /* 중앙 정렬 */
+  margin: 0 auto;       /* 좌우 중앙 */
+}
+.analysis-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;           /* 위아래 간격 조절 */
+  padding: 16px;
+  background: #fff;
+  border-radius: 16px;
+}
 
 /* 세팅 */
 .setting-card { display:flex; justify-content:space-between; 
