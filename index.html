@@ -662,11 +662,26 @@ function renderMyTab(identityScore){
   const mainChar = characterMap.find(c => c.type === topTraits[0]) || characterMap.find(c=>c.type==="균형형");
   const subChar = topTraits[1] ? characterMap.find(c => c.type === topTraits[1]) : null;
 
-  document.getElementById("monsterImage").src = mainChar.image;
-  document.getElementById("monsterMainType").textContent = mainChar.name;
-  document.getElementById("monsterSubType").textContent = subChar ? subChar.name : "";
-  document.getElementById("monsterDesc").textContent = subChar ? `${mainChar.desc} / ${subChar.desc}` : mainChar.desc;
-  document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
+const mainTypeEl = document.getElementById("monsterMainType");
+const subTypeEl = document.getElementById("monsterSubType");
+const descEl = document.getElementById("monsterDesc");
+const imageEl = document.getElementById("monsterImage");
+const adviceEl = document.getElementById("monsterAdvice");
+
+// 안전하게 업데이트
+if (mainChar) {
+  mainTypeEl.textContent = mainChar.name || "타입 없음";
+  descEl.textContent = mainChar.desc || "";
+  imageEl.src = mainChar.image || "images/default-monster.png";
+  
+  // 부 타입 있으면 표시
+  subTypeEl.textContent = subChar ? subChar.name : "";
+  
+  // 조언 합치기
+  adviceEl.textContent = subChar && subChar.advice
+    ? `${mainChar.advice} ${subChar.advice}`
+    : mainChar.advice || "오늘의 조언이 없습니다.";
+  
 }
 
 // -------------------- 방사형 그래프 렌더 --------------------
