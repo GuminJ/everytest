@@ -4,9 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>MY LittleMonster</title>
-
 <link rel="stylesheet" href="style.css" />
-
 <link
   rel="stylesheet"
   as="style"
@@ -14,411 +12,120 @@
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
 />
 </head>
-
 <body>
-
 <div class="app">
 
   <!-- 헤더 -->
   <header class="top-header" id="topHeader">
-
     <div>
       <h1 class="logo">MY LittleMonster</h1>
-
-      <p class="subtitle">
-        심리테스트로 만드는<br>
-        나의 정체성
-      </p>
+      <p class="subtitle">심리테스트로 만드는<br>나의 정체성</p>
+      <button class="start-btn" onclick="location.href='test-myMonster.html'">테스트 시작하기</button>
     </div>
-
     <div class="profile-wrap">
-
       <label class="profile-mini">
-
-        <img
-          id="profileImage"
-          src="images/default-profile.png"
-          alt="프로필"
-        />
-
-        <input
-          type="file"
-          id="profileInput"
-          accept="image/*"
-        />
-
+        <img id="profileImage" src="images/default-profile.png" alt="프로필"/>
+        <input type="file" id="profileInput" accept="image/*"/>
       </label>
-
       <div class="point-badge">
         <span id="pointText">0PT</span>
       </div>
-
     </div>
-
   </header>
 
   <!-- 메인 -->
   <main class="main-content">
-
-    <!-- 홈 -->
+    <!-- 홈 페이지 -->
     <section class="page active" id="homePage">
-
-      <!-- 메인 배너 -->
-      <div class="main-banner">
-
-        <div class="banner-text">
-
-          <span class="small-label">
-            오늘의 추천 테스트
-          </span>
- <h2 class="banner-title">
-            나는 어떤 <br>
-            리틀몬스터일까요?
-          </h2>
-
-          <p class="banner-desc">
-            테스트를 통해 나만의 정체성을 발견해보세요
-          </p>
-
-        <button class="start-btn" onclick="location.href='test-myMonster.html'">테스트 시작하기</button>
-
-        </div>
-
-        <img
-          src="images/icon.png"
-          alt="리틀몬스터"
-          class="monster-image"
-        />
-
-      </div>
-
-      <!-- 인기 테스트 -->
-      <div class="section-title">
-        🔥 인기 테스트
-      </div>
-
+      <div class="section-title">🔥 인기 테스트</div>
       <div class="card-list">
-
-        <div class="test-card tap">
-
-          <div class="emoji">🍚</div>
-
-          <div class="card-info">
-            <h3>식사 유형으로 적성 찾기</h3>
-
-            <p>
-              외식 취향으로 나와 잘맞는 직무 파악하기
-            </p>
-          </div>
-
-        </div>
-
-        <div class="test-card tap">
-
-          <div class="emoji">💘</div>
-
-          <div class="card-info">
-            <h3>연애 집착남/녀 테스트</h3>
-
-            <p>
-              나는 얼마나 사랑/애정에 갈망하고 있을까?
-            </p>
-          </div>
-
-        </div>
-
-        <div class="test-card tap">
-
-          <div class="emoji">🌙</div>
-
-          <div class="card-info">
-            <h3>감각 테스트</h3>
-
-            <p>
-              나의 감각은 얼마나 뛰어날까?
-            </p>
-          </div>
-
-        </div>
-
+        <div class="test-card tap"><div class="emoji">🍚</div><div class="card-info"><h3>식사 유형</h3></div></div>
+        <div class="test-card tap"><div class="emoji">💘</div><div class="card-info"><h3>연애 테스트</h3></div></div>
+        <div class="test-card tap"><div class="emoji">🌙</div><div class="card-info"><h3>감각 테스트</h3></div></div>
       </div>
-
-      <!-- 오늘 기분 기록 -->
       <div class="mood-box">
-
-        <div class="section-title">
-          🌈 오늘 기분 기록
-        </div>
-
+        <div class="section-title">🌈 오늘 기분 기록</div>
         <div class="mood-list">
-
           <button class="mood-btn tap">😊</button>
           <button class="mood-btn tap">😴</button>
           <button class="mood-btn tap">🥹</button>
           <button class="mood-btn tap">😎</button>
           <button class="mood-btn tap">🥺</button>
           <button class="mood-btn tap">😡</button>
-
         </div>
-
-        <div
-          class="week-mood-box"
-          id="weekMoodBox"
-        >
-
-          <div
-            class="week-grid"
-            id="weekGrid"
-          ></div>
-
+        <div class="week-mood-box" id="weekMoodBox">
+          <div class="week-grid" id="weekGrid"></div>
         </div>
-
       </div>
-
     </section>
 
-    <!-- 탐색 -->
+    <!-- 탐색 페이지 -->
     <section class="page" id="explorePage">
-
-      <div class="section-title">
-        🧠 카테고리 탐색
-      </div>
-
+      <div class="section-title">🧠 카테고리 탐색</div>
       <div class="category-grid">
-
-        <div class="category-card tap popular">
-          🔥<span>인기</span>
-        </div>
-
-        <div class="category-card tap love">
-          💘<span>연애</span>
-        </div>
-
-        <div class="category-card tap personality">
-          🧠<span>성격</span>
-        </div>
-
-        <div class="category-card tap relation">
-          👥<span>관계</span>
-        </div>
-
-        <div class="category-card tap work">
-          💼<span>직장</span>
-        </div>
-
-        <div class="category-card tap emotion">
-          🌙<span>감성</span>
-        </div>
-
-        <div class="category-card tap taste">
-          🎨<span>취향</span>
-        </div>
-
+        <div class="category-card tap popular">🔥<span>인기</span></div>
+        <div class="category-card tap love">💘<span>연애</span></div>
+        <div class="category-card tap personality">🧠<span>성격</span></div>
+        <div class="category-card tap relation">👥<span>관계</span></div>
+        <div class="category-card tap work">💼<span>직장</span></div>
+        <div class="category-card tap emotion">🌙<span>감성</span></div>
+        <div class="category-card tap taste">🎨<span>취향</span></div>
       </div>
-
     </section>
 
-<!-- MY 페이지 섹션 -->
-<section class="page" id="myPage">
-  <div class="my-monster-card">
-    <div class="monster-info">
-      <div class="monster-main-type" id="monsterMainType">타입</div>
-      <div class="monster-sub-type" id="monsterSubType">보조 타입</div>
-      <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
-      <div class="monster-advice" id="monsterAdvice">조언</div>
-    </div>
-    <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
-  </div>
-</section>
-    
-  <!-- 정체성 분석 -->
-  <div class="analysis-box">
-    <div class="section-title">📊 정체성 분석</div>
-    <canvas id="radarChart" class="radar-canvas" style="width:100%; max-width:400px; height:300px;"></canvas>
-  </div>
+    <!-- MY 페이지 -->
+    <section class="page" id="myPage">
+      <div class="my-monster-card">
+        <div class="monster-info">
+          <div class="monster-main-type" id="monsterMainType">타입</div>
+          <div class="monster-sub-type" id="monsterSubType">보조 타입</div>
+          <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
+          <div class="monster-advice" id="monsterAdvice">조언</div>
+        </div>
+        <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
+      </div>
+      <div class="analysis-box">
+        <div class="section-title">📊 정체성 분석</div>
+        <canvas id="radarChart" class="radar-canvas" style="width:100%; max-width:400px; height:300px;"></canvas>
+      </div>
+      <div class="advice-box">
+        <div class="section-title">💡 오늘의 조언</div>
+        <p id="monsterAdvice">테스트 후 자동 업데이트</p>
+      </div>
+    </section>
 
-  <!-- 조언 -->
-  <div class="advice-box">
-    <div class="section-title">💡 오늘의 조언</div>
-    <p id="monsterAdvice">테스트 후 자동 업데이트</p>
-  </div>
-
-</section>
-
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- 설정 -->
+    <!-- 설정 페이지 -->
     <section class="page" id="settingPage">
-
-      <!-- 알림 -->
       <div class="setting-card">
-
-        <div>
-          <h3>🔔 새 테스트 알림</h3>
-
-          <p>
-            새로운 심리테스트 업데이트 시 알림
-          </p>
-        </div>
-
-        <div class="toggle-switch">
-
-          <div class="toggle-thumb"></div>
-
-        </div>
-
+        <div><h3>⚙️ 앱 버전</h3><p>0.0.1</p></div>
       </div>
-
-      <!-- 문의 -->
-      <div class="setting-card">
-
-        <div>
-          <h3>✉️ 문의하기</h3>
-          <p>
-          <a href="mailto:wjdrnals16@naver.com?subject=MYLITTLEMONSTER 문의&body=문의 내용을 입력하세요"
-         style="text-decoration:none; color:inherit;">
-        버그 제보 및 제안을 보내려면 클릭하세요.
-          </a>
-    </p>
-        </div>
-
-      </div>
-
-      <!-- 개인정보 -->
-      <div class="setting-card" id="privacyCard">
-        <div>
-          <h3>🔒 개인정보 처리방침</h3>
-          <p>내용을 보려면 클릭하세요.</p>
-        </div>
-      </div>
-
-      <!-- 개인정보 모달 -->
-<div id="privacyModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>개인정보 처리방침</h2>
-      <button class="close-btn" id="privacyCloseBtn">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p><strong>제1조(개인정보의 수집 및 이용 목적)</strong></p>
-      <p>본 앱은 사용자의 심리 테스트 결과 및 프로필 정보를 <strong>사용자 단말기의 로컬 저장소(LocalStorage)에만 저장</strong>하며, 다음 목적을 위해 이용됩니다.</p>
-      <ul>
-        <li>테스트 진행 기록 저장</li>
-        <li>테스트 결과 기반 정체성 분석 표시</li>
-        <li>프로필 이미지 저장</li>
-      </ul>
-      <p>서버 또는 외부 클라우드로 전송되지 않으며, 앱 외부에서 사용자의 개인정보가 활용되지 않습니다.</p>
-
-      <p><strong>제2조(수집하는 개인정보 항목)</strong></p>
-      <ul>
-        <li>프로필 이미지</li>
-        <li>테스트 진행 기록 및 결과 점수</li>
-        <li>사용자가 선택한 기분 기록 및 포인트</li>
-      </ul>
-
-      <p><strong>제3조(개인정보 보관 기간)</strong></p>
-      <p>로컬에 저장된 개인정보는 <strong>사용자가 앱을 삭제하거나 브라우저 데이터를 삭제할 때까지</strong> 보관됩니다. 앱 삭제 시 모든 로컬 기록이 <strong>영구적으로 삭제</strong>되며, 복구가 불가능합니다.</p>
-
-      <p><strong>제4조(개인정보의 제3자 제공)</strong></p>
-      <p>본 앱은 수집한 개인정보를 <strong>외부 서버, 광고주, 제휴사 등 제3자에게 제공하지 않습니다.</strong></p>
-
-      <p><strong>제5조(사용자 권리 및 관리)</strong></p>
-      <ul>
-        <li>사용자는 언제든 앱 내 기능을 통해 기록을 초기화하거나 삭제할 수 있습니다.</li>
-        <li>앱 삭제 시 로컬에 저장된 모든 데이터가 사라집니다.</li>
-        <li>추후 내보내기/복원 기능을 통해 사용자가 직접 백업할 수 있습니다.</li>
-      </ul>
-
-      <p><strong>제6조(고지 의무)</strong></p>
-      <p>본 개인정보 처리방침은 앱 내 설정 메뉴에 항상 표시되며, 내용이 변경될 경우 앱 실행 시 안내 메시지를 통해 공지됩니다.</p>
-    </div>
-  </div>
-</div>
-      <script>
-  const privacyCard = document.getElementById('privacyCard');
-  const privacyModal = document.getElementById('privacyModal');
-  const privacyCloseBtn = document.getElementById('privacyCloseBtn');
-
-  privacyCard.addEventListener('click', () => {
-    privacyModal.style.display = 'block';
-  });
-
-  privacyCloseBtn.addEventListener('click', () => {
-    privacyModal.style.display = 'none';
-  });
-
-  window.addEventListener('click', (e) => {
-    if (e.target === privacyModal) {
-      privacyModal.style.display = 'none';
-    }
-  });
-</script>
-      
-      
-
-      <!-- 버전 -->
-      <div class="setting-card">
-
-        <div>
-          <h3>⚙️ 앱 버전</h3>
-          <p>0.0.1</p>
-        </div>
-
-      </div>
-
     </section>
-
   </main>
 
   <!-- 하단 탭 -->
   <nav class="bottom-tab">
-
-    <button
-      class="tab active tap"
-      data-page="homePage"
-    >
-      <span>🏠</span>
-      <small>홈</small>
-    </button>
-
-    <button
-      class="tab tap"
-      data-page="explorePage"
-    >
-      <span>🔍</span>
-      <small>탐색</small>
-    </button>
-
-    <button
-      class="tab tap"
-      data-page="myPage"
-    >
-      <span>👾</span>
-      <small>MY</small>
-    </button>
-
-    <button
-      class="tab tap"
-      data-page="settingPage"
-    >
-      <span>⚙️</span>
-      <small>설정</small>
-    </button>
-
+    <button class="tab active" data-page="homePage">🏠<small>홈</small></button>
+    <button class="tab" data-page="explorePage">🔍<small>탐색</small></button>
+    <button class="tab" data-page="myPage">👾<small>MY</small></button>
+    <button class="tab" data-page="settingPage">⚙️<small>설정</small></button>
   </nav>
-
-  <!-- PT 팝업 -->
-  <div
-    class="point-popup"
-    id="pointPopup"
-  >
-    +1PT
-  </div>
-
 </div>
 
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
+// -------------------- 캐릭터 매핑 --------------------
+const characterMap = [
+  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형", image: "images/fire-monster.png", advice:"오늘은 새로운 도전을!" },
+  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png", advice:"천천히 계획하세요." },
+  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png", advice:"관심과 배려를 보여주세요." },
+  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png", advice:"끝까지 밀어붙이세요." },
+  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png", advice:"스스로 결정하세요." },
+  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png", advice:"함께 해결해보세요." },
+  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png", advice:"아이디어를 펼쳐보세요." },
+  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png", advice:"여유롭게 보내세요." }
+];
 
 // -------------------- 탭 이동 --------------------
 const tabs = document.querySelectorAll(".tab");
@@ -429,349 +136,55 @@ tabs.forEach(tab => {
   tab.addEventListener("click", () => {
     tabs.forEach(t => t.classList.remove("active"));
     pages.forEach(p => p.classList.remove("active"));
-
     tab.classList.add("active");
-    const target = tab.dataset.page;
-    document.getElementById(target).classList.add("active");
-
+    const targetPage = document.getElementById(tab.dataset.page);
+    if(targetPage) targetPage.classList.add("active");
     mainContent.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
-  
+
 // -------------------- 눌림 효과 --------------------
-document.querySelectorAll(".tap").forEach(btn => {
+document.querySelectorAll(".tap:not(.tab)").forEach(btn => {
   btn.addEventListener("click", () => {
     btn.classList.add("selected");
     setTimeout(() => btn.classList.remove("selected"), 150);
   });
 });
-  
-// -------------------- Storage Key --------------------
-const STORAGE_KEYS = {
-  POINT: "point",
-  MOOD: "weekMood",
-  WEEK_KEY: "weekKey",
-  PROFILE: "profileImage",
-  ALERT: "newTestAlert"
-};
 
-// -------------------- 프로필 이미지 --------------------
-const profileInput = document.getElementById("profileInput");
-const profileImage = document.getElementById("profileImage");
-const savedProfile = localStorage.getItem(STORAGE_KEYS.PROFILE);
-
-if(savedProfile) profileImage.src = savedProfile;
-
-profileInput.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if(!file) return;
-
-  const reader = new FileReader();
-  reader.onload = event => {
-    profileImage.src = event.target.result;
-    localStorage.setItem(STORAGE_KEYS.PROFILE, event.target.result);
-  };
-  reader.readAsDataURL(file);
-});
-  
-// -------------------- 포인트 시스템 --------------------
-const pointText = document.getElementById("pointText");
-const pointPopup = document.getElementById("pointPopup");
-let point = Number(localStorage.getItem(STORAGE_KEYS.POINT)) || 0;
-
-function updatePointUI() {
-  pointText.textContent = `${point}PT`;
-}
-
-function showPointPopup(text) {
-  pointPopup.textContent = text;
-  pointPopup.style.opacity = "1";
-  setTimeout(() => { pointPopup.style.opacity = "0"; }, 1600);
-}
-
-function addPoint(amount){
-  point += amount;
-  localStorage.setItem(STORAGE_KEYS.POINT, point);
-  updatePointUI();
-  showPointPopup(`+${amount}PT`);
-}
-
-updatePointUI();
-
-
-// -------------------- 감정 기록 --------------------
-const moodButtons = document.querySelectorAll(".mood-btn");
-const weekMoodBox = document.getElementById("weekMoodBox");
-const weekGrid = document.getElementById("weekGrid");
-
-const currentWeekKey = getCurrentWeekKey(new Date());
-const savedWeekKey = localStorage.getItem(STORAGE_KEYS.WEEK_KEY);
-
-let savedMoodData = {};
-
-if(savedWeekKey !== currentWeekKey){
-  localStorage.removeItem(STORAGE_KEYS.MOOD);
-  localStorage.setItem(STORAGE_KEYS.WEEK_KEY, currentWeekKey);
-} else {
-  savedMoodData = JSON.parse(localStorage.getItem(STORAGE_KEYS.MOOD)) || {};
-}
-
-moodButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const todayKey = getDateKey(new Date());
-    const alreadyChecked = !!savedMoodData[todayKey];
-
-    savedMoodData[todayKey] = { mood: button.textContent, createdAt: Date.now() };
-    localStorage.setItem(STORAGE_KEYS.MOOD, JSON.stringify(savedMoodData));
-
-    renderWeekMood();
-    weekMoodBox.style.display = "block";
-
-    if(!alreadyChecked) addPoint(10);
-
-    moodButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-  });
-});
-
-// -------------------- 주간 렌더링 --------------------
-function renderWeekMood(){
-  weekGrid.innerHTML = "";
-  const startOfWeek = getStartOfWeek(new Date());
-  const dayNames = ["일","월","화","수","목","금","토"];
-  const todayKey = getDateKey(new Date());
-
-  for(let i = 0; i < 7; i++){
-    const date = new Date(startOfWeek);
-    date.setDate(startOfWeek.getDate() + i);
-    const key = getDateKey(date);
-    const mood = savedMoodData[key]?.mood || "➖";
-
-    const item = document.createElement("div");
-    item.className = "week-item";
-    if(key === todayKey) item.classList.add("today");
-
-    item.innerHTML = `
-      ${key === todayKey ? `<div class="today-label">TODAY</div>` : `<div class="today-placeholder"></div>`}
-      <div class="week-day">${dayNames[i]}</div>
-      <div class="week-emoji">${mood}</div>
-    `;
-    weekGrid.appendChild(item);
-  }
-}
-
-// -------------------- 날짜 함수 --------------------
-function getStartOfWeek(date){
-  const d = new Date(date);
-  d.setDate(d.getDate() - d.getDay());
-  return d;
-}
-
-function getDateKey(date){
-  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
-}
-
-function getCurrentWeekKey(date){
-  return getDateKey(getStartOfWeek(date));
-}
-
-// -------------------- 초기 렌더 --------------------
-if(Object.keys(savedMoodData).length > 0){
-
-  weekMoodBox.style.display =
-    "block";
-
-  renderWeekMood();
-
-  const todayMood =
-    savedMoodData[
-      getDateKey(new Date())
-    ]?.mood;
-
-  if(todayMood){
-
-    moodButtons.forEach(btn => {
-
-      if(btn.textContent === todayMood){
-
-        btn.classList.add("active");
-
-      }
-
-    });
-
-  }
-
-}
-
-// -------------------- 토글 스위치 --------------------
-const toggle = document.querySelector(".toggle-switch");
-let toggleState = localStorage.getItem(STORAGE_KEYS.ALERT) === "on";
-if(toggleState) toggle.classList.add("active");
-
-toggle.addEventListener("click", () => {
-  toggleState = !toggleState;
-  toggle.classList.toggle("active");
-  localStorage.setItem(STORAGE_KEYS.ALERT, toggleState ? "on" : "off");
-});
-  
-// -------------------- 7요인 점수 가져오기 --------------------
-let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
-  "도파민감각": 0,
-  "불안레이더": 0,
-  "마음연결력": 0,
-  "버티는힘": 0,
-  "나만의중심": 0,
-  "공감온도": 0,
-  "몽상감도": 0
-};
-
-renderMyTab(identityScore);
-renderRadarGraph(identityScore);
-  
-function addScore(type, amount){
-  if(identityScore[type] !== undefined){
-    identityScore[type] += amount;
-    localStorage.setItem("userIdentity", JSON.stringify(identityScore));
-    renderMyTab(identityScore);      // MY 탭 UI 업데이트
-    renderRadarGraph(identityScore); // 방사형 그래프 업데이트
-  }
-}
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  const mainType = localStorage.getItem("myMainType");
-  const subType = localStorage.getItem("mySubType");
-
-  // characterMap 배열 기준으로 데이터 찾기
-  const mainChar = characterMap.find(c=> c.type === mainType);
-  const subChar = characterMap.find(c=> c.type === subType);
-
-  if(mainChar){
-    document.getElementById("monsterMainType").textContent = mainChar.name;
-    document.getElementById("monsterDesc").textContent = mainChar.desc;
-    document.getElementById("monsterImage").src = mainChar.image;
-    document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
-  }
-
-  if(subChar){
-    document.getElementById("monsterSubType").textContent = subChar.name;
-  }
-});
-
-  
-// -------------------- 캐릭터 매칭 --------------------
-const characterMap = [
-  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형, 활기찬 타입", image: "images/fire-monster.png", advice:"오늘은 새로운 도전을 시도해보세요!" },
-  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png", advice:"조급해하지 말고 천천히 계획을 세워보세요." },
-  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png", advice:"주변 사람들에게 관심과 배려를 보여주세요." },
-  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png", advice:"포기하지 않고 끝까지 밀어붙이세요." },
-  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png", advice:"오늘은 스스로 결정하고 행동해보세요." },
-  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png", advice:"함께 협력하며 문제를 해결해보세요." },
-  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png", advice:"아이디어와 상상을 마음껏 펼쳐보세요." },
-  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png", advice:"오늘은 균형을 유지하며 여유롭게 보내세요." }
-];
-
-// -------------------- 주/보조 성향 도출 --------------------
-function getTopTraits(identityScore){
-  const entries = Object.entries(identityScore);
-  entries.sort((a,b)=> b[1]-a[1]);
-  const allEqual = entries.every(e => e[1] === entries[0][1]);
-  return allEqual ? ["균형형"] : [entries[0][0], entries[1][0]];
-}
-
-// -------------------- MY 탭 렌더 --------------------
-function renderMyTab(identityScore){
-  const topTraits = getTopTraits(identityScore);
-  const mainChar = characterMap.find(c => c.type === topTraits[0]) || characterMap.find(c=>c.type==="균형형");
-  const subChar = topTraits[1] ? characterMap.find(c => c.type === topTraits[1]) : null;
-
-const mainTypeEl = document.getElementById("monsterMainType");
-const subTypeEl = document.getElementById("monsterSubType");
-const descEl = document.getElementById("monsterDesc");
-const imageEl = document.getElementById("monsterImage");
-const adviceEl = document.getElementById("monsterAdvice");
-
-// 안전하게 업데이트
-if (mainChar) {
-  mainTypeEl.textContent = mainChar.name || "타입 없음";
-  descEl.textContent = mainChar.desc || "";
-  imageEl.src = mainChar.image || "images/default-monster.png";
-  
-  // 부 타입 있으면 표시
-  subTypeEl.textContent = subChar ? subChar.name : "";
-  
-  // 조언 합치기
-  adviceEl.textContent = subChar && subChar.advice
-    ? `${mainChar.advice} ${subChar.advice}`
-    : mainChar.advice || "오늘의 조언이 없습니다.";
-  
-}
-
-// -------------------- 방사형 그래프 렌더 --------------------
-function renderRadarGraph(identityScore){
-  const ctx = document.getElementById('radarChart').getContext('2d');
-  if(window.radarChartInstance) window.radarChartInstance.destroy();
-
-  // 안전하게 값 보장
-  const score = [
-    identityScore["도파민감각"] ?? 0,
-    identityScore["불안레이더"] ?? 0,
-    identityScore["마음연결력"] ?? 0,
-    identityScore["버티는힘"] ?? 0,
-    identityScore["나만의중심"] ?? 0,
-    identityScore["공감온도"] ?? 0,
-    identityScore["몽상감도"] ?? 0
-  ];
-
-  window.radarChartInstance = new Chart(ctx, {
-    type:'radar',
-    data:{
-      labels:["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
-      datasets:[{
-        label:'성향 점수',
-        data: score,
-        backgroundColor:'rgba(123,108,255,0.2)',
-        borderColor:'#7B6CFF',
-        pointBackgroundColor:'#7B6CFF',
-        pointBorderColor:'#fff',
-        pointRadius:6,
-        borderWidth:2
+// -------------------- Radar 차트 예시 --------------------
+const radarCtx = document.getElementById("radarChart");
+if(radarCtx){
+  new Chart(radarCtx, {
+    type: 'radar',
+    data: {
+      labels: ['도파민', '불안', '공감', '인내', '자율', '상상', '균형'],
+      datasets: [{
+        label: '나의 점수',
+        data: [80, 65, 75, 90, 50, 60, 70],
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 2
       }]
     },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      scales:{
-        r:{
-          beginAtZero:true,
-          min:0,
-          max:10,
-          ticks:{ stepSize:1, color:'#555' },
-          angleLines:{ color:'#ddd' },
-          grid:{ color:'#eee' },
-          pointLabels:{ color:'#222', font:{ size:12, weight:'600' } }
-        }
-      },
-      plugins:{ legend:{ display:false } }
+    options: {
+      scales: {
+        r: { beginAtZero:true, max:100 }
+      }
     }
   });
 }
 
-// -------------------- 초기 실행 --------------------
-renderMyTab(identityScore);
-renderRadarGraph(identityScore);
-if(Object.keys(savedMoodData).length>0){
-  weekMoodBox.style.display = "block";
-  renderWeekMood();
-
-  const todayMood = savedMoodData[getDateKey(new Date())]?.mood;
-  if(todayMood){
-    moodButtons.forEach(btn => {
-      if(btn.textContent === todayMood) btn.classList.add("active");
-    });
+// -------------------- 포인트 + 프로필 예시 --------------------
+let point = 0;
+const pointText = document.getElementById("pointText");
+document.getElementById("profileInput").addEventListener("change", e=>{
+  const file = e.target.files[0];
+  if(file){
+    document.getElementById("profileImage").src = URL.createObjectURL(file);
+    point += 10;
+    pointText.textContent = point + "PT";
   }
-}
+});
 </script>
-
 </body>
 </html>
