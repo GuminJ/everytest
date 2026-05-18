@@ -420,54 +420,32 @@
 <script>
 
 // -------------------- 탭 이동 --------------------
+// -------------------- 탭 이동 --------------------
 const tabs = document.querySelectorAll(".tab");
 const pages = document.querySelectorAll(".page");
 const mainContent = document.querySelector(".main-content");
 
 tabs.forEach(tab => {
-
   tab.addEventListener("click", () => {
-
-    tabs.forEach(t =>
-      t.classList.remove("active")
-    );
-
-    pages.forEach(p =>
-      p.classList.remove("active")
-    );
+    tabs.forEach(t => t.classList.remove("active"));
+    pages.forEach(p => p.classList.remove("active"));
 
     tab.classList.add("active");
-
     const target = tab.dataset.page;
+    document.getElementById(target).classList.add("active");
 
-    document
-      .getElementById(target)
-      .classList.add("active");
-
-    mainContent.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
+    mainContent.scrollTo({ top: 0, behavior: "smooth" });
   });
-
 });
-
+  
 // -------------------- 눌림 효과 --------------------
 document.querySelectorAll(".tap").forEach(btn => {
-
   btn.addEventListener("click", () => {
-
     btn.classList.add("selected");
-
-    setTimeout(() => {
-      btn.classList.remove("selected");
-    }, 150);
-
+    setTimeout(() => btn.classList.remove("selected"), 150);
   });
-
 });
-
+  
 // -------------------- Storage Key --------------------
 const STORAGE_KEYS = {
   POINT: "point",
@@ -478,270 +456,122 @@ const STORAGE_KEYS = {
 };
 
 // -------------------- 프로필 이미지 --------------------
-const profileInput =
-  document.getElementById("profileInput");
+const profileInput = document.getElementById("profileInput");
+const profileImage = document.getElementById("profileImage");
+const savedProfile = localStorage.getItem(STORAGE_KEYS.PROFILE);
 
-const profileImage =
-  document.getElementById("profileImage");
-
-const savedProfile =
-  localStorage.getItem(
-    STORAGE_KEYS.PROFILE
-  );
-
-if(savedProfile){
-  profileImage.src = savedProfile;
-}
+if(savedProfile) profileImage.src = savedProfile;
 
 profileInput.addEventListener("change", e => {
-
   const file = e.target.files[0];
-
   if(!file) return;
 
   const reader = new FileReader();
-
   reader.onload = event => {
-
-    profileImage.src =
-      event.target.result;
-
-    localStorage.setItem(
-      STORAGE_KEYS.PROFILE,
-      event.target.result
-    );
-
+    profileImage.src = event.target.result;
+    localStorage.setItem(STORAGE_KEYS.PROFILE, event.target.result);
   };
-
   reader.readAsDataURL(file);
-
 });
-
+  
 // -------------------- 포인트 시스템 --------------------
-const pointText =
-  document.getElementById("pointText");
+const pointText = document.getElementById("pointText");
+const pointPopup = document.getElementById("pointPopup");
+let point = Number(localStorage.getItem(STORAGE_KEYS.POINT)) || 0;
 
-const pointPopup =
-  document.getElementById("pointPopup");
+function updatePointUI() {
+  pointText.textContent = `${point}PT`;
+}
 
-let point = Number(
-  localStorage.getItem(
-    STORAGE_KEYS.POINT
-  )
-) || 0;
+function showPointPopup(text) {
+  pointPopup.textContent = text;
+  pointPopup.style.opacity = "1";
+  setTimeout(() => { pointPopup.style.opacity = "0"; }, 1600);
+}
+
+function addPoint(amount){
+  point += amount;
+  localStorage.setItem(STORAGE_KEYS.POINT, point);
+  updatePointUI();
+  showPointPopup(`+${amount}PT`);
+}
 
 updatePointUI();
 
-function addPoint(amount){
-
-  point += amount;
-
-  localStorage.setItem(
-    STORAGE_KEYS.POINT,
-    point
-  );
-
-  updatePointUI();
-
-  showPointPopup(`+${amount}PT`);
-
-}
-
-function updatePointUI(){
-
-  pointText.textContent =
-    `${point}PT`;
-
-}
-
-function showPointPopup(text){
-
-  pointPopup.textContent = text;
-
-  pointPopup.style.opacity = "1";
-
-  setTimeout(() => {
-
-    pointPopup.style.opacity = "0";
-
-  }, 1600);
-
-}
-
 // -------------------- 감정 기록 --------------------
-const moodButtons =
-  document.querySelectorAll(".mood-btn");
+const moodButtons = document.querySelectorAll(".mood-btn");
+const weekMoodBox = document.getElementById("weekMoodBox");
+const weekGrid = document.getElementById("weekGrid");
 
-const weekMoodBox =
-  document.getElementById("weekMoodBox");
-
-const weekGrid =
-  document.getElementById("weekGrid");
-
-const currentWeekKey =
-  getCurrentWeekKey(new Date());
-
-const savedWeekKey =
-  localStorage.getItem(
-    STORAGE_KEYS.WEEK_KEY
-  );
+const currentWeekKey = getCurrentWeekKey(new Date());
+const savedWeekKey = localStorage.getItem(STORAGE_KEYS.WEEK_KEY);
 
 let savedMoodData = {};
 
-// 주차 변경 시 초기화
 if(savedWeekKey !== currentWeekKey){
-
-  localStorage.removeItem(
-    STORAGE_KEYS.MOOD
-  );
-
-  localStorage.setItem(
-    STORAGE_KEYS.WEEK_KEY,
-    currentWeekKey
-  );
-
+  localStorage.removeItem(STORAGE_KEYS.MOOD);
+  localStorage.setItem(STORAGE_KEYS.WEEK_KEY, currentWeekKey);
 } else {
-
-  savedMoodData = JSON.parse(
-    localStorage.getItem(
-      STORAGE_KEYS.MOOD
-    )
-  ) || {};
-
+  savedMoodData = JSON.parse(localStorage.getItem(STORAGE_KEYS.MOOD)) || {};
 }
 
-// 감정 기록
 moodButtons.forEach(button => {
-
   button.addEventListener("click", () => {
+    const todayKey = getDateKey(new Date());
+    const alreadyChecked = !!savedMoodData[todayKey];
 
-    const todayKey =
-      getDateKey(new Date());
-
-    const alreadyChecked =
-      !!savedMoodData[todayKey];
-
-    savedMoodData[todayKey] = {
-      mood: button.textContent,
-      createdAt: Date.now()
-    };
-
-    localStorage.setItem(
-      STORAGE_KEYS.MOOD,
-      JSON.stringify(savedMoodData)
-    );
+    savedMoodData[todayKey] = { mood: button.textContent, createdAt: Date.now() };
+    localStorage.setItem(STORAGE_KEYS.MOOD, JSON.stringify(savedMoodData));
 
     renderWeekMood();
+    weekMoodBox.style.display = "block";
 
-    weekMoodBox.style.display =
-      "block";
+    if(!alreadyChecked) addPoint(10);
 
-    if(!alreadyChecked){
-      addPoint(10);
-    }
-
-    // 버튼 active 처리
-    moodButtons.forEach(btn =>
-      btn.classList.remove("active")
-    );
-
+    moodButtons.forEach(btn => btn.classList.remove("active"));
     button.classList.add("active");
-
   });
-
 });
 
 // -------------------- 주간 렌더링 --------------------
 function renderWeekMood(){
-
   weekGrid.innerHTML = "";
-
-  const startOfWeek =
-    getStartOfWeek(new Date());
-
-  const dayNames =
-    ["일","월","화","수","목","금","토"];
-
-  const todayKey =
-    getDateKey(new Date());
+  const startOfWeek = getStartOfWeek(new Date());
+  const dayNames = ["일","월","화","수","목","금","토"];
+  const todayKey = getDateKey(new Date());
 
   for(let i = 0; i < 7; i++){
+    const date = new Date(startOfWeek);
+    date.setDate(startOfWeek.getDate() + i);
+    const key = getDateKey(date);
+    const mood = savedMoodData[key]?.mood || "➖";
 
-    const date =
-      new Date(startOfWeek);
-
-    date.setDate(
-      startOfWeek.getDate() + i
-    );
-
-    const key =
-      getDateKey(date);
-
-    const mood =
-      savedMoodData[key]?.mood || "➖";
-
-    const item =
-      document.createElement("div");
-
+    const item = document.createElement("div");
     item.className = "week-item";
-
-    if(key === todayKey){
-      item.classList.add("today");
-    }
+    if(key === todayKey) item.classList.add("today");
 
     item.innerHTML = `
-      ${
-        key === todayKey
-        ? `<div class="today-label">TODAY</div>`
-        : `<div class="today-placeholder"></div>`
-      }
-
-      <div class="week-day">
-        ${dayNames[i]}
-      </div>
-
-      <div class="week-emoji">
-        ${mood}
-      </div>
+      ${key === todayKey ? `<div class="today-label">TODAY</div>` : `<div class="today-placeholder"></div>`}
+      <div class="week-day">${dayNames[i]}</div>
+      <div class="week-emoji">${mood}</div>
     `;
-
     weekGrid.appendChild(item);
-
   }
-
 }
 
 // -------------------- 날짜 함수 --------------------
 function getStartOfWeek(date){
-
   const d = new Date(date);
-
-  const day = d.getDay();
-
-  d.setDate(
-    d.getDate() - day
-  );
-
+  d.setDate(d.getDate() - d.getDay());
   return d;
-
 }
 
 function getDateKey(date){
-
-  return `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${
-    date.getDate()
-  }`;
-
+  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 }
 
 function getCurrentWeekKey(date){
-
-  return getDateKey(
-    getStartOfWeek(date)
-  );
-
+  return getDateKey(getStartOfWeek(date));
 }
 
 // -------------------- 초기 렌더 --------------------
@@ -774,31 +604,14 @@ if(Object.keys(savedMoodData).length > 0){
 }
 
 // -------------------- 토글 스위치 --------------------
-const toggle =
-  document.querySelector(
-    ".toggle-switch"
-  );
-
-let toggleState =
-  localStorage.getItem(
-    STORAGE_KEYS.ALERT
-  ) === "on";
-
-if(toggleState){
-  toggle.classList.add("active");
-}
+const toggle = document.querySelector(".toggle-switch");
+let toggleState = localStorage.getItem(STORAGE_KEYS.ALERT) === "on";
+if(toggleState) toggle.classList.add("active");
 
 toggle.addEventListener("click", () => {
-
   toggleState = !toggleState;
-
   toggle.classList.toggle("active");
-
-  localStorage.setItem(
-    STORAGE_KEYS.ALERT,
-    toggleState ? "on" : "off"
-  );
-
+  localStorage.setItem(STORAGE_KEYS.ALERT, toggleState ? "on" : "off");
 });
   
 // -------------------- 7요인 점수 가져오기 --------------------
@@ -827,17 +640,10 @@ const characterMap = [
 
 // -------------------- 주/보조 성향 도출 --------------------
 function getTopTraits(identityScore){
-  // 점수를 배열로 변환
   const entries = Object.entries(identityScore);
-  // 점수 기준 내림차순 정렬
   entries.sort((a,b)=> b[1]-a[1]);
-
-  const mainType = entries[0][0];
-  const subType = entries[1][0];
-
-  // 모든 점수가 동일하면 균형형
   const allEqual = entries.every(e => e[1] === entries[0][1]);
-  return allEqual ? ["균형형"] : [mainType, subType];
+  return allEqual ? ["균형형"] : [entries[0][0], entries[1][0]];
 }
 
 // -------------------- MY 탭 렌더 --------------------
@@ -846,60 +652,46 @@ function renderMyTab(identityScore){
   const mainChar = characterMap.find(c => c.type === topTraits[0]) || characterMap.find(c=>c.type==="균형형");
   const subChar = topTraits[1] ? characterMap.find(c => c.type === topTraits[1]) : null;
 
-  // 카드 이미지
   document.getElementById("monsterImage").src = mainChar.image;
-
-  // 타입 표시 (주 / 보조)
-  const typeText = subChar ? `${mainChar.name} (주) / ${subChar.name} (보조)` : `${mainChar.name} (주)`;
-  document.getElementById("monsterType").textContent = typeText;
-
-  // 설명
-  const descText = subChar ? `${mainChar.desc} / ${subChar.desc}` : mainChar.desc;
-  document.getElementById("monsterDesc").textContent = descText;
-
-  // 오늘의 조언
-  const adviceText = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
-  document.getElementById("monsterAdvice").textContent = adviceText;
+  document.getElementById("monsterMainType").textContent = mainChar.name;
+  document.getElementById("monsterSubType").textContent = subChar ? subChar.name : "";
+  document.getElementById("monsterDesc").textContent = subChar ? `${mainChar.desc} / ${subChar.desc}` : mainChar.desc;
+  document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
 }
 
-// 테스트 종료 후 MY 탭에서 렌더링 예시
-renderMyTab(identityScore);
-
 // -------------------- 방사형 그래프 렌더 --------------------
-function renderRadarGraph(identityScore) {
+function renderRadarGraph(identityScore){
   const ctx = document.getElementById('radarChart').getContext('2d');
-
-  // 기존 그래프가 있으면 지우기 (재렌더링 대비)
   if(window.radarChartInstance) window.radarChartInstance.destroy();
 
   window.radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
-      datasets: [{
-        label: '성향 점수',
-        data: [
-          identityScore.NS,
-          identityScore.HA,
-          identityScore.RD,
-          identityScore.PS,
-          identityScore.SD,
-          identityScore.CO,
-          identityScore.ST
+    type:'radar',
+    data:{
+      labels:["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
+      datasets:[{
+        label:'성향 점수',
+        data:[
+          identityScore["도파민감각"],
+          identityScore["불안레이더"],
+          identityScore["마음연결력"],
+          identityScore["버티는힘"],
+          identityScore["나만의중심"],
+          identityScore["공감온도"],
+          identityScore["몽상감도"]
         ],
-        backgroundColor: 'rgba(123,108,255,0.2)',
-        borderColor: '#7B6CFF',
-        pointBackgroundColor: '#7B6CFF',
-        pointBorderColor: '#fff',
-        pointRadius: 6,
-        borderWidth: 2,
+        backgroundColor:'rgba(123,108,255,0.2)',
+        borderColor:'#7B6CFF',
+        pointBackgroundColor:'#7B6CFF',
+        pointBorderColor:'#fff',
+        pointRadius:6,
+        borderWidth:2
       }]
     },
-    options: {
-      responsive: true,
+    options:{
+      responsive:true,
       maintainAspectRatio:false,
-      scales: {
-        r: {
+      scales:{
+        r:{
           beginAtZero:true,
           min:0,
           max:10,
@@ -915,9 +707,19 @@ function renderRadarGraph(identityScore) {
 }
 
 // -------------------- 초기 실행 --------------------
-updateMonsterCard();
-renderRadarChart(identityScore);
-  
+renderMyTab(identityScore);
+renderRadarGraph(identityScore);
+if(Object.keys(savedMoodData).length>0){
+  weekMoodBox.style.display = "block";
+  renderWeekMood();
+
+  const todayMood = savedMoodData[getDateKey(new Date())]?.mood;
+  if(todayMood){
+    moodButtons.forEach(btn => {
+      if(btn.textContent === todayMood) btn.classList.add("active");
+    });
+  }
+}
 </script>
 
 </body>
