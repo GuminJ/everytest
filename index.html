@@ -669,21 +669,24 @@ function renderRadarGraph(identityScore){
   const ctx = document.getElementById('radarChart').getContext('2d');
   if(window.radarChartInstance) window.radarChartInstance.destroy();
 
+  // 안전하게 값 보장
+  const score = [
+    identityScore["도파민감각"] ?? 0,
+    identityScore["불안레이더"] ?? 0,
+    identityScore["마음연결력"] ?? 0,
+    identityScore["버티는힘"] ?? 0,
+    identityScore["나만의중심"] ?? 0,
+    identityScore["공감온도"] ?? 0,
+    identityScore["몽상감도"] ?? 0
+  ];
+
   window.radarChartInstance = new Chart(ctx, {
     type:'radar',
     data:{
       labels:["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
       datasets:[{
         label:'성향 점수',
-        data:[
-          identityScore["도파민감각"],
-          identityScore["불안레이더"],
-          identityScore["마음연결력"],
-          identityScore["버티는힘"],
-          identityScore["나만의중심"],
-          identityScore["공감온도"],
-          identityScore["몽상감도"]
-        ],
+        data: score,
         backgroundColor:'rgba(123,108,255,0.2)',
         borderColor:'#7B6CFF',
         pointBackgroundColor:'#7B6CFF',
