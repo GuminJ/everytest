@@ -218,17 +218,39 @@
 
     </section>
 
-    <!-- MY -->
-    <section class="page" id="myPage">
+<!-- MY 페이지 섹션 -->
+<section class="page" id="myPage">
+  <div class="my-monster-card">
+    <div class="monster-info">
+      <div class="monster-main-type" id="monsterMainType">타입</div>
+      <div class="monster-sub-type" id="monsterSubType">보조 타입</div>
+      <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
+      <div class="monster-advice" id="monsterAdvice">조언</div>
+    </div>
+    <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
+  </div>
+</section>
 
-      <div class="my-monster-card">
-       <div class="monster-info">
-          <div class="monster-main-type" id="monsterMainType">타입</div>
-          <div class="monster-sub-type" id="monsterSubType">보조 타입</div>
-          <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
-        </div>
-        <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
-      </div>
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+  const mainType = localStorage.getItem("myMainType");
+  const subType = localStorage.getItem("mySubType");
+
+  // characterMap 배열 기준으로 데이터 찾기
+  const mainChar = characterMap.find(c=> c.type === mainType);
+  const subChar = characterMap.find(c=> c.type === subType);
+
+  if(mainChar){
+    document.getElementById("monsterMainType").textContent = mainChar.name;
+    document.getElementById("monsterDesc").textContent = mainChar.desc;
+    document.getElementById("monsterImage").src = mainChar.image;
+    document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
+  }
+
+  if(subChar){
+    document.getElementById("monsterSubType").textContent = subChar.name;
+  }
+});
 
   <!-- 정체성 분석 -->
   <div class="analysis-box">
