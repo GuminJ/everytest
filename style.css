@@ -225,7 +225,9 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
   background: linear-gradient(135deg, rgba(255,154,158,0.18), rgba(123,108,255,0.18));
   box-shadow: 0 4px 12px rgba(123,108,255,0.18);
 }
-
+.category-card.selected span {
+  color: #7B6CFF;
+}
 .category-card { flex:1 1 calc(33% - 12px); background:#fff; border-radius:12px; padding:16px; display:flex; flex-direction:column; align-items:center; cursor:pointer; font-weight:bold; }
 .category-card span { margin-top:8px; }
 
