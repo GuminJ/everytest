@@ -215,7 +215,24 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 
 /* 탐색 */
 .category-grid { display:flex; flex-wrap:wrap; gap:12px; }
-.category-card { flex:1 1 calc(33% - 12px); background:#fff; border-radius:12px; padding:16px; display:flex; flex-direction:column; align-items:center; cursor:pointer; font-weight:bold; }
+.category-card { transition:transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease; 
+                flex:1 1 calc(33% - 12px); background:#fff; border-radius:12px; 
+                padding:16px; display:flex; flex-direction:column; align-items:center; cursor:pointer; font-weight:bold; }
+.category-card.selected {
+  transform: scale(0.96);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,154,158,0.18),
+    rgba(123,108,255,0.18)
+  );
+
+  box-shadow:
+    0 4px 12px rgba(123,108,255,0.18);
+}
+.category-card.selected span {
+  color: #7B6CFF;
+}
 .category-card span { margin-top:8px; }
 
 /* MY */
@@ -227,8 +244,18 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 .radar-placeholder { height:150px; background:#f0f0f0; border-radius:12px; display:flex; justify-content:center; align-items:center; }
 
 /* 세팅 */
-.setting-card { display:flex; justify-content:space-between; align-items:center; padding:16px; background:#fff; border-radius:16px; margin-bottom:12px; }
+.setting-card { display:flex; justify-content:space-between; 
+               align-items:center; padding: 12px 14px; background:#fff; border-radius:16px; margin-bottom:8px; }
+.setting-card h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
+}
 
+.setting-card p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
 /* 하단 탭 */
 .bottom-tab {
   display: flex;
