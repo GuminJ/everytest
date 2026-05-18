@@ -330,3 +330,16 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 .toggle-switch.active .toggle-thumb {
   left: 24px;
 }
+
+.today-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6CFF;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.today-placeholder {
+  height: 12px;
+}
+
