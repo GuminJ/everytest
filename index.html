@@ -230,31 +230,22 @@
         <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
       </div>
 
-      <div class="analysis-box">
-        <div class="section-title">
-          📊 정체성 분석
-        </div>
+  <!-- 정체성 분석 -->
+  <div class="analysis-box">
+    <div class="section-title">📊 정체성 분석</div>
+    <canvas id="radarChart" style="width:100%; max-width:400px; height:300px;"></canvas>
+  </div>
 
-        <div class="radar-placeholder">
-          성향 그래프 영역
-        </div>
+  <!-- 조언 -->
+  <div class="advice-box">
+    <div class="section-title">💡 오늘의 조언</div>
+    <p id="monsterAdvice">테스트 후 자동 업데이트</p>
+  </div>
 
-      </div>
+</section>
 
-      <div class="advice-box">
-
-        <div class="section-title">
-          💡 오늘의 조언
-        </div>
-
-        <p>
-          지나친 열정은 화를 부릅니다.<br>
-          뒤를 돌아보고, 찬찬히 살펴보세요.
-        </p>
-
-      </div>
-
-    </section>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- 설정 -->
     <section class="page" id="settingPage">
@@ -809,20 +800,8 @@ toggle.addEventListener("click", () => {
   );
 
 });
-
-// 캐릭터 매칭 테이블
-const characterMap = [
-  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형, 활기찬 타입", image: "images/fire-monster.png" },
-  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png" },
-  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png" },
-  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png" },
-  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png" },
-  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png" },
-  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png" },
-  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png" }
-];
-
-// 로컬에서 점수 가져오기
+  
+// -------------------- 7요인 점수 가져오기 --------------------
 let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
   "도파민감각":0,
   "불안레이더":0,
@@ -832,38 +811,94 @@ let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
   "공감온도":0,
   "몽상감도":0
 };
+  
+// -------------------- 캐릭터 매칭 --------------------
+const characterMap = [
+  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형, 활기찬 타입", image: "images/fire-monster.png", advice:"오늘은 새로운 도전을 시도해보세요!" },
+  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png", advice:"조급해하지 말고 천천히 계획을 세워보세요." },
+  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png", advice:"주변 사람들에게 관심과 배려를 보여주세요." },
+  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png", advice:"포기하지 않고 끝까지 밀어붙이세요." },
+  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png", advice:"오늘은 스스로 결정하고 행동해보세요." },
+  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png", advice:"함께 협력하며 문제를 해결해보세요." },
+  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png", advice:"아이디어와 상상을 마음껏 펼쳐보세요." },
+  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png", advice:"오늘은 균형을 유지하며 여유롭게 보내세요." }
+];
 
-// 주/보조 성향 자동 도출
+// -------------------- 주/보조 성향 도출 --------------------
 function calculateCharacter() {
   const entries = Object.entries(identityScore);
   const sorted = entries.sort((a,b)=>b[1]-a[1]);
-  
-  // 모두 0이면 균형형
-  if(sorted.every(([key, val])=> val === 0)) {
+
+  if(sorted.every(([key,val])=>val===0)){
     return { main:"균형형", sub:null };
   }
-  
-  const main = sorted[0][0]; // 1위 성향
-  const sub = sorted[1][1] > 0 ? sorted[1][0] : null; // 2위 성향 (점수가 있으면)
-  
+
+  const main = sorted[0][0];
+  const sub = sorted[1][1]>0 ? sorted[1][0] : null;
+
   return { main, sub };
 }
 
-// MY 탭 카드 업데이트
+// -------------------- MY 탭 카드 업데이트 --------------------
 function updateMonsterCard() {
   const { main, sub } = calculateCharacter();
   const mainChar = characterMap.find(c=>c.type===main) || characterMap.find(c=>c.type==="균형형");
   const subChar = sub ? characterMap.find(c=>c.type===sub) : null;
-  
-  // DOM 업데이트
+
   document.getElementById("monsterMainType").textContent = mainChar.name + " (" + main + ")";
   document.getElementById("monsterSubType").textContent = subChar ? subChar.name + " (" + sub + ")" : "";
   document.getElementById("monsterDesc").textContent = mainChar.desc;
   document.getElementById("monsterImage").src = mainChar.image;
+  document.getElementById("monsterAdvice").textContent = mainChar.advice;
 }
 
-// 페이지 로드 시 실행
+// -------------------- 방사형 그래프 --------------------
+function renderRadarChart(){
+  const ctx = document.getElementById("radarChart").getContext("2d");
+
+  const data = {
+    labels: ["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
+    datasets:[{
+      label:"나의 성향",
+      data:[
+        identityScore["도파민감각"],
+        identityScore["불안레이더"],
+        identityScore["마음연결력"],
+        identityScore["버티는힘"],
+        identityScore["나만의중심"],
+        identityScore["공감온도"],
+        identityScore["몽상감도"]
+      ],
+      backgroundColor:"rgba(123,108,255,0.2)",
+      borderColor:"#7B6CFF",
+      borderWidth:2,
+      pointBackgroundColor:"#ff9a9e",
+      pointBorderColor:"#fff",
+      pointRadius:5,
+      pointHoverRadius:7
+    }]
+  };
+
+  const options = {
+    scales:{
+      r:{
+        beginAtZero:true,
+        max:3,
+        ticks:{ stepSize:1 },
+        pointLabels:{ color:"#222", font:{size:12, weight:"700"} }
+      }
+    },
+    plugins:{ legend:{ display:false } },
+    responsive:true,
+    maintainAspectRatio:false
+  };
+
+  new Chart(ctx, { type:"radar", data, options });
+}
+
+// -------------------- 초기 실행 --------------------
 updateMonsterCard();
+renderRadarChart();
   
 </script>
 
