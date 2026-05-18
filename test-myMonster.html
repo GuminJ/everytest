@@ -338,8 +338,24 @@ function renderQuestion(){
 
 // -------------------- 테스트 종료 --------------------
 function finishTest() {
-  // 결과 저장
+  // 점수 저장
   localStorage.setItem("userIdentity", JSON.stringify(identityScore));
+
+  // -------------------------
+  //  여기에 MY 페이지용 타입 저장 로직 추가
+  // -------------------------
+  // 점수 기반으로 mainType과 subType 선택
+  const scores = Object.entries(identityScore);
+  // 점수 내림차순 정렬
+  scores.sort((a,b)=> b[1]-a[1]);
+
+  // 가장 높은 점수 타입이 main, 두 번째가 sub
+  const mainType = scores[0][0];
+  const subType = scores[1] ? scores[1][0] : "";
+
+  localStorage.setItem("myMainType", mainType);
+  localStorage.setItem("mySubType", subType);
+  // -------------------------
 
   const popup = document.getElementById("testCompletePopup");
   popup.classList.add("show");
