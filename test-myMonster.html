@@ -40,7 +40,10 @@
     </section>
 
   </main>
-
+  <div id="testCompletePopup" class="test-complete-popup">
+   테스트 완료! 👾<br>
+   MY 탭에서 정체성 분석을 확인해보세요
+  </div>
 </div>
 
 <script>
@@ -310,10 +313,19 @@ function renderQuestion(){
 // -------------------- 테스트 종료 --------------------
 function finishTest(){
   localStorage.setItem("userIdentity", JSON.stringify(identityScore));
-  alert("테스트 완료! MY 탭에서 최종 결과를 확인해보세요 👾");
-  window.location.href = "index.html"; // 완료 후 MY 탭 또는 홈으로
-}
 
+  const popup = document.getElementById("testCompletePopup");
+  popup.classList.add("show");
+
+  // 2초 후 사라지면서 MY 탭으로 이동
+  setTimeout(() => {
+    popup.classList.remove("show");
+
+    // 페이지 전환
+    pages.forEach(p => p.classList.remove("active"));
+    document.getElementById("myPage").classList.add("active");
+  }, 2000);
+}
 // -------------------- 시작 --------------------
 renderQuestion();
 </script>
