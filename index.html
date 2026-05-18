@@ -648,6 +648,12 @@ function renderWeekMood(){
     }
 
     item.innerHTML = `
+      ${
+        key === todayKey
+        ? `<div class="today-label">TODAY</div>`
+        : `<div class="today-placeholder"></div>`
+      }
+
       <div class="week-day">
         ${dayNames[i]}
       </div>
