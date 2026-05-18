@@ -230,28 +230,7 @@
     <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
   </div>
 </section>
-
-<script>
-document.addEventListener("DOMContentLoaded", ()=>{
-  const mainType = localStorage.getItem("myMainType");
-  const subType = localStorage.getItem("mySubType");
-
-  // characterMap 배열 기준으로 데이터 찾기
-  const mainChar = characterMap.find(c=> c.type === mainType);
-  const subChar = characterMap.find(c=> c.type === subType);
-
-  if(mainChar){
-    document.getElementById("monsterMainType").textContent = mainChar.name;
-    document.getElementById("monsterDesc").textContent = mainChar.desc;
-    document.getElementById("monsterImage").src = mainChar.image;
-    document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
-  }
-
-  if(subChar){
-    document.getElementById("monsterSubType").textContent = subChar.name;
-  }
-});
-
+    
   <!-- 정체성 분석 -->
   <div class="analysis-box">
     <div class="section-title">📊 정체성 분석</div>
@@ -519,6 +498,7 @@ function addPoint(amount){
 
 updatePointUI();
 
+
 // -------------------- 감정 기록 --------------------
 const moodButtons = document.querySelectorAll(".mood-btn");
 const weekMoodBox = document.getElementById("weekMoodBox");
@@ -657,6 +637,27 @@ function addScore(type, amount){
     renderRadarGraph(identityScore); // 방사형 그래프 업데이트
   }
 }
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  const mainType = localStorage.getItem("myMainType");
+  const subType = localStorage.getItem("mySubType");
+
+  // characterMap 배열 기준으로 데이터 찾기
+  const mainChar = characterMap.find(c=> c.type === mainType);
+  const subChar = characterMap.find(c=> c.type === subType);
+
+  if(mainChar){
+    document.getElementById("monsterMainType").textContent = mainChar.name;
+    document.getElementById("monsterDesc").textContent = mainChar.desc;
+    document.getElementById("monsterImage").src = mainChar.image;
+    document.getElementById("monsterAdvice").textContent = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
+  }
+
+  if(subChar){
+    document.getElementById("monsterSubType").textContent = subChar.name;
+  }
+});
+
   
 // -------------------- 캐릭터 매칭 --------------------
 const characterMap = [
