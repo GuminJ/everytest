@@ -291,6 +291,25 @@ const totalQuestion = document.getElementById("totalQuestion");
 const shuffledQuestions = testQuestions.sort(() => Math.random()-0.5);
 totalQuestion.textContent = shuffledQuestions.length;
 
+const prevBtn = document.getElementById("prevQuestionBtn");
+const nextBtn = document.getElementById("nextQuestionBtn");
+
+prevBtn.addEventListener("click", () => {
+  if(currentIndex > 0){
+    currentIndex--;
+    renderQuestion();
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if(currentIndex < shuffledQuestions.length - 1){
+    currentIndex++;
+    renderQuestion();
+  } else {
+    finishTest();
+  }
+});
+
 // -------------------- 질문 렌더링 --------------------
 function renderQuestion(){
   const current = shuffledQuestions[currentIndex];
