@@ -4,15 +4,47 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>MY LittleMonster</title>
+
 <link rel="stylesheet" href="style.css" />
-<link
-  rel="stylesheet"
-  as="style"
-  crossorigin
-  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+/* 기본 스타일 일부 (필요 시 style.css와 병합) */
+body{margin:0;font-family:'Pretendard',sans-serif;background:#f8f8f8;color:#333;}
+.app{display:flex;flex-direction:column;height:100vh;}
+.top-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #ddd;}
+.logo{margin:0;font-size:18px;font-weight:bold;}
+.profile-wrap{display:flex;align-items:center;gap:10px;position:relative;}
+.profile-mini img{width:40px;height:40px;border-radius:50%;cursor:pointer;object-fit:cover;}
+.profile-mini input{display:none;}
+.point-badge{background:#7B6CFF;color:#fff;padding:4px 8px;border-radius:12px;font-size:12px;}
+.main-content{flex:1;overflow-y:auto;padding:10px;}
+.page{display:none;}
+.page.active{display:block;}
+.bottom-tab{display:flex;justify-content:space-around;padding:6px 0;background:#fff;border-top:1px solid #ddd;position:sticky;bottom:0;}
+.bottom-tab .tab{flex:1;text-align:center;font-size:14px;padding:6px 0;color:#666;background:none;border:none;outline:none;}
+.bottom-tab .tab.active{color:#7B6CFF;font-weight:bold;}
+.tap{transition:all 0.15s;}
+.tap.selected{transform:scale(0.95);}
+.section-title{margin:10px 0;font-weight:bold;font-size:16px;}
+.card-list,.category-grid{display:flex;overflow-x:auto;gap:10px;padding-bottom:10px;}
+.test-card,.category-card{background:#fff;border-radius:10px;padding:10px;min-width:140px;box-shadow:0 1px 3px rgba(0,0,0,0.1);cursor:pointer;display:flex;gap:8px;align-items:center;}
+.monster-image{width:100px;height:100px;object-fit:contain;}
+.mood-list{display:flex;gap:8px;overflow-x:auto;padding:5px 0;}
+.mood-btn{background:#fff;border:1px solid #ddd;padding:6px 10px;border-radius:10px;font-size:18px;cursor:pointer;}
+.week-grid{display:flex;gap:6px;overflow-x:auto;padding:5px 0;}
+.week-item{display:flex;flex-direction:column;align-items:center;font-size:14px;}
+.week-day{font-size:12px;color:#999;}
+.setting-card{background:#fff;padding:12px;margin:6px 0;border-radius:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+.toggle-switch{width:40px;height:20px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;}
+.toggle-switch::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:1px;left:1px;transition:0.3s;}
+.toggle-switch.active{background:#7B6CFF;}
+.toggle-switch.active::after{left:21px;}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:100;}
+.modal{background:#fff;padding:20px;border-radius:12px;max-width:300px;text-align:center;}
+</style>
 </head>
 <body>
+
 <div class="app">
 
   <!-- 헤더 -->
@@ -20,8 +52,8 @@
     <div>
       <h1 class="logo">MY LittleMonster</h1>
       <p class="subtitle">심리테스트로 만드는<br>나의 정체성</p>
-      <button class="start-btn" onclick="location.href='test-myMonster.html'">테스트 시작하기</button>
     </div>
+
     <div class="profile-wrap">
       <label class="profile-mini">
         <img id="profileImage" src="images/default-profile.png" alt="프로필"/>
@@ -35,14 +67,44 @@
 
   <!-- 메인 -->
   <main class="main-content">
-    <!-- 홈 페이지 -->
+
+    <!-- 홈 -->
     <section class="page active" id="homePage">
+      <div class="main-banner">
+        <div class="banner-text">
+          <span class="small-label">오늘의 추천 테스트</span>
+          <h2 class="banner-title">나는 어떤 <br>리틀몬스터일까요?</h2>
+          <p class="banner-desc">테스트를 통해 나만의 정체성을 발견해보세요</p>
+          <button class="start-btn tap" onclick="location.href='test-myMonster.html'">테스트 시작하기</button>
+        </div>
+        <img src="images/icon.png" alt="리틀몬스터" class="monster-image"/>
+      </div>
+
       <div class="section-title">🔥 인기 테스트</div>
       <div class="card-list">
-        <div class="test-card tap"><div class="emoji">🍚</div><div class="card-info"><h3>식사 유형</h3></div></div>
-        <div class="test-card tap"><div class="emoji">💘</div><div class="card-info"><h3>연애 테스트</h3></div></div>
-        <div class="test-card tap"><div class="emoji">🌙</div><div class="card-info"><h3>감각 테스트</h3></div></div>
+        <div class="test-card tap">
+          <div class="emoji">🍚</div>
+          <div class="card-info">
+            <h3>식사 유형으로 적성 찾기</h3>
+            <p>외식 취향으로 나와 잘맞는 직무 파악하기</p>
+          </div>
+        </div>
+        <div class="test-card tap">
+          <div class="emoji">💘</div>
+          <div class="card-info">
+            <h3>연애 집착남/녀 테스트</h3>
+            <p>나는 얼마나 사랑/애정에 갈망하고 있을까?</p>
+          </div>
+        </div>
+        <div class="test-card tap">
+          <div class="emoji">🌙</div>
+          <div class="card-info">
+            <h3>감각 테스트</h3>
+            <p>나의 감각은 얼마나 뛰어날까?</p>
+          </div>
+        </div>
       </div>
+
       <div class="mood-box">
         <div class="section-title">🌈 오늘 기분 기록</div>
         <div class="mood-list">
@@ -59,7 +121,7 @@
       </div>
     </section>
 
-    <!-- 탐색 페이지 -->
+    <!-- 탐색 -->
     <section class="page" id="explorePage">
       <div class="section-title">🧠 카테고리 탐색</div>
       <div class="category-grid">
@@ -82,108 +144,140 @@
           <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
           <div class="monster-advice" id="monsterAdvice">조언</div>
         </div>
-        <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
+        <img src="images/default-monster.png" alt="my monster" class="monster-image"/>
       </div>
-      <div class="analysis-box">
-        <div class="section-title">📊 정체성 분석</div>
-        <canvas id="radarChart" class="radar-canvas" style="width:100%; max-width:400px; height:300px;"></canvas>
+
+      <div class="section-title">⚙️ 설정</div>
+      <div class="setting-card tap">
+        <span>알림</span>
+        <div class="toggle-switch" id="toggleNotification"></div>
       </div>
-      <div class="advice-box">
-        <div class="section-title">💡 오늘의 조언</div>
-        <p id="monsterAdvice">테스트 후 자동 업데이트</p>
-      </div>
+      <div class="setting-card tap" id="openPrivacyModal">개인정보 처리방침</div>
     </section>
 
-    <!-- 설정 페이지 -->
-    <section class="page" id="settingPage">
-      <div class="setting-card">
-        <div><h3>⚙️ 앱 버전</h3><p>0.0.1</p></div>
-      </div>
-    </section>
   </main>
 
   <!-- 하단 탭 -->
   <nav class="bottom-tab">
-    <button class="tab active" data-page="homePage">🏠<small>홈</small></button>
-    <button class="tab" data-page="explorePage">🔍<small>탐색</small></button>
-    <button class="tab" data-page="myPage">👾<small>MY</small></button>
-    <button class="tab" data-page="settingPage">⚙️<small>설정</small></button>
+    <button class="tab active tap" data-page="homePage">홈</button>
+    <button class="tab tap" data-page="explorePage">탐색</button>
+    <button class="tab tap" data-page="myPage">MY</button>
   </nav>
+
 </div>
 
-<!-- Chart.js -->
+<!-- Privacy Modal -->
+<div class="modal-overlay" id="privacyModal">
+  <div class="modal">
+    <h2>개인정보 처리방침</h2>
+    <p>여기에 개인정보 처리방침 내용을 넣으세요.</p>
+    <button class="tap" id="closePrivacyModal">닫기</button>
+  </div>
+</div>
+
+<!-- 차트 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-// -------------------- 캐릭터 매핑 --------------------
-const characterMap = [
-  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형", image: "images/fire-monster.png", advice:"오늘은 새로운 도전을!" },
-  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png", advice:"천천히 계획하세요." },
-  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png", advice:"관심과 배려를 보여주세요." },
-  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png", advice:"끝까지 밀어붙이세요." },
-  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png", advice:"스스로 결정하세요." },
-  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png", advice:"함께 해결해보세요." },
-  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png", advice:"아이디어를 펼쳐보세요." },
-  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png", advice:"여유롭게 보내세요." }
-];
+document.addEventListener("DOMContentLoaded", ()=>{
 
-// -------------------- 탭 이동 --------------------
-const tabs = document.querySelectorAll(".tab");
-const pages = document.querySelectorAll(".page");
-const mainContent = document.querySelector(".main-content");
-
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    pages.forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    const targetPage = document.getElementById(tab.dataset.page);
-    if(targetPage) targetPage.classList.add("active");
-    mainContent.scrollTo({ top: 0, behavior: "smooth" });
+  // -------------------- 탭 전환 --------------------
+  const tabs = document.querySelectorAll(".bottom-tab .tab");
+  const pages = document.querySelectorAll(".page");
+  tabs.forEach(tab=>{
+    tab.addEventListener("click", ()=>{
+      tabs.forEach(t=>t.classList.remove("active"));
+      pages.forEach(p=>p.classList.remove("active"));
+      tab.classList.add("active");
+      const pageId = tab.dataset.page;
+      document.getElementById(pageId).classList.add("active");
+    });
   });
-});
 
-// -------------------- 눌림 효과 --------------------
-document.querySelectorAll(".tap:not(.tab)").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.add("selected");
-    setTimeout(() => btn.classList.remove("selected"), 150);
+  // -------------------- 탭/버튼 애니메이션 --------------------
+  document.querySelectorAll(".tap").forEach(btn=>{
+    btn.addEventListener("mousedown", ()=>btn.classList.add("selected"));
+    btn.addEventListener("mouseup", ()=>btn.classList.remove("selected"));
+    btn.addEventListener("mouseleave", ()=>btn.classList.remove("selected"));
   });
-});
 
-// -------------------- Radar 차트 예시 --------------------
-const radarCtx = document.getElementById("radarChart");
-if(radarCtx){
-  new Chart(radarCtx, {
-    type: 'radar',
-    data: {
-      labels: ['도파민', '불안', '공감', '인내', '자율', '상상', '균형'],
-      datasets: [{
-        label: '나의 점수',
-        data: [80, 65, 75, 90, 50, 60, 70],
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 2
-      }]
-    },
-    options: {
-      scales: {
-        r: { beginAtZero:true, max:100 }
-      }
+  // -------------------- 프로필 이미지 --------------------
+  const profileImage = document.getElementById("profileImage");
+  const profileInput = document.getElementById("profileInput");
+  const STORAGE_KEYS = {PROFILE:"myMonsterProfile"};
+  profileImage.src = localStorage.getItem(STORAGE_KEYS.PROFILE)||profileImage.src;
+
+  profileInput.addEventListener("change",(ev)=>{
+    const file = ev.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      profileImage.src = ev.target.result;
+      localStorage.setItem(STORAGE_KEYS.PROFILE, ev.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // -------------------- 감정 기록 --------------------
+  const moodButtons = document.querySelectorAll(".mood-btn");
+  const weekMoodBox = document.getElementById("weekMoodBox");
+  const weekGrid = document.getElementById("weekGrid");
+  let savedMoodData = JSON.parse(localStorage.getItem("weekMood") || "{}");
+  function getDateKey(date){ return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`; }
+
+  moodButtons.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const todayKey = getDateKey(new Date());
+      savedMoodData[todayKey] = btn.textContent;
+      localStorage.setItem("weekMood", JSON.stringify(savedMoodData));
+      renderWeekMood();
+      weekMoodBox.style.display = "block";
+    });
+  });
+
+  function renderWeekMood(){
+    weekGrid.innerHTML = "";
+    const dayNames=["일","월","화","수","목","금","토"];
+    for(let i=0;i<7;i++){
+      const item = document.createElement("div");
+      const mood = Object.values(savedMoodData)[i]||"➖";
+      item.className="week-item";
+      item.innerHTML=`<div class="week-day">${dayNames[i]}</div><div class="week-emoji">${mood}</div>`;
+      weekGrid.appendChild(item);
     }
-  });
-}
-
-// -------------------- 포인트 + 프로필 예시 --------------------
-let point = 0;
-const pointText = document.getElementById("pointText");
-document.getElementById("profileInput").addEventListener("change", e=>{
-  const file = e.target.files[0];
-  if(file){
-    document.getElementById("profileImage").src = URL.createObjectURL(file);
-    point += 10;
-    pointText.textContent = point + "PT";
   }
+  renderWeekMood();
+
+  // -------------------- Radar 그래프 --------------------
+  const identityScore = JSON.parse(localStorage.getItem("userIdentity")||'{"도파민감각":0,"불안레이더":0,"마음연결력":0,"버티는힘":0,"나만의중심":0,"공감온도":0,"몽상감도":0}');
+  function renderRadarGraph(score){
+    const radarContainer = document.createElement("canvas");
+    radarContainer.id = "radarChart";
+    document.getElementById("myPage").appendChild(radarContainer);
+    const ctx = radarContainer.getContext('2d');
+    if(window.radarChartInstance) window.radarChartInstance.destroy();
+    window.radarChartInstance = new Chart(ctx, {
+      type:'radar',
+      data:{
+        labels:["도파민감각","불안레이더","마음연결력","버티는힘","나만의중심","공감온도","몽상감도"],
+        datasets:[{ label:'성향 점수', data: Object.values(score), backgroundColor:'rgba(123,108,255,0.2)', borderColor:'#7B6CFF', pointBackgroundColor:'#7B6CFF', pointBorderColor:'#fff', pointRadius:6, borderWidth:2 }]
+      },
+      options:{ responsive:true, maintainAspectRatio:false, scales:{ r:{ beginAtZero:true, min:0, max:10, ticks:{ stepSize:1 } } }, plugins:{ legend:{ display:false } } }
+    });
+  }
+  renderRadarGraph(identityScore);
+
+  // -------------------- MY 토글 --------------------
+  const toggleNotification = document.getElementById("toggleNotification");
+  toggleNotification.addEventListener("click", ()=>{
+    toggleNotification.classList.toggle("active");
+    localStorage.setItem("notifyEnabled", toggleNotification.classList.contains("active"));
+  });
+  if(localStorage.getItem("notifyEnabled")==="true") toggleNotification.classList.add("active");
+
+  // -------------------- Privacy 모달 --------------------
+  const privacyModal = document.getElementById("privacyModal");
+  document.getElementById("openPrivacyModal").addEventListener("click", ()=>privacyModal.style.display="flex");
+  document.getElementById("closePrivacyModal").addEventListener("click", ()=>privacyModal.style.display="none");
+
 });
 </script>
 </body>
