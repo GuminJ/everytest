@@ -420,7 +420,6 @@
 <script>
 
 // -------------------- 탭 이동 --------------------
-// -------------------- 탭 이동 --------------------
 const tabs = document.querySelectorAll(".tab");
 const pages = document.querySelectorAll(".page");
 const mainContent = document.querySelector(".main-content");
@@ -624,6 +623,13 @@ let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
   "공감온도": 0,
   "몽상감도": 0
 };
+  
+function addScore(type, amount){
+  if(identityScore[type] !== undefined){
+    identityScore[type] += amount;
+    localStorage.setItem("userIdentity", JSON.stringify(identityScore));
+  }
+}
   
 // -------------------- 캐릭터 매칭 --------------------
 const characterMap = [
