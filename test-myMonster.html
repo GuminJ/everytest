@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>MY LittleMonster - 나는 어떤 리틀몬스터일까요?</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- 헤더 -->
+  <header class="top-header">
+    <div>
+      <h1 class="logo">MY LittleMonster</h1>
+      <p class="subtitle">심리테스트로 만드는<br>나의 정체성</p>
+    </div>
+  </header>
+
+  <!-- 메인 -->
+  <main class="main-content">
+
+    <!-- 테스트 페이지 -->
+    <section class="page active" id="testPage">
+
+      <div class="test-header">
+        <div class="section-title">🧠 나는 어떤 리틀몬스터일까요?</div>
+        <div class="test-progress">
+          <span id="currentQuestion">1</span> / <span id="totalQuestion">21</span>
+        </div>
+      </div>
+
+      <div class="test-card-box">
+        <div class="test-question" id="testQuestion">질문 로딩 중...</div>
+        <div class="test-answer-list" id="testAnswerList"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+// -------------------- 테스트 데이터 예시 --------------------
+const testQuestions = [
+  // NS - 도파민 감각
+  { type: "NS", question: "새로운 모험을 찾는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "NS", question: "도전을 즐기는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "NS", question: "예상치 못한 상황에서도 흥미를 느끼나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // HA - 불안 레이더
+  { type: "HA", question: "위험을 피하려는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "HA", question: "걱정을 많이 하는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "HA", question: "불확실한 상황에서 긴장되나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // RD - 마음 연결력
+  { type: "RD", question: "타인의 기분을 잘 이해하는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "RD", question: "사람들과 친밀감을 쉽게 느끼나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "RD", question: "모임에서 자연스럽게 어울리나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // PS - 버티는 힘
+  { type: "PS", question: "어려운 상황에서도 포기하지 않나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "PS", question: "계획을 끝까지 실천하는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "PS", question: "장기 목표를 꾸준히 추진하나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // SD - 나만의 중심
+  { type: "SD", question: "자신의 생각과 기준이 확실한 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "SD", question: "자기 결정을 잘 내리나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "SD", question: "주변의 압력보다 스스로 선택하나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // CO - 공감 온도
+  { type: "CO", question: "타인의 감정을 공감하는 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "CO", question: "팀이나 그룹에서 협력적인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "CO", question: "사람들을 돕는 것을 즐기나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  // ST - 몽상 감도
+  { type: "ST", question: "상상력이 풍부한 편인가요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "ST", question: "창의적인 아이디어를 자주 떠올리나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]},
+  { type: "ST", question: "예술, 취미 활동에 관심이 많나요?", answers: [{text:"그렇다", score:2},{text:"보통", score:1},{text:"아니다", score:0}]}
+];
+
+// -------------------- 초기화 --------------------
+let currentIndex = 0;
+const identityScore = { NS:0, HA:0, RD:0, PS:0, SD:0, CO:0, ST:0 };
+
+const testQuestion = document.getElementById("testQuestion");
+const testAnswerList = document.getElementById("testAnswerList");
+const currentQuestion = document.getElementById("currentQuestion");
+const totalQuestion = document.getElementById("totalQuestion");
+
+// 질문 랜덤 섞기
+const shuffledQuestions = testQuestions.sort(() => Math.random()-0.5);
+totalQuestion.textContent = shuffledQuestions.length;
+
+// -------------------- 질문 렌더링 --------------------
+function renderQuestion(){
+  const current = shuffledQuestions[currentIndex];
+  currentQuestion.textContent = currentIndex + 1;
+  testQuestion.textContent = current.question;
+  testAnswerList.innerHTML = "";
+  current.answers.forEach(answer=>{
+    const btn = document.createElement("button");
+    btn.className = "test-answer-btn tap";
+    btn.textContent = answer.text;
+    btn.addEventListener("click", ()=>{
+      identityScore[current.type] += answer.score;
+      currentIndex++;
+      if(currentIndex >= shuffledQuestions.length){
+        finishTest();
+      } else {
+        renderQuestion();
+      }
+    });
+    testAnswerList.appendChild(btn);
+  });
+}
+
+// -------------------- 테스트 종료 --------------------
+function finishTest(){
+  localStorage.setItem("userIdentity", JSON.stringify(identityScore));
+  alert("테스트 완료! MY 탭에서 정체성 분석을 확인해보세요 👾");
+  window.location.href = "index.html"; // 완료 후 MY 탭 또는 홈으로
+}
+
+// -------------------- 시작 --------------------
+renderQuestion();
+</script>
+
+</body>
+</html>
