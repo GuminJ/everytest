@@ -599,3 +599,27 @@ body {
     padding: 16px 14px;
   }
 }
+
+.test-complete-popup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(45deg, #ff9a9e, #7B6CFF);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(123,108,255,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+  z-index: 9999;
+}
+.test-complete-popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+  pointer-events: auto;
+}
