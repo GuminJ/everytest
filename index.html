@@ -174,8 +174,9 @@
 
         </div>
 
-      </div>
-      
+      </div>      
+    </section>
+
     <!-- 테스트 화면 -->
     <section class="page" id="testPage">
 
@@ -192,8 +193,6 @@
         <div class="test-question" id="testQuestion"></div>
     <div class="test-answer-list" id="testAnswerList"></div>
       </div>
-    </section>
-      
     </section>
 
     <!-- 탐색 -->
@@ -826,6 +825,137 @@ function renderQuestion(){
 
     testAnswerList.appendChild(button);
   });
+}
+
+// -------------------- 테스트 --------------------
+
+const startTestBtn =
+  document.getElementById("startTestBtn");
+
+const testQuestion =
+  document.getElementById("testQuestion");
+
+const testAnswerList =
+  document.getElementById("testAnswerList");
+
+const currentQuestion =
+  document.getElementById("currentQuestion");
+
+const totalQuestion =
+  document.getElementById("totalQuestion");
+
+// 테스트 질문
+const testQuestions = [
+
+  {
+    type: "dopamine",
+    question: "갑자기 약속이 취소됐다.",
+    answers: [
+      { text: "오히려 시간 생겨서 좋다", score: 3 },
+      { text: "다른 재밌는 걸 찾게 된다", score: 2 },
+      { text: "그냥 원래 하려던 걸 한다", score: 1 },
+      { text: "하루 흐름 깨져서 별로다", score: 0 }
+    ]
+  },
+
+  {
+    type: "anxiety",
+    question: "답장이 평소보다 늦게 오면…",
+    answers: [
+      { text: "별생각 없다", score: 0 },
+      { text: "이유가 있겠거니 한다", score: 1 },
+      { text: "괜히 신경 쓰인다", score: 2 },
+      { text: "뭔가 잘못된 건가 싶다", score: 3 }
+    ]
+  }
+
+];
+
+let shuffledQuestions = [];
+let currentIndex = 0;
+
+const identityScore = {
+  dopamine: 0,
+  anxiety: 0,
+  connection: 0,
+  persistence: 0,
+  self: 0,
+  empathy: 0,
+  fantasy: 0
+};
+
+// 테스트 시작
+startTestBtn.addEventListener("click", () => {
+
+  shuffledQuestions =
+    [...testQuestions]
+    .sort(() => Math.random() - 0.5);
+
+  currentIndex = 0;
+
+  pages.forEach(p =>
+    p.classList.remove("active")
+  );
+
+  document
+    .getElementById("testPage")
+    .classList.add("active");
+
+  totalQuestion.textContent =
+    shuffledQuestions.length;
+
+  renderQuestion();
+
+});
+
+// 질문 렌더
+function renderQuestion(){
+
+  const current =
+    shuffledQuestions[currentIndex];
+
+  currentQuestion.textContent =
+    currentIndex + 1;
+
+  testQuestion.textContent =
+    current.question;
+
+  testAnswerList.innerHTML = "";
+
+  current.answers.forEach(answer => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "test-answer-btn tap";
+
+    button.textContent =
+      answer.text;
+
+    button.addEventListener("click", () => {
+
+      identityScore[current.type] +=
+        answer.score;
+
+      currentIndex++;
+
+      if(currentIndex >= shuffledQuestions.length){
+
+        finishTest();
+
+      } else {
+
+        renderQuestion();
+
+      }
+
+    });
+
+    testAnswerList.appendChild(button);
+
+  });
+
 }
 
 // -------------------- 테스트 종료 --------------------
