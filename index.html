@@ -222,29 +222,15 @@
     <section class="page" id="myPage">
 
       <div class="my-monster-card">
-
-        <img
-          src="images/fire-monster.png"
-          class="monster-image"
-          alt="my monster"
-        />
-
-        <div>
-
-          <div class="monster-type">
-            매사에 열정적인 '화로'
-          </div>
-
-          <div class="monster-desc">
-            진취적이고, 열정적이며 활기찬 타입
-          </div>
-
+       <div class="monster-info">
+          <div class="monster-main-type" id="monsterMainType">타입</div>
+          <div class="monster-sub-type" id="monsterSubType">보조 타입</div>
+          <div class="monster-desc" id="monsterDesc">캐릭터 설명</div>
         </div>
-
+        <img src="images/default-monster.png" alt="my monster" class="monster-image" id="monsterImage"/>
       </div>
 
       <div class="analysis-box">
-
         <div class="section-title">
           📊 정체성 분석
         </div>
@@ -824,6 +810,61 @@ toggle.addEventListener("click", () => {
 
 });
 
+// 캐릭터 매칭 테이블
+const characterMap = [
+  { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형, 활기찬 타입", image: "images/fire-monster.png" },
+  { type: "불안레이더", name: "몽실몽", desc: "조심/세심, 신중한 타입", image: "images/anxiety-monster.png" },
+  { type: "마음연결력", name: "러브링", desc: "사회적 공감, 다정한 타입", image: "images/love-monster.png" },
+  { type: "버티는힘", name: "둔둔두", desc: "끈기, 인내력 있는 타입", image: "images/persistence-monster.png" },
+  { type: "나만의중심", name: "비트루", desc: "자율적, 주체적 타입", image: "images/center-monster.png" },
+  { type: "공감온도", name: "온츄", desc: "배려심, 협력 중심 타입", image: "images/empathy-monster.png" },
+  { type: "몽상감도", name: "달몽", desc: "상상력, 창의 중심 타입", image: "images/dream-monster.png" },
+  { type: "균형형", name: "슈르", desc: "균형형, 편안한 타입", image: "images/balance-monster.png" }
+];
+
+// 로컬에서 점수 가져오기
+let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
+  "도파민감각":0,
+  "불안레이더":0,
+  "마음연결력":0,
+  "버티는힘":0,
+  "나만의중심":0,
+  "공감온도":0,
+  "몽상감도":0
+};
+
+// 주/보조 성향 자동 도출
+function calculateCharacter() {
+  const entries = Object.entries(identityScore);
+  const sorted = entries.sort((a,b)=>b[1]-a[1]);
+  
+  // 모두 0이면 균형형
+  if(sorted.every(([key, val])=> val === 0)) {
+    return { main:"균형형", sub:null };
+  }
+  
+  const main = sorted[0][0]; // 1위 성향
+  const sub = sorted[1][1] > 0 ? sorted[1][0] : null; // 2위 성향 (점수가 있으면)
+  
+  return { main, sub };
+}
+
+// MY 탭 카드 업데이트
+function updateMonsterCard() {
+  const { main, sub } = calculateCharacter();
+  const mainChar = characterMap.find(c=>c.type===main) || characterMap.find(c=>c.type==="균형형");
+  const subChar = sub ? characterMap.find(c=>c.type===sub) : null;
+  
+  // DOM 업데이트
+  document.getElementById("monsterMainType").textContent = mainChar.name + " (" + main + ")";
+  document.getElementById("monsterSubType").textContent = subChar ? subChar.name + " (" + sub + ")" : "";
+  document.getElementById("monsterDesc").textContent = mainChar.desc;
+  document.getElementById("monsterImage").src = mainChar.image;
+}
+
+// 페이지 로드 시 실행
+updateMonsterCard();
+  
 </script>
 
 </body>
