@@ -286,6 +286,9 @@ const testQuestion = document.getElementById("testQuestion");
 const testAnswerList = document.getElementById("testAnswerList");
 const currentQuestion = document.getElementById("currentQuestion");
 const totalQuestion = document.getElementById("totalQuestion");
+const pages = document.querySelectorAll(".page");
+const tabs = document.querySelectorAll(".tab");
+const mainContent = document.querySelector(".main-content");
 
 // 질문 랜덤 섞기
 const shuffledQuestions = testQuestions.sort(() => Math.random()-0.5);
@@ -335,22 +338,27 @@ function renderQuestion(){
 
 // -------------------- 테스트 종료 --------------------
 function finishTest(){
+  // 결과 저장
   localStorage.setItem("userIdentity", JSON.stringify(identityScore));
 
   const popup = document.getElementById("testCompletePopup");
   popup.classList.add("show");
 
-  // 2초 후 사라지면서 MY 탭으로 이동
+  // 2초 후 사라지면서 홈으로 이동
   setTimeout(() => {
     popup.classList.remove("show");
 
-    // 페이지 전환
+    // 페이지 전환: 홈
     pages.forEach(p => p.classList.remove("active"));
     document.getElementById("homePage").classList.add("active");
 
     // 하단 탭도 홈 활성화
     tabs.forEach(t => t.classList.remove("active"));
-    document.querySelector('.bottom-tab .tab[data-page="homePage"]').classList.add("active");
+    const homeTab = document.querySelector('.bottom-tab .tab[data-page="homePage"]');
+    if(homeTab) homeTab.classList.add("active");
+
+    // 스크롤도 맨 위로
+    mainContent.scrollTo({top:0, behavior:"smooth"});
   }, 1800);
 }
 // -------------------- 시작 --------------------
