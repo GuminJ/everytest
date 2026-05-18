@@ -563,27 +563,33 @@ body {
   transform: scale(0.97);
 }
 
-/* ===== 다음/이전 버튼 (선택적) ===== */
-.test-nav {
+/* ===== 다음/이전 버튼ㅜ ===== */
+.test-navigation {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 12px;
+  gap: 8px;
 }
 
-.test-nav button {
-  padding: 10px 20px;
-  font-weight: bold;
-  border-radius: 12px;
+.test-nav-btn {
+  flex: 1;
+  padding: 12px 0;
   border: none;
+  border-radius: 18px;
+  background: #f6f7fb;
+  font-weight: 700;
   cursor: pointer;
-  background: linear-gradient(45deg, #ff9a9e, #7B6CFF);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(123,108,255,0.2);
-  transition: all 0.2s;
+  transition: all 0.18s ease;
 }
 
-.test-nav button:hover {
-  transform: translateY(-2px);
+.test-nav-btn:hover {
+  background: rgba(123,108,255,0.1);
+  color: #7B6CFF;
+  transform: translateY(-1px);
+}
+
+.test-nav-btn:active {
+  transform: scale(0.98);
 }
 
 /* ===== 모바일 반응형 ===== */
