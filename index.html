@@ -812,6 +812,7 @@ let identityScore = JSON.parse(localStorage.getItem("userIdentity")) || {
   "몽상감도":0
 };
   
+  
 // -------------------- 캐릭터 매칭 --------------------
 const characterMap = [
   { type: "도파민감각", name: "화로", desc: "에너제틱하고, 모험가형, 활기찬 타입", image: "images/fire-monster.png", advice:"오늘은 새로운 도전을 시도해보세요!" },
@@ -825,32 +826,44 @@ const characterMap = [
 ];
 
 // -------------------- 주/보조 성향 도출 --------------------
-function calculateCharacter() {
+function getTopTraits(identityScore){
+  // 점수를 배열로 변환
   const entries = Object.entries(identityScore);
-  const sorted = entries.sort((a,b)=>b[1]-a[1]);
+  // 점수 기준 내림차순 정렬
+  entries.sort((a,b)=> b[1]-a[1]);
 
-  if(sorted.every(([key,val])=>val===0)){
-    return { main:"균형형", sub:null };
-  }
+  const mainType = entries[0][0];
+  const subType = entries[1][0];
 
-  const main = sorted[0][0];
-  const sub = sorted[1][1]>0 ? sorted[1][0] : null;
-
-  return { main, sub };
+  // 모든 점수가 동일하면 균형형
+  const allEqual = entries.every(e => e[1] === entries[0][1]);
+  return allEqual ? ["균형형"] : [mainType, subType];
 }
 
-// -------------------- MY 탭 카드 업데이트 --------------------
-function updateMonsterCard() {
-  const { main, sub } = calculateCharacter();
-  const mainChar = characterMap.find(c=>c.type===main) || characterMap.find(c=>c.type==="균형형");
-  const subChar = sub ? characterMap.find(c=>c.type===sub) : null;
+// -------------------- MY 탭 렌더 --------------------
+function renderMyTab(identityScore){
+  const topTraits = getTopTraits(identityScore);
+  const mainChar = characterMap.find(c => c.type === topTraits[0]) || characterMap.find(c=>c.type==="균형형");
+  const subChar = topTraits[1] ? characterMap.find(c => c.type === topTraits[1]) : null;
 
-  document.getElementById("monsterMainType").textContent = mainChar.name + " (" + main + ")";
-  document.getElementById("monsterSubType").textContent = subChar ? subChar.name + " (" + sub + ")" : "";
-  document.getElementById("monsterDesc").textContent = mainChar.desc;
+  // 카드 이미지
   document.getElementById("monsterImage").src = mainChar.image;
-  document.getElementById("monsterAdvice").textContent = mainChar.advice;
+
+  // 타입 표시 (주 / 보조)
+  const typeText = subChar ? `${mainChar.name} (주) / ${subChar.name} (보조)` : `${mainChar.name} (주)`;
+  document.getElementById("monsterType").textContent = typeText;
+
+  // 설명
+  const descText = subChar ? `${mainChar.desc} / ${subChar.desc}` : mainChar.desc;
+  document.getElementById("monsterDesc").textContent = descText;
+
+  // 오늘의 조언
+  const adviceText = subChar ? `${mainChar.advice} ${subChar.advice}` : mainChar.advice;
+  document.getElementById("monsterAdvice").textContent = adviceText;
 }
+
+// 테스트 종료 후 MY 탭에서 렌더링 예시
+renderMyTab(identityScore);
 
 // -------------------- 방사형 그래프 --------------------
 function renderRadarChart(){
