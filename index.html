@@ -648,16 +648,21 @@ function renderWeekMood(){
       item.classList.add("today");
     }
 
-    item.innerHTML = `
-      <div class="week-day">
-        ${dayNames[i]}
-      </div>
+   item.innerHTML = `
+  ${
+    key === todayKey
+    ? `<div class="today-label">TODAY</div>`
+    : `<div class="today-placeholder"></div>`
+  }
 
-      <div class="week-emoji">
-        ${mood}
-      </div>
-    `;
+  <div class="week-day">
+    ${dayNames[i]}
+  </div>
 
+  <div class="week-emoji">
+    ${mood}
+  </div>
+`;
     weekGrid.appendChild(item);
 
   }
