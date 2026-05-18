@@ -81,9 +81,7 @@
             테스트를 통해 나만의 정체성을 발견해보세요
           </p>
 
-          <button class="start-btn tap">
-            테스트 시작하기
-          </button>
+          <button class="start-btn tap" id="startTestBtn">테스트 시작하기</button>
 
         </div>
 
@@ -177,7 +175,25 @@
         </div>
 
       </div>
+      
+    <!-- 테스트 화면 -->
+    <section class="page" id="testPage">
 
+      <div class="test-header">
+        <div class="section-title">🧠 나는 어떤 리틀몬스터일까요?</div>
+        <div class="test-progress">
+          <span id="currentQuestion">1</span>
+          /
+          <span id="totalQuestion">21</span>
+        </div>
+      </div>
+
+      <div class="test-card-box">
+        <div class="test-question" id="testQuestion"></div>
+    <div class="test-answer-list" id="testAnswerList"></div>
+      </div>
+    </section>
+      
     </section>
 
     <!-- 탐색 -->
@@ -759,6 +775,75 @@ toggle.addEventListener("click", () => {
 
 });
 
+  const testQuestions = [
+    .sort(() => Math.random() - 0.5);
+
+  currentIndex = 0;
+
+  tabs.forEach(t => t.classList.remove("active"));
+  pages.forEach(p => p.classList.remove("active"));
+
+  document.getElementById("testPage").classList.add("active");
+
+  totalQuestion.textContent = shuffledQuestions.length;
+
+  renderQuestion();
+});
+
+// -------------------- 질문 렌더 --------------------
+
+function renderQuestion(){
+
+  const current = shuffledQuestions[currentIndex];
+
+  currentQuestion.textContent = currentIndex + 1;
+
+  testQuestion.textContent = current.question;
+
+  testAnswerList.innerHTML = "";
+
+  current.answers.forEach(answer => {
+
+    const button = document.createElement("button");
+
+    button.className = "test-answer-btn tap";
+
+    button.textContent = answer.text;
+
+    button.addEventListener("click", () => {
+
+      identityScore[current.type] += answer.score;
+
+      currentIndex++;
+
+      if(currentIndex >= shuffledQuestions.length){
+        finishTest();
+      } else {
+        renderQuestion();
+      }
+
+    });
+
+    testAnswerList.appendChild(button);
+  });
+}
+
+// -------------------- 테스트 종료 --------------------
+
+function finishTest(){
+
+  localStorage.setItem(
+    "userIdentity",
+    JSON.stringify(identityScore)
+  );
+
+  alert("테스트 완료! MY 탭에서 정체성 분석을 확인해보세요 👾");
+
+  pages.forEach(p => p.classList.remove("active"));
+
+  document.getElementById("myPage").classList.add("active");
+}
+  
 </script>
 
 </body>
