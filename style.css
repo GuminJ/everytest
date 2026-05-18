@@ -212,6 +212,20 @@ html, body { width:100%; height:100%; margin:0; font-family:'Pretendard',sans-se
 .week-item.today {
   border:2px solid #7B6CFF;
 }
+.today-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6CFF;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(45deg,#ff9a9e,#7B6CFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.today-placeholder {
+  height: 12px;
+}
 
 /* 탐색 */
 .category-grid { display:flex; flex-wrap:wrap; gap:12px; }
